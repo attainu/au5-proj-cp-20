@@ -9,22 +9,20 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 
 function App() {
-  {
-    return (
-      <BrowserRouter>
-        <div>
-          <Route path='/login'>
-            <Login />
-          </Route>
-        </div>
-        <div>
-          <Route path='/register'>
-            <Register />
-          </Route>
-        </div>
-      </BrowserRouter>
-    );
-  }
+  return (
+    <BrowserRouter>
+      <div>
+        <Route path='/login'>
+          <Login />
+        </Route>
+      </div>
+      <div>
+        <Route path='/register'>
+          <Register />
+        </Route>
+      </div>
+    </BrowserRouter>
+  );
 }
 
 export default App;
