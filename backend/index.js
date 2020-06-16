@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const registerRoute = require('./Routers/login/login')
+const main = require('./Routers/main')
 const bodyParser = require('body-parser')
 
 //For Enviornment 
@@ -24,5 +25,7 @@ mongoose.connection.on('error', err => {
 //Middlewears for Registrations
 app.use('/register/', registerRoute)
 
+//Middlewears After Registrations
+app.use('/main/', main)
 //Others
 app.listen(process.env.PORT || 8000, console.log("Server runnng "))

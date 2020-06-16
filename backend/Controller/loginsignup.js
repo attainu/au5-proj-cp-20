@@ -1,5 +1,6 @@
 const userModel = require('../model/auth')
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 var controller = {}
 
 //SignUP Controller
@@ -32,7 +33,8 @@ controller.login = async (req, res) => {
             res.status(400).send("Password not matched")
         } else {
             console.log("user loged in")
-            res.send("user loged in")
+            const token = jwt.sign({ _id: user._id }, process.env.TOKEN)
+            res.header('auth-token', token).send(token)
         }
     } else {
         res.status(401).send("Email not found")
