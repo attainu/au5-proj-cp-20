@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+var register = {}
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -21,4 +22,5 @@ const userSchema = new mongoose.Schema({
         default: Date.now
     }
 })
-module.exports = mongoose.model('user', userSchema)
+register.signup = mongoose.model('user', userSchema)
+module.exports = register
