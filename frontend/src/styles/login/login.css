@@ -1,0 +1,38 @@
+body {
+  background-image: url("./social_networks.jpg");
+}
+.login_div {
+  padding: 1rem 1rem 1rem 1rem;
+  width: 25%;
+  margin-left: 75%;
+  background-color: rgba(255, 255, 255, 0.966);
+  height: 43.3rem;
+}
+
+.head_div {
+  padding: 1rem;
+  background: rgb(69, 196, 248);
+  background: linear-gradient(
+    28deg,
+    rgba(69, 196, 248, 1) 0%,
+    rgba(57, 122, 198, 1) 57%,
+    rgba(37, 48, 98, 1) 99%
+  );
+  margin-top: 2rem;
+  color: beige;
+  border-radius: 70px 0px 70px 70px;
+  border-left: 15px solid greenyellow;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.info-div-login {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-size: small;
+}
+
+.social {
+  display: flex;
+  flex-direction: row;
+}
