@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import { sendSignupData } from "../../Redux/actions/register_action";
+import { GoogleLogin } from "react-google-login";
 
 class Register extends React.Component {
   state = {
@@ -16,6 +17,10 @@ class Register extends React.Component {
       password_error: "",
       c_password_error: "",
     },
+  };
+
+  responseGoogle = (response) => {
+    console.log(response);
   };
 
   handleName(event) {
@@ -42,12 +47,19 @@ class Register extends React.Component {
     }
     if (password === confirm_password) {
       this.setState({ error_msg: { c_password_error: "" } });
+      this.setState({ confirm_password: event.target.value });
     }
   }
   handleClick = (event) => {
     event.preventDefault();
     event.target.className += " was-validated";
-    if (this.state.confirm_password !== "") {
+    console.log(this.state);
+    if (
+      this.state.name.length !== 0 &&
+      this.state.email.length !== 0 &&
+      this.state.password.length !== 0 &&
+      this.state.confirm_password.length !== 0
+    ) {
       this.props.sendSignupData(this.state);
     }
   };
@@ -126,21 +138,21 @@ class Register extends React.Component {
                 Register
               </MDBBtn>
             </form>
+            <div className='social_register'>
+              <GoogleLogin
+                clientId='189392606316-gophi88gi150u8rg4b0gotokdfe36ufk.apps.googleusercontent.com'
+                buttonText='Login with Google'
+                onSuccess={this.responseGoogle}
+                onFailure={this.responseGoogle}
+                cookiePolicy={"single_host_origin"}
+              />
+            </div>
             <div className='info-div-login'>
-              Forgot Password ? <Link>Click Here</Link> to reset.
+              Forgot Password ? <Link to='/forgot-password'>Click Here</Link> to
+              reset.
             </div>
             <div className='info-div-login'>
               Already a user..? <Link to='/login'>Click Here</Link> to Login
-            </div>
-            <div className='social'>
-              <MDBBtn social='fb' color='blue'>
-                <MDBIcon fab icon='facebook-f' className='pr-1' />
-                Facebook
-              </MDBBtn>
-              <MDBBtn social='gplus' color='red'>
-                <MDBIcon fab icon='google-plus-g' className='pr-1' />
-                Google+
-              </MDBBtn>
             </div>
           </div>
         </div>

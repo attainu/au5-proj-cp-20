@@ -38,7 +38,16 @@ body {
   font-size: small;
 }
 
-.social {
+.social_login {
   display: flex;
-  flex-direction: row;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.social_register {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0.5rem;
 }
