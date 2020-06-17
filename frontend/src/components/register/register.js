@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "../../styles/login/login.css";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { MDBInput, MDBBtn, MDBIcon } from "mdbreact";
+import { MDBInput, MDBBtn } from "mdbreact";
 import { sendSignupData } from "../../Redux/actions/register_action";
 import { GoogleLogin } from "react-google-login";
 
@@ -54,13 +54,18 @@ class Register extends React.Component {
     event.preventDefault();
     event.target.className += " was-validated";
     console.log(this.state);
+    const data = {
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+    };
     if (
       this.state.name.length !== 0 &&
       this.state.email.length !== 0 &&
       this.state.password.length !== 0 &&
       this.state.confirm_password.length !== 0
     ) {
-      this.props.sendSignupData(this.state);
+      this.props.sendSignupData(data);
     }
   };
   render() {

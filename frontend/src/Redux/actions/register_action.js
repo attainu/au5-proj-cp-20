@@ -9,6 +9,7 @@ export function sendSignupData(data) {
       data,
     })
       .then((res) => {
+        console.log(res);
         dispatch({
           type: "SIGNUP_RESPONSE",
           payload: res.data,

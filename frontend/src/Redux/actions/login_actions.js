@@ -9,6 +9,11 @@ export function sendLoginData(data) {
       data,
     })
       .then(function (res) {
+        console.log(res);
+
+        window.localStorage.setItem("auth-token", res.headers["auth-token"]);
+        // console.log(window.localStorage.getItem("auth-token"));
+
         dispatch({
           type: "LOGIN_RESPONSE",
           payload: res.data,
