@@ -20,3 +20,12 @@ export function sendSignupData(data) {
       });
   };
 }
+export function sendLoginData(data) {
+  console.log("data in action", data);
+  return (dispatch) => {
+    dispatch({
+      type: "LOGIN",
+      payload: data.email,
+    });
+  };
+}

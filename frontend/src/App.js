@@ -13,7 +13,7 @@ function App() {
   return (
     <BrowserRouter>
       <div>
-        <Route path='/'>
+        <Route path='/' exact>
           <Land />
         </Route>
       </div>

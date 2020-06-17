@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
   MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon
@@ -6,6 +8,10 @@ import {
 import { BrowserRouter as Router } from 'react-router-dom';
 
 class Navbar extends Component {
+  constructor(props) {
+    super(props)
+    console.log(this.props.state)
+  }
   state = {
     isOpen: false
   };
@@ -15,6 +21,7 @@ class Navbar extends Component {
   }
 
   render() {
+    console.log(this.props.state)
     return (
       <Router>
         <MDBNavbar color="elegant-color" dark expand="md">
@@ -48,7 +55,8 @@ class Navbar extends Component {
               </MDBNavItem>
             </MDBNavbarNav>
             <MDBNavbarNav right className="mr-5">
-              <MDBNavItem>
+
+              {/* <MDBNavItem>
                 <MDBDropdown>
                   <MDBDropdownToggle nav caret>
                     <MDBIcon icon="user" />
@@ -61,7 +69,7 @@ class Navbar extends Component {
                     <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
                   </MDBDropdownMenu>
                 </MDBDropdown>
-              </MDBNavItem>
+              </MDBNavItem> */}
             </MDBNavbarNav>
           </MDBCollapse>
         </MDBNavbar>
@@ -69,5 +77,12 @@ class Navbar extends Component {
     );
   }
 }
-
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    state: state
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({}, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
