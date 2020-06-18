@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import axios from 'axios'
+import { Link, Redirect } from "react-router-dom";
 import "../../styles/login/login.css";
 import { MDBInput, MDBBtn } from "mdbreact";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { sendLoginData } from "../../Redux/actions/login_actions";
+import { sendLoginData } from "../../actions/register_action";
 import { GoogleLogin } from "react-google-login";
 
 class Login extends React.Component {
@@ -12,35 +13,34 @@ class Login extends React.Component {
     email: "",
     password: "",
   };
-
   responseGoogle = (response) => {
     console.log(response);
   };
-
   handleEmail(event) {
     this.setState({ [event.target.name]: event.target.value });
-    // this.setState({
-    //   email: event.target.value,
-    // });
   }
-
   handlePassword(event) {
     this.setState({ [event.target.name]: event.target.value });
-    // this.setState({
-    //   password: event.target.value,
-    // });
   }
-
-  handleLogin = (event) => {
+  handleLogin = async (event) => {
     event.preventDefault();
     event.target.className += " was-validated";
-
     if (this.state.email !== "" && this.state.password !== "") {
-      this.props.sendLoginData(this.state);
+      let data = this.state
+      let res = await axios({ method: "post", url: "http://localhost:8000/register/login", data })
+      if (res) {
+        localStorage.setItem('auth-token', res.data)
+        this.props.sendLoginData(data)
+      } else {
+        console.log("USER Data Not Found plz Register")
+      }
     }
   };
-
   render() {
+    console.log(this.props.state.user)
+    if (this.props.state.user.login === true) {
+      return <Redirect to='/' />
+    }
     return (
       <div>
         <div className='login_div'>
@@ -109,7 +109,9 @@ class Login extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  return {};
+  return {
+    state: state
+  };
 };
 
 const giveDataToRedux = (dispatch) => {

@@ -4,7 +4,7 @@ import "../../styles/login/login.css";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { MDBInput, MDBBtn } from "mdbreact";
-import { sendSignupData } from "../../Redux/actions/register_action";
+import { sendSignupData } from "../../actions/register_action";
 import { GoogleLogin } from "react-google-login";
 
 class Register extends React.Component {

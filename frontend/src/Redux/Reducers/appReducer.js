@@ -1,14 +1,19 @@
-let initialState = {};
+let userdata = {
+  login: false,
+  user: ''
+};
 
-function appReducerFunction(state = initialState, action) {
+function userReducer(state = userdata, action) {
   let stateCopy = JSON.parse(JSON.stringify(state));
-
   switch (action.type) {
-    case "DEFAULT_CASE":
+    case "LOGIN":
+      console.log(action)
+      stateCopy.login = true
+      stateCopy.user = action.payload
       return stateCopy;
     default:
       return stateCopy;
   }
 }
 
-export default appReducerFunction;
+export default userReducer;
