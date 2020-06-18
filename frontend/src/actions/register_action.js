@@ -30,6 +30,14 @@ export function sendLoginData(data) {
   };
 }
 
-export function verifyToken() {
-
+export async function verifyToken() {
+  let token = await localStorage.getItem('auth-token')
+  if (token) {
+    let instance = await axios.get({
+      method: 'get',
+      url: 'localhost:8000/main/home',
+      headers: { 'auth-token': token }
+    })
+    console.log(instance)
+  }
 }
