@@ -3,6 +3,16 @@ const app = express()
 const registerRoute = require('./Routers/login/login')
 const main = require('./Routers/main')
 const bodyParser = require('body-parser')
+//Cros Error
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+        "Access-Control-Allow-Headers",
+        "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+});
+
 
 //For Enviornment 
 const dotenv = require('dotenv')
