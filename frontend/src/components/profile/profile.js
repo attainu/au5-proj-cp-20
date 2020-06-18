@@ -210,7 +210,6 @@ class Profile extends React.Component {
               </MDBModal>
             </MDBContainer>
           </div>
-
           <div className='user-name-div'>
             <h1>
               <strong>Vivek Sharma</strong>
@@ -227,7 +226,7 @@ class Profile extends React.Component {
           </div>
         </div>
         <hr />
-        <nav>
+        <nav id='nav'>
           <ul>
             <Link to='/profile/upvotes'>
               <li>Upvotes</li>
