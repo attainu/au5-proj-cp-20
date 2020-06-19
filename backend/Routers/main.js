@@ -1,8 +1,6 @@
 const express = require('express')
 const route = express.Router()
+const controller = require('../Controller/protected')
 const userValid = require('./jwt')
-route.get('/home', userValid, (req, res) => {
-    console.log(req.user)
-    res.send(req.user)
-})
+route.get('/home', userValid, controller.main)
 module.exports = route

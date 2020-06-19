@@ -1,16 +1,17 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
+// import axios from 'axios'
+// import { verifyToken } from '../../actions/register_action'
 import { connect } from "react-redux";
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
   MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon
 } from "mdbreact";
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 class Navbar extends Component {
-  constructor(props) {
-    super(props)
-    console.log(this.props.state)
+  componentDidMount() {
+
   }
   state = {
     isOpen: false
@@ -21,13 +22,15 @@ class Navbar extends Component {
   }
 
   render() {
-    console.log(this.props.state)
+    // verifyToken()
     return (
       <Router>
         <MDBNavbar color="elegant-color" dark expand="md">
-          <MDBNavbarBrand>
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Ddk77xa-APCWbCOETR0NggAAAA%26pid%3DApi&f=1" alt="logo" height='35px' width='40px' />
-          </MDBNavbarBrand>
+          <Link to='/'>
+            <MDBNavbarBrand>
+              <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Ddk77xa-APCWbCOETR0NggAAAA%26pid%3DApi&f=1" alt="logo" height='35px' width='40px' />
+            </MDBNavbarBrand>
+          </Link>
           <MDBNavbarToggler onClick={this.toggleCollapse} />
           <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
             <MDBNavbarNav left>
