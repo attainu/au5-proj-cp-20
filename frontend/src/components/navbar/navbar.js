@@ -22,6 +22,7 @@ class Navbar extends Component {
   }
 
   render() {
+    console.log("Navbar", this.props.state)
     // verifyToken()
     return (
       <Router>

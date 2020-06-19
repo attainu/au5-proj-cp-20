@@ -34,7 +34,7 @@ controller.login = async (req, res) => {
     } else {
       console.log("user loged in");
       const token = jwt.sign({ _id: user._id }, process.env.TOKEN);
-      res.header("auth-token", token).send(token);
+      res.header("auth-token", token).send({ token, user });
     }
   } else {
     res.status(401).send("Email not found");

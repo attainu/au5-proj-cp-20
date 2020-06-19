@@ -9,6 +9,7 @@ export function sendSignupData(data) {
       data,
     })
       .then((res) => {
+        window.location.assign('/login')
         console.log(res);
         dispatch({
           type: "SIGNUP_RESPONSE",
@@ -25,7 +26,7 @@ export function sendLoginData(data) {
   return (dispatch) => {
     dispatch({
       type: "LOGIN",
-      payload: data.email,
+      payload: data,
     });
   };
 }
