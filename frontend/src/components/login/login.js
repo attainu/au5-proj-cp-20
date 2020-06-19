@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, Route } from "react-router-dom";
 import "../../styles/login/login.css";
 import { MDBInput, MDBBtn } from "mdbreact";
 import { bindActionCreators } from "redux";
@@ -27,17 +27,33 @@ class Login extends React.Component {
     event.target.className += " was-validated";
     if (this.state.email !== "" && this.state.password !== "") {
       let data = this.state;
-      let res = await axios({
+      axios({
         method: "post",
         url: "http://localhost:8000/register/login",
         data,
-      });
-      if (res) {
-        localStorage.setItem("auth-token", res.data);
-        this.props.sendLoginData(data);
-      } else {
-        console.log("USER Data Not Found plz Register");
-      }
+      })
+        .then((res) => {
+          console.log("Login res", res);
+          localStorage.setItem("auth-token", res.data.token);
+          let { name, email } = res.data.user;
+          this.props.sendLoginData({ name, email });
+        })
+        .catch((err) => {
+          this.setState({ error_msg: "User not Found Please Register" });
+          console.log("USER Data Not Found plz Register", err);
+        });
+
+      // let res = await axios({
+      //   method: "post",
+      //   url: "http://localhost:8000/register/login",
+      //   data,
+      // });
+      // if (res) {
+      //   localStorage.setItem("auth-token", res.data);
+      //   this.props.sendLoginData(data);
+      // } else {
+      //   console.log("USER Data Not Found plz Register");
+      // }
     }
   };
   render() {
@@ -100,6 +116,11 @@ class Login extends React.Component {
                 cookiePolicy={"single_host_origin"}
               />
             </div>
+            <div className='info-div-login'>
+              Forgot password..?
+              <Link to='/login/reset_password'>Click Here</Link> to reset.
+            </div>
+
             <div className='info-div-login'>
               Not a Member Yet ..? <Link to='/register'>Click Here</Link> to
               register
