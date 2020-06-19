@@ -12,6 +12,7 @@ class Login extends React.Component {
   state = {
     email: "",
     password: "",
+    error_msg: null,
   };
   responseGoogle = (response) => {
     console.log(response);
@@ -22,11 +23,14 @@ class Login extends React.Component {
   handlePassword(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
-  handleLogin = async (event) => {
+  handleLogin = (event) => {
     event.preventDefault();
     event.target.className += " was-validated";
     if (this.state.email !== "" && this.state.password !== "") {
-      let data = this.state;
+      let data = {
+        email: this.state.email,
+        password: this.state.password,
+      };
       axios({
         method: "post",
         url: "http://localhost:8000/register/login",
@@ -42,18 +46,6 @@ class Login extends React.Component {
           this.setState({ error_msg: "User not Found Please Register" });
           console.log("USER Data Not Found plz Register", err);
         });
-
-      // let res = await axios({
-      //   method: "post",
-      //   url: "http://localhost:8000/register/login",
-      //   data,
-      // });
-      // if (res) {
-      //   localStorage.setItem("auth-token", res.data);
-      //   this.props.sendLoginData(data);
-      // } else {
-      //   console.log("USER Data Not Found plz Register");
-      // }
     }
   };
   render() {
@@ -102,7 +94,7 @@ class Login extends React.Component {
                   </div>
                 </MDBInput>
               </div>
-
+              <p className='error_div'>{this.state.error_msg}</p>
               <MDBBtn type='submit' rounded gradient='blue'>
                 Login
               </MDBBtn>

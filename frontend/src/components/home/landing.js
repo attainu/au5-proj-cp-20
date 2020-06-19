@@ -6,7 +6,7 @@ class Land extends React.Component {
     render() {
         return (
             <div>
-                <Navbar />
+                <nav><Navbar /></nav>
                 <div>
                     <div className='row'>
                         <div className="col-8 main" >

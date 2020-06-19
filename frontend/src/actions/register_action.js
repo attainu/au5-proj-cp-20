@@ -9,6 +9,7 @@ export function sendSignupData(data) {
       data,
     })
       .then((res) => {
+        window.location.assign('/login')
         console.log(res);
         dispatch({
           type: "SIGNUP_RESPONSE",
@@ -25,19 +26,21 @@ export function sendLoginData(data) {
   return (dispatch) => {
     dispatch({
       type: "LOGIN",
-      payload: data.email,
+      payload: data,
     });
   };
 }
 
 export async function verifyToken() {
-  let token = await localStorage.getItem("auth-token");
-  if (token) {
-    let instance = await axios.get({
-      method: "get",
-      url: "localhost:8000/main/home",
-      headers: { "auth-token": token },
-    });
-    console.log(instance);
+  return async () => {
+    let token = await localStorage.getItem("auth-token");
+    if (token) {
+      let instance = await axios.get({
+        method: "get",
+        url: "localhost:8000/main/home",
+        headers: { "auth-token": token },
+      });
+      console.log(instance);
+    }
   }
 }

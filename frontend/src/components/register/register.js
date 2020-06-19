@@ -33,7 +33,7 @@ class Register extends React.Component {
     var emailRGEX = /^[^\s@]+@[^\s@]/;
     var resultEmail = emailRGEX.test(email);
     console.log(resultEmail.email);
-    if (resultEmail == false) {
+    if (resultEmail === false) {
       this.setState({
         email: "",
         error_msg: {
@@ -41,7 +41,7 @@ class Register extends React.Component {
         },
       });
     }
-    if (resultEmail == true) {
+    if (resultEmail === true) {
       this.setState({
         email: event.target.value,
         error_msg: {
