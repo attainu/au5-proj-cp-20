@@ -30,6 +30,4 @@ export function sendLoginData(data) {
   };
 }
 
-export function verifyToken() {
-
-}
+export function verifyToken() {}

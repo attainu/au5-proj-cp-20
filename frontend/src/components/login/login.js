@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import "../../styles/login/login.css";
 import { MDBInput, MDBBtn } from "mdbreact";
@@ -26,20 +26,24 @@ class Login extends React.Component {
     event.preventDefault();
     event.target.className += " was-validated";
     if (this.state.email !== "" && this.state.password !== "") {
-      let data = this.state
-      let res = await axios({ method: "post", url: "http://localhost:8000/register/login", data })
+      let data = this.state;
+      let res = await axios({
+        method: "post",
+        url: "http://localhost:8000/register/login",
+        data,
+      });
       if (res) {
-        localStorage.setItem('auth-token', res.data)
-        this.props.sendLoginData(data)
+        localStorage.setItem("auth-token", res.data);
+        this.props.sendLoginData(data);
       } else {
-        console.log("USER Data Not Found plz Register")
+        console.log("USER Data Not Found plz Register");
       }
     }
   };
   render() {
-    console.log(this.props.state.user)
+    console.log(this.props.state.user);
     if (this.props.state.user.login === true) {
-      return <Redirect to='/' />
+      return <Redirect to='/' />;
     }
     return (
       <div>
@@ -96,7 +100,6 @@ class Login extends React.Component {
                 cookiePolicy={"single_host_origin"}
               />
             </div>
-
             <div className='info-div-login'>
               Not a Member Yet ..? <Link to='/register'>Click Here</Link> to
               register
@@ -110,7 +113,7 @@ class Login extends React.Component {
 
 const getDataFromRedux = (state) => {
   return {
-    state: state
+    state: state,
   };
 };
 

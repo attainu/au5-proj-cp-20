@@ -14,6 +14,7 @@ class Register extends React.Component {
     password: "",
     confirm_password: "",
     error_msg: {
+      email_error: "",
       password_error: "",
       c_password_error: "",
     },
@@ -26,13 +27,33 @@ class Register extends React.Component {
   handleName(event) {
     this.setState({ name: event.target.value });
   }
+
   handleEmail(event) {
-    this.setState({ email: event.target.value });
+    var email = event.target.value;
+    var emailRGEX = /^[^\s@]+@[^\s@]/;
+    var resultEmail = emailRGEX.test(email);
+    console.log(resultEmail.email);
+    if (resultEmail == false) {
+      this.setState({
+        email: "",
+        error_msg: {
+          email_error: "Please enter a valid Email Id !",
+        },
+      });
+    }
+    if (resultEmail == true) {
+      this.setState({
+        email: event.target.value,
+        error_msg: {
+          email_error: "",
+        },
+      });
+    }
   }
   handlePassword(event) {
     if (event.target.value.length < 8) {
       this.setState({
-        error_msg: { password_error: "Password Must be 8 characters long" },
+        error_msg: { password_error: "Password Must be 8 characters long !" },
       });
     } else if (event.target.value.length >= 8) {
       this.setState({ error_msg: { password_error: "" } });
@@ -43,7 +64,9 @@ class Register extends React.Component {
     const password = this.state.password;
     const confirm_password = event.target.value;
     if (password !== confirm_password) {
-      this.setState({ error_msg: { c_password_error: "Password Mismatch" } });
+      this.setState({
+        error_msg: { c_password_error: "Password Mismatch !" },
+      });
     }
     if (password === confirm_password) {
       this.setState({ error_msg: { c_password_error: "" } });
@@ -59,6 +82,7 @@ class Register extends React.Component {
       email: this.state.email,
       password: this.state.password,
     };
+
     if (
       this.state.name.length !== 0 &&
       this.state.email.length !== 0 &&
@@ -66,6 +90,20 @@ class Register extends React.Component {
       this.state.confirm_password.length !== 0
     ) {
       this.props.sendSignupData(data);
+    }
+
+    if (
+      this.state.email.length === 0 ||
+      this.state.password.length === 0 ||
+      this.state.confirm_password.length === 0
+    ) {
+      this.setState({
+        error_msg: {
+          email_error: "Please enter a valid Email Id !",
+          password_error: "Password must be 8 characters long !",
+          c_password_error: "Password Mismatch !",
+        },
+      });
     }
   };
   render() {
@@ -97,13 +135,14 @@ class Register extends React.Component {
                 <MDBInput
                   label='Email'
                   type='email'
+                  id='email'
                   icon='envelope'
                   size='sm'
                   onChange={(event) => this.handleEmail(event)}
                   outline
                   required>
-                  <div className='invalid-feedback'>
-                    Please enter a valid email address containing '@'.
+                  <div className='error_div'>
+                    {this.state.error_msg.email_error}
                   </div>
                 </MDBInput>
               </div>
@@ -152,10 +191,7 @@ class Register extends React.Component {
                 cookiePolicy={"single_host_origin"}
               />
             </div>
-            <div className='info-div-login'>
-              Forgot Password ? <Link to='/forgot-password'>Click Here</Link> to
-              reset.
-            </div>
+
             <div className='info-div-login'>
               Already a user..? <Link to='/login'>Click Here</Link> to Login
             </div>

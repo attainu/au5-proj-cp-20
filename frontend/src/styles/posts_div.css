@@ -1,0 +1,38 @@
+.posts_div {
+  display: flex;
+  flex-direction: row;
+  background-color: rgb(255, 254, 254);
+  color: black;
+  border-top: 5px solid rgb(0, 119, 199);
+  border-left: 5px solid rgb(0, 119, 199);
+  border-right: 5px solid rgb(0, 119, 199);
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 50px;
+}
+.upvote-downvote-div {
+  padding: 1rem;
+}
+
+.post-content-div {
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 131, 0, 0.75);
+  padding: 2rem;
+}
+
+.contents-tools-div {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.tools {
+  box-shadow: inset 0px 0px 3px 1px rgba(145, 0, 0, 0.75);
+  padding: 1rem;
+}
+
+.col-6 {
+  padding: 0.3rem;
+}
+
+i:hover {
+  opacity: 0.5;
+}
