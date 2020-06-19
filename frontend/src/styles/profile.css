@@ -42,7 +42,12 @@
   z-index: 6;
   margin-top: 1rem;
   margin-left: 3rem;
-  box-shadow: 0px 0px 4px 2px rgb(19, 17, 17);
+  box-shadow: 0px 0px 48px 12px rgba(0, 0, 0, 0.75);
+}
+
+.avatar:hover {
+  opacity: 0.8;
+  box-shadow: 0px 0px 48px 12px rgba(0, 153, 255, 0.897);
 }
 
 .user-contents {
@@ -122,4 +127,21 @@ input[type="File"] {
   display: flex;
   align-items: flex-end;
   font-weight: bolder;
+}
+
+.changeAvatar {
+  position: relative;
+  top: -200px;
+  background-color: rgb(0, 0, 0, 0.7);
+  border-radius: 50%;
+  height: 200px;
+  width: 100%;
+  color: white;
+  font-size: 20px;
+  text-align: center;
+  padding-top: 40%;
+  opacity: 0;
+}
+.avatar:hover .changeAvatar {
+  opacity: 1;
 }

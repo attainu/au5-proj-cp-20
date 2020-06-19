@@ -1,5 +1,5 @@
 import React from "react";
-
+import Postdiv from "../../posts_component/posts_component";
 class Posts extends React.Component {
   render() {
     return (
@@ -9,6 +9,7 @@ class Posts extends React.Component {
         </div>
         <hr />
         <div>You have no posts yet</div>
+        <Postdiv />
       </div>
     );
   }

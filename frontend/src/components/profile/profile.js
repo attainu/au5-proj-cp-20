@@ -31,7 +31,8 @@ class Profile extends React.Component {
       crop: {
         unit: "%",
         width: 30,
-        aspect: 16 / 9,
+        height: 40,
+        aspect: 16 / 14,
       },
     };
     this.handleImage = this.handleImage.bind(this);
@@ -137,7 +138,6 @@ class Profile extends React.Component {
   };
 
   render() {
-    console.log(this.state.url);
     const { crop } = this.state;
 
     return (
@@ -150,10 +150,13 @@ class Profile extends React.Component {
               src={
                 this.state.url
                   ? this.state.url
-                  : "http://via.placeholder.com/1000?text=Upload+profile+pic"
+                  : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png"
               }
               alt=''
             />
+            <div className='changeAvatar'>
+              <span>Change Avatar</span>
+            </div>
           </div>
           <div className='option-modal'>
             {this.state.src && (
@@ -174,13 +177,17 @@ class Profile extends React.Component {
                     />
                   </MDBModalBody>
                   <MDBModalFooter>
-                    <MDBBtn color='secondary' onClick={this.toggle(12)}>
+                    <MDBBtn
+                      outline
+                      color='peach-gradient'
+                      onClick={this.toggle(12)}>
                       Close
                     </MDBBtn>
                     <MDBBtn
+                      outline
                       color='primary'
                       onClick={() => this.handleImageUpload(12)}>
-                      Save changes
+                      Upload Image
                     </MDBBtn>
                   </MDBModalFooter>
                 </MDBModal>
@@ -196,12 +203,9 @@ class Profile extends React.Component {
                 <MDBModalHeader toggle={this.toggle(14)}>
                   Update Profile Picture
                 </MDBModalHeader>
-                <MDBModalBody></MDBModalBody>
                 <MDBModalFooter>
-                  <MDBBtn color='secondary' onClick={this.toggle(14)}>
-                    Remove Profile Pic
-                  </MDBBtn>
                   <MDBBtn
+                    outline
                     color='secondary'
                     onClick={() => this.handlePicture(14, 12)}>
                     Upload From Device
@@ -219,7 +223,8 @@ class Profile extends React.Component {
             <ul>
               <li>
                 <h5>
-                  <i class='fas fa-birthday-cake'></i> 12 october
+                  <i class='fas light-green-text fa-birthday-cake'></i> 12
+                  october
                 </h5>
               </li>
             </ul>

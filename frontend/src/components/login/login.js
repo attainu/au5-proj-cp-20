@@ -1,5 +1,5 @@
 import React from "react";
-import axios from 'axios'
+import axios from "axios";
 import { Link, Redirect } from "react-router-dom";
 import "../../styles/login/login.css";
 import { MDBInput, MDBBtn } from "mdbreact";
@@ -44,9 +44,9 @@ class Login extends React.Component {
     }
   };
   render() {
-    console.log(this.props.state.user)
+    console.log(this.props.state.user);
     if (this.props.state.user.login === true) {
-      return <Redirect to='/' />
+      return <Redirect to='/' />;
     }
     return (
       <div>
@@ -103,7 +103,6 @@ class Login extends React.Component {
                 cookiePolicy={"single_host_origin"}
               />
             </div>
-
             <div className='info-div-login'>
               Not a Member Yet ..? <Link to='/register'>Click Here</Link> to
               register
@@ -117,7 +116,7 @@ class Login extends React.Component {
 
 const getDataFromRedux = (state) => {
   return {
-    state: state
+    state: state,
   };
 };
 
