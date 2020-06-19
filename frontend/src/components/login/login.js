@@ -32,7 +32,6 @@ class Login extends React.Component {
         password: this.state.password
       }
       axios({ method: "post", url: "http://localhost:8000/register/login", data }).then((res) => {
-        console.log("JSon", JSON.parse(res))
         console.log("Login res", res)
         localStorage.setItem('auth-token', res.data.token)
         let { name, email } = res.data.user
