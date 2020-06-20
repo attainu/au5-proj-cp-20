@@ -1,6 +1,8 @@
 import React from "react";
 import "../../styles/profile.css";
 import ReactCrop from "react-image-crop";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
 import { Route, Link } from "react-router-dom";
 import "react-image-crop/dist/ReactCrop.css";
 import { storage } from "../../config/firebase_config";
@@ -146,7 +148,7 @@ class Profile extends React.Component {
           <div className='avatar' onClick={this.toggle(14)}>
             <img
               className='avatar_img'
-              for='file'
+              htmlFor='file'
               src={
                 this.state.url
                   ? this.state.url
@@ -163,7 +165,7 @@ class Profile extends React.Component {
               <MDBContainer>
                 <MDBModal isOpen={this.state.modal12} toggle={this.toggle(12)}>
                   <MDBModalHeader toggle={this.toggle(12)}>
-                    MDBModal title
+                    Crop Image
                   </MDBModalHeader>
                   <MDBModalBody id='modal-body'>
                     <ReactCrop
@@ -216,14 +218,14 @@ class Profile extends React.Component {
           </div>
           <div className='user-name-div'>
             <h1>
-              <strong>Vivek Sharma</strong>
+              <strong>{this.state.google}</strong>
             </h1>
           </div>
           <div className='user-details'>
             <ul>
               <li>
                 <h5>
-                  <i class='fas light-green-text fa-birthday-cake'></i> 12
+                  <i className='fas light-green-text fa-birthday-cake'></i> 12
                   october
                 </h5>
               </li>
@@ -270,4 +272,13 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+const getDataFromRedux = (state) => {
+  console.log("in profile", state);
+  return {};
+};
+
+const giveDataToRedux = (dispatch) => {
+  return bindActionCreators({}, dispatch);
+};
+
+export default connect(getDataFromRedux, giveDataToRedux)(Profile);

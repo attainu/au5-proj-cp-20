@@ -9,7 +9,7 @@ export function sendSignupData(data) {
       data,
     })
       .then((res) => {
-        window.location.assign('/login')
+        window.location.assign("/login");
         console.log(res);
         dispatch({
           type: "SIGNUP_RESPONSE",
@@ -42,5 +42,15 @@ export async function verifyToken() {
       });
       console.log(instance);
     }
-  }
+  };
+}
+
+export function sendLoginDataGoogle(data) {
+  console.log("Google Data : ", data);
+  return (dispatch) => {
+    dispatch({
+      type: "GOOGLE_LOGIN",
+      payload: data,
+    });
+  };
 }

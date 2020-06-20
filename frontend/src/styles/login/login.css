@@ -51,3 +51,15 @@ body {
   flex-direction: column;
   padding: 0.5rem;
 }
+
+#reset-card {
+  width: 500px;
+  margin-left: 12rem;
+  display: flex;
+  justify-content: center;
+}
+#reset-button {
+  width: 200px;
+  margin-left: 10rem;
+  margin-bottom: 2rem;
+}

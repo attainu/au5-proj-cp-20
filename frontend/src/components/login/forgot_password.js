@@ -54,7 +54,7 @@ class Forgetpassword extends React.Component {
           <div className='row' style={{ marginTop: 20 }}>
             <div className='col-sm-2'></div>
             <div className='col-sm-8'>
-              <div className='card'>
+              <div className='card' id='reset-card'>
                 <div className='card-header text-center'>Login</div>
                 <div className='card-body'>
                   <div className='form-group'>
@@ -70,6 +70,7 @@ class Forgetpassword extends React.Component {
                 </div>
                 <input
                   type='button'
+                  id='reset-button'
                   value='send Mail'
                   onClick={this.handleForm}
                   className='btn btn-primary'

@@ -1,11 +1,12 @@
 import React from "react";
 import axios from "axios";
-import { Link, Redirect, Route } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import "../../styles/login/login.css";
 import { MDBInput, MDBBtn } from "mdbreact";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { sendLoginData } from "../../actions/register_action";
+import { sendLoginDataGoogle } from "../../actions/register_action";
 import { GoogleLogin } from "react-google-login";
 
 class Login extends React.Component {
@@ -16,7 +17,20 @@ class Login extends React.Component {
   };
   responseGoogle = (response) => {
     console.log(response);
+    const data = {
+      name: response.profileObj.name,
+      email: response.profileObj.email,
+      image: response.profileObj.imageUrl,
+    };
+    if (response) {
+      this.props.sendLoginDataGoogle(data);
+    }
   };
+
+  // googleSignIn = () => {
+  //   base_provider = new firebase.auth.GoogleAuthProvider();
+  //   firebase.auth.signinWithPopup(base_provider);
+  // };
   handleEmail(event) {
     this.setState({ [event.target.name]: event.target.value });
   }
@@ -131,7 +145,7 @@ const getDataFromRedux = (state) => {
 };
 
 const giveDataToRedux = (dispatch) => {
-  return bindActionCreators({ sendLoginData }, dispatch);
+  return bindActionCreators({ sendLoginData, sendLoginDataGoogle }, dispatch);
 };
 
 export default connect(getDataFromRedux, giveDataToRedux)(Login);
