@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { bindActionCreators } from "redux";
-import { MDBBtn } from "mdbreact";
+import { MDBBtn, MDBTypography } from "mdbreact";
 // import axios from 'axios'
-import { verifyToken } from '../../actions/register_action'
+import { verifyToken, logoutAgain } from '../../actions/register_action'
 import { connect } from "react-redux";
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
   componentDidMount() {
-
+    this.props.verifyToken()
   }
   state = {
     isOpen: false
@@ -21,7 +21,6 @@ class Navbar extends Component {
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
-
   render() {
     console.log("Navbar", this.props.state.user)
     // verifyToken()
@@ -44,16 +43,16 @@ class Navbar extends Component {
             <MDBNavItem className="ml-2" >
               <MDBNavLink to="#!">Pricing</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem className="ml-2" >
+            <MDBNavItem>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
-                  <div className="d-none d-md-inline">Dropdown</div>
+                  <span className="mr-2">Posts Filter</span>
                 </MDBDropdownToggle>
-                <MDBDropdownMenu className="dropdown-default">
-                  <MDBDropdownItem href="#!">Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Another Action</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
-                  <MDBDropdownItem href="#!">Something else here</MDBDropdownItem>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem href="#!">All Posts</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Popular</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Up Voted</MDBDropdownItem>
+                  <MDBDropdownItem href="#!">Down Voted</MDBDropdownItem>
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
@@ -75,8 +74,8 @@ class Navbar extends Component {
                       <MDBIcon icon="user" />
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default">
-                      <MDBDropdownItem href="#!">My Profile</MDBDropdownItem>
-                      <MDBDropdownItem href="#!">Logout</MDBDropdownItem>
+                      <MDBDropdownItem size="sm" href='/profile' >My Profile</MDBDropdownItem>
+                      <MDBDropdownItem onClick={() => this.props.logoutAgain()} size="sm" >Logout</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
                 </MDBNavItem>
@@ -93,6 +92,6 @@ const mapStateToProps = (state) => {
   }
 }
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ verifyToken }, dispatch)
+  return bindActionCreators({ verifyToken, logoutAgain }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)
