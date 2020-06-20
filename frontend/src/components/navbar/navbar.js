@@ -11,7 +11,8 @@ import {
 import { Link } from 'react-router-dom';
 
 class Navbar extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
     this.props.verifyToken()
   }
   state = {
