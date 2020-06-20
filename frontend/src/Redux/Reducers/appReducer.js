@@ -17,6 +17,11 @@ function userReducer(state = userdata, action) {
       console.log("in reducer", action);
       stateCopy.google = action.payload;
       return stateCopy;
+    case "LOGOUT":
+      console.log(action)
+      stateCopy.login = false
+      stateCopy.user = action.payload
+      return stateCopy;
     default:
       return stateCopy;
   }

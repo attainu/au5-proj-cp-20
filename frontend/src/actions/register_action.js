@@ -31,17 +31,22 @@ export function sendLoginData(data) {
   };
 }
 
-export async function verifyToken() {
-  return async () => {
-    let token = await localStorage.getItem("auth-token");
-    if (token) {
-      let instance = await axios.get({
-        method: "get",
-        url: "localhost:8000/main/home",
-        headers: { "auth-token": token },
+export function verifyToken() {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    return axios({
+      method: "get",
+      url: "/main/home",
+      headers: { "auth-token": token },
+    }).then((res) => {
+      console.log("BACKEND", res);
+      let data = { name: res.data.name, email: res.data.email };
+      console.log("ResDATA", data);
+      dispatch({
+        type: "LOGIN",
+        payload: data,
       });
-      console.log(instance);
-    }
+    });
   };
 }
 
@@ -51,6 +56,18 @@ export function sendLoginDataGoogle(data) {
     dispatch({
       type: "GOOGLE_LOGIN",
       payload: data,
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+}
+
+export function logoutAgain() {
+  localStorage.clear();
+  return (dispatch) => {
+    dispatch({
+      type: "LOGOUT",
+      payload: "",
     });
   };
 }
