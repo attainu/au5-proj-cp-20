@@ -70,6 +70,18 @@ class Login extends React.Component {
     return (
       <div>
         <div className='login_div'>
+          <div className='logo-name'>
+            <span style={{ fontSize: "50px" }} className='logo-title2'>
+              #
+            </span>
+            <span style={{ fontSize: "50px" }} className='logo-title1'>
+              raise
+            </span>
+            <span style={{ fontSize: "50px" }} className='logo-title2'>
+              it
+            </span>
+          </div>
+
           <div className='head_div'>LOGIN</div>
           <hr />
           <div className='form_div'>
@@ -120,6 +132,7 @@ class Login extends React.Component {
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
                 cookiePolicy={"single_host_origin"}
+                theme='dark'
               />
             </div>
             <div className='info-div-login'>

@@ -16,32 +16,32 @@ import ResetPassword from "./components/login/reset_password";
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className='wrapper'>
         <Route path='/' exact strict>
           <Land />
         </Route>
       </div>
-      <div>
+      <div className='wrapper1'>
         <Route path='/login' exact strict>
           <Login />
         </Route>
       </div>
-      <div>
+      <div className='wrapper1'>
         <Route path='/register' exact strict>
           <Register />
         </Route>
       </div>
-      <div>
+      <div className='wrapper'>
         <Route path='/profile'>
           <Profile />
         </Route>
       </div>
-      <div>
+      <div className='wrapper'>
         <Route path='/login/reset_password'>
           <Forgetpassword />
         </Route>
       </div>
-      <div>
+      <div className='wrapper'>
         <Route path='/change-password/:slug' component={ResetPassword}></Route>
       </div>
     </BrowserRouter>

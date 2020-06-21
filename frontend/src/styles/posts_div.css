@@ -1,21 +1,26 @@
 .posts_div {
   display: flex;
   flex-direction: row;
-  background-color: rgb(255, 254, 254);
   color: black;
-  border-top: 5px solid rgb(0, 119, 199);
-  border-left: 5px solid rgb(0, 119, 199);
-  border-right: 5px solid rgb(0, 119, 199);
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 50px;
 }
 .upvote-downvote-div {
   padding: 1rem;
+  border-radius: 10px;
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+  background-color: #212121;
+  color: beige;
+  border: 5px double beige;
+  margin: 1px;
 }
 
 .post-content-div {
-  box-shadow: inset 0px 0px 3px 1px rgba(0, 131, 0, 0.75);
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
   padding: 2rem;
+  border-radius: 10px;
+  background-color: #212121;
+  color: beige;
+  border: 5px double beige;
+  margin: 1px;
 }
 
 .contents-tools-div {
@@ -25,8 +30,13 @@
 }
 
 .tools {
-  box-shadow: inset 0px 0px 3px 1px rgba(145, 0, 0, 0.75);
+  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
   padding: 1rem;
+  border-radius: 10px;
+  background-color: #212121;
+  color: beige;
+  border: 5px double beige;
+  margin: 1px;
 }
 
 .col-6 {
