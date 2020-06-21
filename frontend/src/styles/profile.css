@@ -1,9 +1,10 @@
 .main_profile {
-  width: 80%;
+  width: 90%;
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  margin-left: 8rem;
+  margin-left: 5rem;
+  background-color: #dae0e6;
 }
 
 .content-div {
@@ -13,16 +14,11 @@
 
 .post-div {
   margin: 1rem;
-  margin-left: 3rem;
-  color: whitesmoke;
-  background-color: #636363;
-  width: 65%;
-  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+  margin-left: 2rem;
+  color: rgb(44, 44, 44);
+  width: 90%;
   padding: 2rem;
   height: 1000px;
-  border-top: 5px solid rgb(0, 119, 199);
-  border-left: 5px solid rgb(0, 119, 199);
-  border-top-left-radius: 20px;
 }
 
 .user-info-div {
@@ -30,18 +26,11 @@
   margin-top: 3rem;
 }
 
-.cover-img {
-  width: 100%;
-  height: auto;
-}
 .avatar {
   background-color: aliceblue;
   width: 200px;
   height: 200px;
-  border-radius: 50%;
   z-index: 6;
-  margin-top: 1rem;
-  margin-left: 3rem;
   box-shadow: 0px 0px 6px 2px rgba(145, 145, 145, 1);
 }
 
@@ -56,18 +45,10 @@
 }
 
 .avatar_img {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-}
-.image-div {
-  color: bisque;
-  font-family: cursive;
-  margin-bottom: 1rem;
-  height: 250px;
-  display: flex;
-  justify-content: center;
-  box-shadow: 0px 0px 4px 2px rgb(19, 17, 17);
+  width: 312px;
+  height: 220px;
+  margin-left: -12px;
+  box-shadow: 0px 0px 6px 2px rgb(0, 0, 0);
 }
 
 .user-details {
@@ -83,14 +64,14 @@ input[type="File"] {
 }
 
 #nav {
-  width: 100%;
+  color: beige;
+  width: 95%;
   height: 50px;
   position: sticky;
   top: 0px;
-  background-color: #3b3b3b;
-  border-top: 5px solid rgb(0, 119, 199);
-  border-left: 5px solid rgb(0, 119, 199);
-  box-shadow: inset 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+  background-color: #212121;
+  box-shadow: 0px 0px 3px 1px rgba(0, 0, 0, 0.75);
+  margin-left: 1rem;
 }
 #nav ul {
   display: flex;
@@ -98,8 +79,7 @@ input[type="File"] {
   color: aliceblue;
 }
 #nav ul li {
-  color: aliceblue;
-  /* margin-left: 100px; */
+  color: beige;
   white-space: pre-line;
   margin-top: 5px;
   padding: 0.5rem;
@@ -112,6 +92,21 @@ input[type="File"] {
 #nav ul li:active {
   opacity: inherit;
   border-bottom: 5px aliceblue solid;
+}
+.nav-div {
+  width: 70%;
+}
+.pp-div {
+  position: sticky;
+  top: 0px;
+  margin-left: 2rem;
+  color: beige;
+}
+
+.card {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
 }
 
 .user-details ul li {
@@ -126,11 +121,11 @@ input[type="File"] {
 
 .changeAvatar {
   position: relative;
-  top: -200px;
-  background-color: rgb(0, 0, 0, 0.7);
-  border-radius: 50%;
-  height: 200px;
-  width: 100%;
+  top: -220px;
+  background-color: rgba(0, 0, 0, 0.377);
+  height: 220px;
+  width: 312px;
+  margin-left: -12px;
   color: white;
   font-size: 20px;
   text-align: center;
@@ -139,4 +134,8 @@ input[type="File"] {
 }
 .avatar:hover .changeAvatar {
   opacity: 1;
+}
+
+#file-upload {
+  margin-left: 6rem;
 }

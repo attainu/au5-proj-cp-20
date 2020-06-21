@@ -110,6 +110,14 @@ class Register extends React.Component {
     return (
       <div>
         <div className='login_div'>
+          <div className='logo-name'>
+            <span style={{ fontSize: "50px" }} className='logo-title1'>
+              raise
+            </span>
+            <span style={{ fontSize: "50px" }} className='logo-title2'>
+              it
+            </span>
+          </div>
           <div className='head_div'>REGISTER</div>
           <hr />
           <div className='form_div'>
@@ -186,6 +194,7 @@ class Register extends React.Component {
               <GoogleLogin
                 clientId='189392606316-gophi88gi150u8rg4b0gotokdfe36ufk.apps.googleusercontent.com'
                 buttonText='Login with Google'
+                theme='dark'
                 onSuccess={this.responseGoogle}
                 onFailure={this.responseGoogle}
                 cookiePolicy={"single_host_origin"}

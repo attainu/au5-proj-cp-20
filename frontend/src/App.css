@@ -1,0 +1,20 @@
+.wrapper {
+  background-color: #dae0e6;
+}
+.wrapper1 {
+  background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
+    no-repeat center fixed;
+  background-size: cover;
+}
+
+.logo-title1 {
+  color: beige;
+  font-weight: bolder;
+  font-size: x-large;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+.logo-title2 {
+  color: red;
+  font-weight: bolder;
+  font-size: x-large;
+}

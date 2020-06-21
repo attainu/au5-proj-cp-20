@@ -15,12 +15,13 @@ function userReducer(state = userdata, action) {
 
     case "GOOGLE_LOGIN":
       console.log("in reducer", action);
+      stateCopy.login = true;
       stateCopy.google = action.payload;
       return stateCopy;
     case "LOGOUT":
-      console.log(action)
-      stateCopy.login = false
-      stateCopy.user = action.payload
+      console.log(action);
+      stateCopy.login = false;
+      stateCopy.user = action.payload;
       return stateCopy;
     default:
       return stateCopy;

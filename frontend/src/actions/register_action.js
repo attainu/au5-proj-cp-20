@@ -56,8 +56,6 @@ export function sendLoginDataGoogle(data) {
     dispatch({
       type: "GOOGLE_LOGIN",
       payload: data,
-    }).catch((error) => {
-      console.log(error);
     });
   };
 }
