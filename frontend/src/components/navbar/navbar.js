@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { MDBBtn, MDBTypography } from "mdbreact";
 // import axios from 'axios'
-import { verifyToken, logoutAgain } from '../../actions/register_action'
+import { verifyToken, logoutAgain, articleCall } from '../../actions/register_action'
 import { connect } from "react-redux";
 import {
   MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
@@ -14,22 +14,26 @@ class Navbar extends Component {
   constructor(props) {
     super(props)
     this.props.verifyToken()
+    this.props.articleCall('Reddit')
   }
   state = {
-    isOpen: false
+    isOpen: false,
+    querry: 'reddit'
   };
-
+  article = () => {
+    this.props.articleCall(this.state.querry)
+  }
   toggleCollapse = () => {
     this.setState({ isOpen: !this.state.isOpen });
   }
   render() {
-    console.log("Navbar", this.props.state.user)
+    console.log("Navbar", this.props.state.user, "state", this.state)
     // verifyToken()
     return (
       <MDBNavbar color="elegant-color" dark expand="md">
         <Link to='/'>
           <MDBNavbarBrand>
-            <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.Ddk77xa-APCWbCOETR0NggAAAA%26pid%3DApi&f=1" alt="logo" height='35px' width='40px' />
+            <MDBIcon fab icon="reddit-alien" size="2x" className="red-text" />
           </MDBNavbarBrand>
         </Link>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -57,6 +61,12 @@ class Navbar extends Component {
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavItem>
+            <div className="md-form my-0 ml-2">
+              <input className="form-control mr-sm-2 text-white" type="text" placeholder="Search" aria-label="Search" onKeyUp={(e) => this.setState({ querry: e.target.value })} />
+            </div>
+            <MDBNavItem onClick={() => this.article()} >
+              <MDBIcon fab icon="reddit-alien" size="2x" className="d-inline text-white" />
+            </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right className="mr-1">
             {this.props.state.user.login === false ?
@@ -75,7 +85,8 @@ class Navbar extends Component {
                       <MDBIcon icon="user" />
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className="dropdown-default">
-                      <MDBDropdownItem size="sm" href='/profile' >My Profile</MDBDropdownItem>
+                      <MDBDropdownItem size="sm">My Profile</MDBDropdownItem>
+                      <MDBDropdownItem size="sm">Create Post</MDBDropdownItem>
                       <MDBDropdownItem onClick={() => this.props.logoutAgain()} size="sm" >Logout</MDBDropdownItem>
                     </MDBDropdownMenu>
                   </MDBDropdown>
@@ -93,6 +104,6 @@ const mapStateToProps = (state) => {
   }
 }
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ verifyToken, logoutAgain }, dispatch)
+  return bindActionCreators({ verifyToken, logoutAgain, articleCall }, dispatch)
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Navbar)

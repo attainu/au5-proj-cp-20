@@ -71,3 +71,36 @@ export function logoutAgain() {
     });
   };
 }
+
+export function articleCall(querry) {
+  return (dispatch) => {
+    axios({
+      method: "get",
+      url: `https://www.reddit.com/search.json?q=${querry}&sort=new&limit=10&raw_json=1`,
+    }).then(res => res.data)
+      .then((data) => data.data.children.map(data => data.data))
+      .then((soup) => {
+        console.log(soup)
+        let arr = []
+        soup.forEach(e => {
+          if (e.preview) {
+            let data = {
+              title: e.title,
+              text: e.selftext,
+              image: e.preview.images[0].source.url,
+              post: e.url
+            }
+            console.log(e.preview.images[0].source)
+            return arr.push(data)
+          }
+        })
+        console.log(arr)
+        dispatch({
+          type: 'ARTICLE',
+          payload: arr
+        })
+      }).catch((err) => {
+        console.log(err)
+      })
+  }
+}

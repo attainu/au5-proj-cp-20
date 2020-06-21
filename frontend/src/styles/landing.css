@@ -6,3 +6,10 @@ body{
     padding: 0;
     background-color: bisque;
 }
+article{
+    display: flex;
+}
+.card{
+    width: 20rem;
+    height: 20rem;
+}
