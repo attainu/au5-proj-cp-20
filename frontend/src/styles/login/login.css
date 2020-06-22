@@ -3,7 +3,7 @@
   width: 25%;
   margin-left: 75%;
   background: rgba(0, 0, 0, 0.726);
-  height: 43.3rem;
+  height: 100vh;
   color: whitesmoke;
 }
 
@@ -65,4 +65,108 @@
 
 .logo-name {
   margin-left: 5rem;
+}
+
+/* @media screen and (max-width: 1060px) {
+  .login_div {
+    padding: 1rem 1rem 1rem 1rem;
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.726);
+    height: 100%;
+    color: whitesmoke;
+  }
+
+  .logo-name {
+    margin-left: 13rem;
+  }
+} */
+
+/* @media screen and (max-width: 768px) {
+  .login_div {
+    padding: 1rem 1rem 1rem 1rem;
+    width: 100%;
+    margin: 0;
+    height: fit-content;
+    background: rgba(0, 0, 0, 0.726);
+    height: 100vh;
+    color: whitesmoke;
+  }
+
+  .logo-name {
+    margin-left: 6rem;
+  }
+} */
+
+@media screen and (device-width: 768px) and (device-height: 1024px) {
+  .login_div {
+    padding: 7rem 1rem 10rem 1rem;
+    width: 100%;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.788);
+    height: 100vh;
+    color: whitesmoke;
+  }
+
+  .wrapper1 {
+    background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
+      no-repeat center fixed;
+    background-size: cover;
+  }
+
+  .head_div {
+    margin-bottom: 5rem;
+    width: 70%;
+    margin-left: 7rem;
+    padding: 1rem;
+    font-size: 70px;
+  }
+
+  .form_div {
+    width: 70%;
+    margin-left: 7rem;
+  }
+
+  .logo-name {
+    margin-left: 20rem;
+    font-size: 70px;
+  }
+}
+
+/* for Ipad pro */
+
+@media screen and (device-width: 1024px) and (device-height: 1366px) {
+  .login_div {
+    padding: 7rem 1rem 10rem 1rem;
+    width: 100%;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.788);
+    height: 100vh;
+    color: whitesmoke;
+  }
+
+  .wrapper1 {
+    background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
+      no-repeat center fixed;
+    background-size: cover;
+  }
+
+  .head_div {
+    margin-bottom: 5rem;
+    width: 70%;
+    margin-left: 7rem;
+    padding: 1rem;
+    font-size: 70px;
+  }
+
+  .form_div {
+    width: 70%;
+    margin-left: 7rem;
+  }
+
+  .logo-name {
+    margin-left: 20rem;
+    font-size: 70px;
+  }
 }

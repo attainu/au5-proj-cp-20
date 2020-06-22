@@ -103,12 +103,6 @@ input[type="File"] {
   color: beige;
 }
 
-.card {
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0px;
-}
-
 .user-details ul li {
   list-style-type: none;
 }
@@ -138,4 +132,7 @@ input[type="File"] {
 
 #file-upload {
   margin-left: 6rem;
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
 }

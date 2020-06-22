@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 var register = {};
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,

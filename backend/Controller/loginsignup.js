@@ -50,10 +50,6 @@ controller.reset = async (req, res) => {
       var transporter = nodemailer.createTransport({
         // service: 'gmail',//smtp.gmail.com  //in place of service use host...
 
-        // auth: {
-        //     user: 'ashutosh.choubey@codeclouds.in',
-        //     pass: 'ashu@q@w3e4r%'
-        // }
         host: "smtp.mailtrap.io",
         port: 2525,
         auth: {
