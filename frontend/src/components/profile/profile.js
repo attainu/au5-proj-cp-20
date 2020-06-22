@@ -11,6 +11,7 @@ import Downvotes from "./downvotes/downvotes";
 import Posts from "./posts/posts";
 import Navbar from "../navbar/navbar";
 import Login from "../login/login";
+import Forbidden from "../forbidden/forbidden";
 import { getCroppedImg } from "./crop_image/image_cropper";
 import { verifyToken } from "../../actions/register_action";
 
@@ -77,9 +78,11 @@ class Profile extends React.Component {
       "state_changed",
       (snapshot) => {
         // progrss function ....
+        console.log(snapshot);
         const progress = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
+        console.log(progress);
         this.setState({ progress });
       },
       (error) => {
@@ -93,7 +96,6 @@ class Profile extends React.Component {
           .child(croppedImageUrl.name)
           .getDownloadURL()
           .then((url) => {
-            console.log(url);
             this.setState({ url });
           });
       }
@@ -145,13 +147,26 @@ class Profile extends React.Component {
 
   render() {
     const { crop } = this.state;
-
+    console.log("progress", this.state.progress);
     return (
       <div>
         <Navbar />
         {this.props.login === true ? (
           <div>
             <div className='main_profile'>
+              {this.state.progress ? (
+                <div class='progress'>
+                  <div
+                    class='progress-bar'
+                    role='progressbar'
+                    aria-valuenow={this.state.progress}
+                    aria-valuemin='0'
+                    aria-valuemax='100'></div>
+                </div>
+              ) : (
+                <div></div>
+              )}
+
               <div className='user-contents'>
                 <div className='nav-div'>
                   <nav id='nav'>
@@ -205,7 +220,6 @@ class Profile extends React.Component {
                     <div className='card-body'>
                       <ul>
                         <li>
-                          {" "}
                           <i className='fas fa-at amber-text'></i>{" "}
                           {this.props.user.email}
                         </li>
@@ -300,7 +314,7 @@ class Profile extends React.Component {
           </div>
         ) : (
           <div>
-            <link rel='stylesheet' href='/login' />
+            <Redirect to='/login' Component={Login} />
           </div>
         )}
       </div>
