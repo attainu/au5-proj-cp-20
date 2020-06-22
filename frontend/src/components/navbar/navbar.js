@@ -28,7 +28,7 @@ class Navbar extends Component {
   }
   state = {
     isOpen: false,
-    querry: 'reddit'
+    querry: 'meme'
   };
   article = () => {
     this.props.articleCall(this.state.querry)

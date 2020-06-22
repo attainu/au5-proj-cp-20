@@ -6,6 +6,7 @@ import Land from "./components/home/landing";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Profile from "./components/profile/profile.js";
+import TabsDefault from "../src/components/home/postCreate"
 import "react-notifications/lib/notifications.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -43,6 +44,9 @@ function App() {
       </div>
       <div className='wrapper'>
         <Route path='/change-password/:slug' component={ResetPassword}></Route>
+      </div>
+      <div className='wrapper'>
+        <Route path='/create' component={TabsDefault}></Route>
       </div>
     </BrowserRouter>
   );
