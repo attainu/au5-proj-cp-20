@@ -6,6 +6,8 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import "../../styles/login/forgot_password.css";
+import { MDBBtn, MDBInput } from "mdbreact";
 
 class Forgetpassword extends React.Component {
   constructor(props) {
@@ -51,21 +53,26 @@ class Forgetpassword extends React.Component {
       <div className='content'>
         <NotificationContainer />
         <form onSubmit={this.handleForm}>
-          <div className='row' style={{ marginTop: 20 }}>
-            <div className='col-sm-2'></div>
-            <div className='col-sm-8'>
-              <div className='card' id='reset-card'>
-                <div className='card-header text-center'>Login</div>
-                <div className='card-body'>
+          <div className='row' id='fg-row'>
+            <div className='fg-col'>
+              <div className='card bg-dark text-light' id='reset-card'>
+                <div className='card-header text-center'>Forgot Password</div>
+                <div className='card-body bg-dark-gray'>
                   <div className='form-group'>
-                    <label>Email address</label>
-                    <input
-                      type='email'
+                    <label>Please provide your email address</label>
+                    <MDBInput
                       name='email'
                       value={this.state.email}
                       onChange={this.handleInput}
-                      className='form-control'
-                    />
+                      label='Email'
+                      type='email'
+                      icon='envelope'
+                      outline
+                      required>
+                      <div className='invalid-feedback'>
+                        Please Enter Your Email.
+                      </div>
+                    </MDBInput>
                   </div>
                 </div>
                 <input
@@ -77,7 +84,6 @@ class Forgetpassword extends React.Component {
                 />
               </div>
             </div>
-            <div className='col-sm-2'></div>
           </div>
         </form>
       </div>

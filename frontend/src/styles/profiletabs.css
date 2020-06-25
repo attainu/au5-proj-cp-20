@@ -1,0 +1,13 @@
+#tab-nav {
+  background-color: #212121;
+  margin-top: 2rem;
+}
+
+.nav-link {
+  color: beige;
+}
+
+.nav-link:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 0, 0, 0.849);
+}

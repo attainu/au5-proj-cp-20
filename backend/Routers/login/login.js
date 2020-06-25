@@ -7,5 +7,6 @@ route.post("/signup", controller.signup);
 route.post("/login", controller.login);
 route.post("/reset", controller.reset);
 route.post("/update_password", controller.update_password);
+route.put("/update_profile", controller.profileUpdate);
 
 module.exports = route;

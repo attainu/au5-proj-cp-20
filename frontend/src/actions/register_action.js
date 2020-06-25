@@ -75,30 +75,53 @@ export function articleCall(querry) {
     axios({
       method: "get",
       url: `https://www.reddit.com/search.json?q=${querry}&sort=relevance&limit=50&raw_json=1`,
-    }).then(res => res.data)
-      .then((data) => data.data.children.map(data => data.data))
+    })
+      .then((res) => res.data)
+      .then((data) => data.data.children.map((data) => data.data))
       .then((soup) => {
-        console.log(soup)
-        let arr = []
-        soup.forEach(e => {
+        console.log(soup);
+        let arr = [];
+        soup.forEach((e) => {
           if (e.preview) {
             let data = {
               title: e.title.substring(0, 150),
               text: e.selftext.substring(0, 150),
               image: e.preview.images[0].source.url,
-              post: e.url
-            }
-            console.log(e.preview.images[0].source)
-            return arr.push(data)
+              post: e.url,
+            };
+            console.log(e.preview.images[0].source);
+            return arr.push(data);
           }
-        })
-        console.log(arr)
+        });
+        console.log(arr);
         dispatch({
-          type: 'ARTICLE',
-          payload: arr
-        })
-      }).catch((err) => {
-        console.log(err)
+          type: "ARTICLE",
+          payload: arr,
+        });
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+}
+
+export function sendEditProfileData() {
+  // return (dispatch) => {
+  //   return axios({
+  //     method: "post",
+  //     url: "http://localhost:8000/register/signup",
+  //     data,
+  //   })
+  //     .then((res) => {
+  //       window.location.assign("/login");
+  //       console.log(res);
+  //       dispatch({
+  //         type: "EDIT_PROFILE",
+  //         payload: res.data,
+  //       });
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // };
 }

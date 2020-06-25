@@ -67,7 +67,7 @@
   margin-left: 5rem;
 }
 
-/* @media screen and (max-width: 1060px) {
+@media screen and (max-width: 1060px) {
   .login_div {
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
@@ -81,9 +81,9 @@
   .logo-name {
     margin-left: 13rem;
   }
-} */
+}
 
-/* @media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
   .login_div {
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
@@ -97,7 +97,7 @@
   .logo-name {
     margin-left: 6rem;
   }
-} */
+}
 
 @media screen and (device-width: 768px) and (device-height: 1024px) {
   .login_div {
