@@ -43,10 +43,10 @@ function App() {
         </Route>
       </div>
       <div className='wrapper'>
-        <Route path='/change-password/:slug' component={ResetPassword}></Route>
+        <Route path='/change-password/:slug' component={ResetPassword} strict exact></Route>
       </div>
       <div className='wrapper'>
-        <Route path='/create' component={TabsDefault}></Route>
+        <Route path='/create' component={TabsDefault} exact strict></Route>
       </div>
     </BrowserRouter>
   );

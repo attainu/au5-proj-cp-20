@@ -117,10 +117,8 @@ class Navbar extends Component {
                         <MDBIcon icon='user' />
                       </MDBDropdownToggle>
                       <MDBDropdownMenu className='dropdown-default'>
-                        <Link to='/profile'>
-                          <MDBDropdownItem size='sm'>My Profile</MDBDropdownItem>
-                        </Link>
-                        <MDBDropdownItem size='sm'>Create Post</MDBDropdownItem>
+                        <MDBDropdownItem href='/profile' size='sm' >My Profile</MDBDropdownItem>
+                        <MDBDropdownItem href='/create' size='sm'>Create Post</MDBDropdownItem>
                         <MDBDropdownItem
                           onClick={() => this.props.logoutAgain()}
                           size='sm'>
