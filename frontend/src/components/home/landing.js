@@ -8,15 +8,14 @@ class Land extends React.Component {
         console.log("From Landing page", this.props.state)
         return (
             <div>
-                <nav><Navbar /></nav>
-                <article>
+                <nav className="mb-2"><Navbar /></nav>
+                <article className="row">
                     {this.props.state.user.article == null ? <div></div> : this.props.state.user.article.map((el, i) => {
                         return (
-                            <div className="card" key={i} >
-                                <img className="card-img-top" src={el.image} alt="Card image cap" />
-                                <div className="card-body elegant-color white-text">
-                                    <h4 className="card-title"><a>{el.title}</a></h4>
-                                    <p className="card-text">{el.text}</p>
+                            <div className="card  mt-3" key={i} style={{ width: "20rem" }} >
+                                <img className="card-img-top" style={{ height: "25rem" }} src={el.image} alt="Card image cap" />
+                                <div className="card-body elegant-color white-text" style={{ height: "9.5rem" }}>
+                                    <h6 className="card-title text-sm-left"><a>{el.title}</a></h6>
                                     <p className="text-center"><a target="_blank" rel="noopener noreferrer" href={el.post}> See post</a></p>
                                 </div>
                             </div>

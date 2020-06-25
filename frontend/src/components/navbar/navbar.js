@@ -32,7 +32,7 @@ class Navbar extends Component {
   }
   state = {
     isOpen: false,
-    querry: "reddit",
+    querry: 'meme'
   };
   article = () => {
     this.props.articleCall(this.state.querry);
@@ -110,27 +110,27 @@ class Navbar extends Component {
                 </Link>
               </Fragment>
             ) : (
-              <div>
-                <MDBNavItem>
-                  <MDBDropdown dropleft>
-                    <MDBDropdownToggle nav caret>
-                      <MDBIcon icon='user' />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default'>
-                      <Link to='/profile'>
-                        <MDBDropdownItem size='sm'>My Profile</MDBDropdownItem>
-                      </Link>
-                      <MDBDropdownItem size='sm'>Create Post</MDBDropdownItem>
-                      <MDBDropdownItem
-                        onClick={() => this.props.logoutAgain()}
-                        size='sm'>
-                        Logout
+                <div>
+                  <MDBNavItem>
+                    <MDBDropdown dropleft>
+                      <MDBDropdownToggle nav caret>
+                        <MDBIcon icon='user' />
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default'>
+                        <Link to='/profile'>
+                          <MDBDropdownItem size='sm'>My Profile</MDBDropdownItem>
+                        </Link>
+                        <MDBDropdownItem size='sm'>Create Post</MDBDropdownItem>
+                        <MDBDropdownItem
+                          onClick={() => this.props.logoutAgain()}
+                          size='sm'>
+                          Logout
                       </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-              </div>
-            )}
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                </div>
+              )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>

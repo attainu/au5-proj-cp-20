@@ -74,7 +74,7 @@ export function articleCall(querry) {
   return (dispatch) => {
     axios({
       method: "get",
-      url: `https://www.reddit.com/search.json?q=${querry}&sort=new&limit=10&raw_json=1`,
+      url: `https://www.reddit.com/search.json?q=${querry}&sort=relevance&limit=50&raw_json=1`,
     })
       .then((res) => res.data)
       .then((data) => data.data.children.map((data) => data.data))
@@ -84,8 +84,8 @@ export function articleCall(querry) {
         soup.forEach((e) => {
           if (e.preview) {
             let data = {
-              title: e.title,
-              text: e.selftext,
+              title: e.title.substring(0, 150),
+              text: e.selftext.substring(0, 150),
               image: e.preview.images[0].source.url,
               post: e.url,
             };
