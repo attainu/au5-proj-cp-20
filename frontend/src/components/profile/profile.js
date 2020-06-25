@@ -10,10 +10,14 @@ import Upvotes from "./upvotes/upvotes";
 import Downvotes from "./downvotes/downvotes";
 import Posts from "./posts/posts";
 import Navbar from "../navbar/navbar";
-import Login from "../login/login";
-import Forbidden from "../forbidden/forbidden";
+import EditProfile from "../profile/edit-profile/edit-profile";
+// import Login from "../login/login";
+// import Forbidden from "../forbidden/forbidden";
 import { getCroppedImg } from "./crop_image/image_cropper";
 import { verifyToken } from "../../actions/register_action";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
+import ProfileTabs from "../profile/tabs/tabs";
 
 import {
   MDBContainer,
@@ -22,6 +26,7 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
+  MDBProgress,
 } from "mdbreact";
 
 class Profile extends React.Component {
@@ -69,7 +74,7 @@ class Profile extends React.Component {
     });
   };
 
-  handleImageUpload = (nr) => {
+  handleImageUpload = (nr, pr) => {
     const { croppedImageUrl } = this.state;
     const uploadTask = storage
       .ref(`images/${croppedImageUrl.name}`)
@@ -103,6 +108,10 @@ class Profile extends React.Component {
     let modalNumber = "modal" + nr;
     this.setState({
       [modalNumber]: !this.state[modalNumber],
+    });
+    let modalNumber2 = "modal" + pr;
+    this.setState({
+      [modalNumber2]: !this.state[modalNumber2],
     });
   };
 
@@ -151,54 +160,47 @@ class Profile extends React.Component {
     return (
       <div>
         <Navbar />
+        <div className='the-bg'></div>
         {this.props.login === true ? (
           <div>
             <div className='main_profile'>
-              {this.state.progress ? (
-                <div class='progress'>
-                  <div
-                    class='progress-bar'
-                    role='progressbar'
-                    aria-valuenow={this.state.progress}
-                    aria-valuemin='0'
-                    aria-valuemax='100'></div>
-                </div>
-              ) : (
-                <div></div>
-              )}
+              {/* <MDBContainer>
+                <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)}>
+                  <MDBModalHeader toggle={this.toggle(2)}>
+                    MDBModal title
+                  </MDBModalHeader>
+                  <MDBModalBody>
+                    <div className='prog-bar'>
+                      <CircularProgressbar
+                        value={this.state.progress}
+                        text={`${this.state.progress}%`}
+                      />
+                    </div>
+                  </MDBModalBody>
+                  <MDBModalFooter>
+                    <MDBBtn color='secondary' onClick={this.toggle(2)}>
+                      Close
+                    </MDBBtn>
+                    <MDBBtn color='primary'>Save changes</MDBBtn>
+                  </MDBModalFooter>
+                </MDBModal>
+              </MDBContainer> */}
 
               <div className='user-contents'>
                 <div className='nav-div'>
-                  <nav id='nav'>
-                    <ul>
-                      <Link to='/profile/upvotes'>
-                        <li>Upvotes</li>
-                      </Link>
-                      <Link to='/profile/downvotes'>
-                        <li>DownVotes</li>
-                      </Link>
-                      <Link to='/profile/posts'>
-                        <li>Posts</li>
-                      </Link>
-                    </ul>
-                  </nav>
+                  <ProfileTabs />
                   <div className='content-div'>
-                    <div className='post-div'>
-                      <Route path='/profile/upvotes'>
-                        <Upvotes />
-                      </Route>
-                      <Route path='/profile/downvotes'>
-                        <Downvotes />
-                      </Route>
-                      <Route path='/profile/posts'>
-                        <Posts />
-                      </Route>
-                    </div>
+                    <div className='post-div'></div>
                   </div>
                 </div>
                 <div className='pp-div'>
-                  <div className='card bg-dark' style={{ width: "18rem" }}>
-                    <div className='card-header'>{this.props.user.name}</div>
+                  <div
+                    className='card bg-dark'
+                    id='profile-card'
+                    style={{ width: "18rem", height: "25rem" }}>
+                    <div className='card-header'>
+                      {this.props.user.name} {this.props.google.name}
+                    </div>
                     <div className='avatar' onClick={this.toggle(14)}>
                       <img
                         className='avatar_img'
@@ -222,6 +224,7 @@ class Profile extends React.Component {
                         <li>
                           <i className='fas fa-at amber-text'></i>{" "}
                           {this.props.user.email}
+                          {this.props.google.email}
                         </li>
                         <li>
                           <i className='fas fa-birthday-cake green-text'></i> 12
@@ -266,7 +269,7 @@ class Profile extends React.Component {
                         <MDBBtn
                           outline
                           color='primary'
-                          onClick={() => this.handleImageUpload(12)}>
+                          onClick={() => this.handleImageUpload(12, 2)}>
                           Upload Image
                         </MDBBtn>
                       </MDBModalFooter>
@@ -313,9 +316,7 @@ class Profile extends React.Component {
             </div>
           </div>
         ) : (
-          <div>
-            <Redirect to='/login' Component={Login} />
-          </div>
+          <div>{/* <Redirect to='/login' Component={Login} /> */}</div>
         )}
       </div>
     );
@@ -324,7 +325,11 @@ class Profile extends React.Component {
 
 const getDataFromRedux = (state) => {
   console.log("in profile", state.user.google);
-  return { login: state.user.login, user: state.user.user };
+  return {
+    login: state.user.login,
+    user: state.user.user,
+    google: state.user.google,
+  };
 };
 
 const giveDataToRedux = (dispatch) => {

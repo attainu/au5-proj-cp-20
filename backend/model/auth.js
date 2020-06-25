@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
     required: true,
     min: 5,
   },
+  username: { type: String, required: false },
+  mobile: { type: String, required: false },
+  bio: [
+    {
+      type: String,
+      required: false,
+    },
+  ],
   date: {
     type: Date,
     default: Date.now,

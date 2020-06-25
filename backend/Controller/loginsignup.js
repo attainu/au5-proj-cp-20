@@ -42,14 +42,34 @@ controller.login = async (req, res) => {
   }
 };
 
+// User Profile update
+controller.profileUpdate = async (req, res) => {
+  let { email, name, username, mobile, bio, new_email } = req.body;
+  console.log(req.body);
+  const user = await userModel.signup.update(
+    { email },
+    {
+      name,
+      username,
+      mobile,
+      bio,
+      email: new_email,
+    },
+    function (error, updatedData) {
+      res.send(updatedData);
+      console.log(updatedData);
+    }
+  );
+};
+
 // Password reset
 controller.reset = async (req, res) => {
+  console.log("data from frontend", req.body);
   const user = await userModel.signup.findOne(
     { email: req.body.email },
     function (error, userData) {
       var transporter = nodemailer.createTransport({
         // service: 'gmail',//smtp.gmail.com  //in place of service use host...
-
         host: "smtp.mailtrap.io",
         port: 2525,
         auth: {
@@ -62,7 +82,6 @@ controller.reset = async (req, res) => {
         from: "admin@gmail.com",
         to: req.body.email,
         subject: "Password Reset",
-        // text: 'That was easy!',
         html:
           "<h1>Welcome To Daily Task Report ! </h1><p>\
         <h3>Hello " +

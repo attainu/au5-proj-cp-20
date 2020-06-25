@@ -4,6 +4,8 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
+import "../../styles/login/forgot_password.css";
+import { MDBBtn, MDBInput } from "mdbreact";
 
 class Resetpassword extends React.Component {
   constructor(props) {
@@ -66,31 +68,43 @@ class Resetpassword extends React.Component {
       <div className='content'>
         <NotificationContainer />
         <form onSubmit={this.handleForm}>
-          <div className='row' style={{ marginTop: 20 }}>
-            <div className='col-sm-3'></div>
-            <div className='col-sm-6'>
-              <div className='card'>
+          <div className='row' id='fg-row'>
+            <div className='fg-col'>
+              <div className='card bg-dark text-light' id='reset-card1'>
                 <div className='card-header text-center'>Reset Password</div>
                 <div className='card-body'>
                   <div className='form-group'>
-                    <label>Password</label>
-                    <input
-                      type='password'
+                    <label>Enter your new password</label>
+                    <MDBInput
                       name='password'
                       value={this.state.password}
                       onChange={this.handleInput}
+                      label='Password'
+                      type='password'
+                      icon='key'
                       className='form-control'
-                    />
+                      outline
+                      required>
+                      <div className='invalid-feedback'>
+                        Please Enter Your Email.
+                      </div>
+                    </MDBInput>
                   </div>
                   <div className='form-group'>
-                    <label>Confirm Password</label>
-                    <input
+                    <MDBInput
                       type='password'
                       name='confirm_password'
                       value={this.state.confirm_password}
                       onChange={this.handleInput}
+                      label='Confirm Password'
+                      icon='clipboard-check'
                       className='form-control'
-                    />
+                      outline
+                      required>
+                      <div className='invalid-feedback'>
+                        Please Enter Your Email.
+                      </div>
+                    </MDBInput>
                   </div>
                 </div>
                 <div className='card-footer text-center'>
@@ -103,7 +117,6 @@ class Resetpassword extends React.Component {
                 </div>
               </div>
             </div>
-            <div className='col-sm-3'></div>
           </div>
         </form>
       </div>

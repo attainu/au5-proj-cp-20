@@ -31,7 +31,7 @@ function App() {
           <Register />
         </Route>
       </div>
-      <div className='wrapper'>
+      <div className='wrapper-profile'>
         <Route path='/profile'>
           <Profile />
         </Route>
