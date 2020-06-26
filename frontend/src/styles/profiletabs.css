@@ -7,7 +7,13 @@
   color: blueviolet;
 }
 
+.profile-nav-link {
+  color: whitesmoke;
+  border-radius: 10px;
+}
+
 .nav-link:hover {
   color: rgb(255, 255, 255);
-  background-color: rgba(255, 0, 0, 0.849);
+  background-color: rgba(255, 0, 0, 0.452);
+  border-radius: 20px;
 }

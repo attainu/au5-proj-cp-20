@@ -2,7 +2,7 @@ let userdata = {
   login: false,
   user: "",
   google: "",
-  article: null
+  article: null,
 };
 
 function userReducer(state = userdata, action) {
@@ -25,9 +25,9 @@ function userReducer(state = userdata, action) {
       stateCopy.user = action.payload;
       return stateCopy;
     case "ARTICLE":
-      console.log('article', action)
-      stateCopy.article = action.payload
-      return stateCopy
+      console.log("article", action);
+      stateCopy.article = action.payload;
+      return stateCopy;
     default:
       return stateCopy;
   }
