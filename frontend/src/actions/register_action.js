@@ -79,7 +79,6 @@ export function articleCall(querry) {
       .then((res) => res.data)
       .then((data) => data.data.children.map((data) => data.data))
       .then((soup) => {
-        console.log(soup);
         let arr = [];
         soup.forEach((e) => {
           if (e.preview) {
@@ -89,7 +88,6 @@ export function articleCall(querry) {
               image: e.preview.images[0].source.url,
               post: e.url,
             };
-            console.log(e.preview.images[0].source);
             return arr.push(data);
           }
         });
