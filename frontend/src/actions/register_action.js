@@ -40,7 +40,7 @@ export function verifyToken() {
       headers: { "auth-token": token },
     }).then((res) => {
       console.log("BACKEND", res);
-      let data = { name: res.data.name, email: res.data.email };
+      let data = res.data;
       console.log("ResDATA", data);
       dispatch({
         type: "LOGIN",
@@ -105,23 +105,42 @@ export function articleCall(querry) {
   };
 }
 
-export function sendEditProfileData() {
-  // return (dispatch) => {
-  //   return axios({
-  //     method: "post",
-  //     url: "http://localhost:8000/register/signup",
-  //     data,
-  //   })
-  //     .then((res) => {
-  //       window.location.assign("/login");
-  //       console.log(res);
-  //       dispatch({
-  //         type: "EDIT_PROFILE",
-  //         payload: res.data,
-  //       });
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // };
+export function sendEditProfileData(data) {
+  console.log("from EDIT PROFILE", data);
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: "http://localhost:8000/register/update_profile",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "EDIT_PROFILE",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function sendImageUrl(data) {
+  console.log(data);
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: "http://localhost:8000/register/update_profile_pic",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "EDIT_PROFILE_PIC",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 }

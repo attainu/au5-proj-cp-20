@@ -6,13 +6,16 @@ import Posts from "../posts/posts";
 import EditProfile from "../../profile/edit-profile/edit-profile";
 
 class ProfileTabs extends React.Component {
+  sendDataFromEDP = () => {
+    this.props.toggle();
+  };
   render() {
     return (
       <div>
         <nav id='tab-nav'>
           <div class='nav nav-tabs' id='nav-tab' role='tablist'>
             <a
-              class='nav-item nav-link active'
+              class='nav-item nav-link active profile-nav-link'
               id='nav-posts-tab'
               data-toggle='tab'
               href='#nav-posts'
@@ -22,7 +25,7 @@ class ProfileTabs extends React.Component {
               POSTS
             </a>
             <a
-              class='nav-item nav-link'
+              class='nav-item nav-link profile-nav-link'
               id='nav-upvotes-tab'
               data-toggle='tab'
               href='#nav-upvotes'
@@ -32,7 +35,7 @@ class ProfileTabs extends React.Component {
               UPVOTES
             </a>
             <a
-              class='nav-item nav-link'
+              class='nav-item nav-link profile-nav-link'
               id='nav-downvotes-tab'
               data-toggle='tab'
               href='#nav-downvotes'
@@ -42,7 +45,7 @@ class ProfileTabs extends React.Component {
               DOWNVOTES
             </a>
             <a
-              class='nav-item nav-link'
+              class='nav-item nav-link profile-nav-link'
               id='nav-followers-tab'
               data-toggle='tab'
               href='#nav-followers'
@@ -52,7 +55,7 @@ class ProfileTabs extends React.Component {
               FOLLOWERS
             </a>
             <a
-              class='nav-item nav-link'
+              class='nav-item nav-link profile-nav-link'
               id='nav-following-tab'
               data-toggle='tab'
               href='#nav-following'
@@ -62,7 +65,7 @@ class ProfileTabs extends React.Component {
               FOLLOWING
             </a>
             <a
-              class='nav-item nav-link'
+              class='nav-item nav-link profile-nav-link'
               id='nav-ep-tab'
               data-toggle='tab'
               href='#nav-ep'
@@ -114,7 +117,7 @@ class ProfileTabs extends React.Component {
             id='nav-ep'
             role='tabpanel'
             aria-labelledby='nav-ep-tab'>
-            <EditProfile />
+            <EditProfile sendDataFromEDP={(nr) => this.sendDataFromEDP(nr)} />
           </div>
         </div>
       </div>

@@ -20,12 +20,14 @@ const userSchema = new mongoose.Schema({
   },
   username: { type: String, required: false },
   mobile: { type: String, required: false },
-  bio: [
-    {
-      type: String,
-      required: false,
-    },
-  ],
+  bio: {
+    type: String,
+    required: false,
+  },
+  image_url: {
+    type: String,
+    required: false,
+  },
   date: {
     type: Date,
     default: Date.now,

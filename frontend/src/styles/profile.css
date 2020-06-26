@@ -44,13 +44,29 @@
 }
 
 .avatar_img {
-  width: 312px;
-  height: 220px;
-  margin-left: -12px;
-  box-shadow: 0px 0px 6px 2px rgb(0, 0, 0);
-  border-radius: 20px;
+  width: 80%;
+  height: 60%;
+  border-radius: 50%;
+  border: 3px double whitesmoke;
 }
 
+.avatar_img_small {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 2px solid whitesmoke;
+}
+.avatar_img_navbar {
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  border: 2px solid whitesmoke;
+}
+
+.small-logo-image {
+  display: flex;
+  flex-direction: row;
+}
 .user-details {
   padding: 0.7rem;
   margin-left: 5rem;
@@ -237,34 +253,6 @@ input[type="File"] {
   border-radius: 10px;
 }
 
-.card-flip > div {
-  backface-visibility: hidden;
-  transition: transform 300ms;
-  transition-timing-function: linear;
-  width: 100%;
-  height: 100%;
-  margin: 0;
-  display: flex;
-}
-
-.card-front {
-  transform: rotateY(0deg);
-}
-
-.card-back {
-  transform: rotateY(180deg);
-  position: absolute;
-  top: 0;
-}
-
-.card-flip:hover .card-front {
-  transform: rotateY(-180deg);
-}
-
-.card-flip:hover .card-back {
-  transform: rotateY(0deg);
-}
-
 #edit-profile-card {
   width: 100%;
   height: auto;
@@ -289,4 +277,131 @@ input[type="File"] {
 
 .form-group input {
   color: white;
+}
+
+/* html {
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+} */
+
+/* body {
+  background-color: #bdc2e8;
+  background-image: linear-gradient(
+    to top,
+    #bdc2e8 0%,
+    #bdc2e8 1%,
+    #e6dee9 100%
+  );
+  background-repeat: no-repeat;
+} */
+
+/* CARD STYLING */
+
+.container,
+#card,
+#card_front,
+#card_back {
+  width: 20rem;
+  height: 25rem;
+}
+
+#card_front,
+#card_back {
+  box-shadow: 0px 5px 25px 0px rgba(51, 51, 51, 0.28);
+}
+
+#card-symbol {
+  margin: 0;
+  width: 100%;
+  text-align: center;
+  color: #000;
+  font-family: "Cantata One", serif;
+  font-size: 13em;
+  mix-blend-mode: lighten;
+}
+
+@supports (display: flex) {
+  #card_front {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  #card_front .card-symbol {
+    margin: 0 0.15em;
+    border-radius: 50%;
+    font-size: 15em;
+  }
+}
+
+#card_front {
+  position: relative;
+}
+
+#card_front .card-symbol {
+  font-size: 15em;
+}
+
+#card_back {
+  /*   display: none; */
+  padding: 1em;
+}
+
+#card_front > *,
+#card_back > * {
+  background-color: #212121;
+  background-color: #212121;
+  color: whitesmoke;
+}
+
+#card-text {
+  padding: 0 4.5em 1em;
+  line-height: 1.4;
+}
+
+/* FLIP CARD STYLING */
+.container {
+  perspective: 1000px;
+}
+
+.container:hover .card,
+.container.hover {
+  transform: rotateY(-180deg);
+}
+
+.card {
+  transition: 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card_front,
+.card_back {
+  backface-visibility: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.card_front {
+  z-index: 2;
+  transform: rotateY(0deg);
+  display: flex;
+  flex-direction: column;
+  background-color: #212121;
+  border: 3px solid whitesmoke;
+  border-radius: 30px;
+}
+
+.card_back {
+  transform: rotateY(-180deg);
+  background-color: #212121;
+  padding: 3px;
+  border: 3px solid whitesmoke;
+  border-radius: 30px;
 }

@@ -44,16 +44,30 @@ controller.login = async (req, res) => {
 
 // User Profile update
 controller.profileUpdate = async (req, res) => {
-  let { email, name, username, mobile, bio, new_email } = req.body;
+  let { email, name, username, mobile, bio, image_url } = req.body;
   console.log(req.body);
-  const user = await userModel.signup.update(
+  const user = await userModel.signup.updateMany(
     { email },
     {
       name,
       username,
       mobile,
       bio,
-      email: new_email,
+    },
+    function (error, updatedData) {
+      res.send(updatedData);
+      console.log(updatedData);
+    }
+  );
+};
+
+controller.profilePicUpdate = async (req, res) => {
+  let { email, url } = req.body;
+  console.log(url);
+  const user = await userModel.signup.updateOne(
+    { email },
+    {
+      image_url: url,
     },
     function (error, updatedData) {
       res.send(updatedData);
