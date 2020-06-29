@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const registerRoute = require("./Routers/login/login");
 const postsRoute = require("./Routers/posts/posts_route");
+const followRoute = require("./Routers/follow/follow");
 const main = require("./Routers/main");
 const bodyParser = require("body-parser");
 //Cros Error
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const mongoose = require("mongoose");
 mongoose.connect(
   process.env.ATLAS,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
   () => {
     console.log("DB connected");
   }
@@ -41,5 +42,6 @@ app.use("/posts/", postsRoute);
 
 //Middlewears After Registrations
 app.use("/main/", main);
+app.use("/users/", followRoute);
 //Others
 app.listen(process.env.PORT || 8000, console.log("Server runnng "));

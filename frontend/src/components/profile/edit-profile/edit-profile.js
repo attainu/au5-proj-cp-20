@@ -141,7 +141,6 @@ class EditProfile extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  console.log("in EP", state.user.user);
   return {
     user: state.user.user,
   };

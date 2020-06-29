@@ -2,10 +2,20 @@ import React from "react";
 import "../../../styles/profiletabs.css";
 import Upvotes from "../upvotes/upvotes";
 import Downvotes from "../downvotes/downvotes";
+import { bindActionCreators } from "redux";
 import Posts from "../posts/posts";
 import EditProfile from "../../profile/edit-profile/edit-profile";
+import { getFollowing, getFollowers } from "../../../actions/register_action";
+import { connect } from "react-redux";
 
 class ProfileTabs extends React.Component {
+  componentDidMount = () => {
+    const data = {
+      _id: this.props.user._id,
+    };
+    this.props.getFollowing(data);
+    this.props.getFollowers(data);
+  };
   sendDataFromEDP = () => {
     this.props.toggle();
   };
@@ -103,15 +113,58 @@ class ProfileTabs extends React.Component {
             id='nav-followers'
             role='tabpanel'
             aria-labelledby='nav-followers-tab'>
-            FOLLOWERS
+            <h3 style={{ color: "white", margin: "1rem" }}>FOLLOWERS</h3>
+            {this.props.followers.map((ele, index) => (
+              <div className='folowers-div'>
+                <div className='small-logo-image'>
+                  <div className='col-4 ml-5'>
+                    <img
+                      className='avatar_img_small'
+                      htmlFor='file'
+                      src={
+                        ele.image_url
+                          ? ele.image_url
+                          : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png"
+                      }
+                      alt=''
+                    />
+                  </div>
+                  <div className='col-8' className='followers-name-div'>
+                    <h3></h3>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
           <div
             class='tab-pane fade'
             id='nav-following'
             role='tabpanel'
             aria-labelledby='nav-following-tab'>
-            FOLLOWING
+            <h3 style={{ color: "white", margin: "1rem" }}>FOLLOWING</h3>
+            {this.props.following.map((ele, index) => (
+              <div className='folowers-div'>
+                <div className='small-logo-image'>
+                  <div className='col-4 ml-5'>
+                    <img
+                      className='avatar_img_small'
+                      htmlFor='file'
+                      src={
+                        ele.image_url
+                          ? ele.image_url
+                          : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png"
+                      }
+                      alt=''
+                    />
+                  </div>
+                  <div className='col-8' className='followers-name-div'>
+                    <h3>{ele.name}</h3>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
+
           <div
             class='tab-pane fade'
             id='nav-ep'
@@ -125,4 +178,20 @@ class ProfileTabs extends React.Component {
   }
 }
 
-export default ProfileTabs;
+const getDataFromRedux = (state) => {
+  console.log("in tabs following", state.user.following);
+  console.log("in tabs followers", state.user.followers);
+  console.log("in tabs followers", state.user.user_profile);
+  return {
+    user: state.user.user,
+    followers: state.user.followers,
+    following: state.user.following,
+    user_profile: state.user.user_profile,
+  };
+};
+
+const giveDataToRedux = (dispatch) => {
+  return bindActionCreators({ getFollowing, getFollowers }, dispatch);
+};
+
+export default connect(getDataFromRedux, giveDataToRedux)(ProfileTabs);
