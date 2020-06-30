@@ -59,11 +59,38 @@ class TabsDefault extends Component {
         if (tab === 2) {
             if (this.state.pic === "" || this.state.title === "") {
                 this.setState({ image_error: "Please select a File" })
+            } else {
+                let { email, title, text } = this.state
+                let data = { title, text, email }
+                let token = localStorage.getItem("auth-token");
+                return axios({
+                    method: "post",
+                    url: "/api/post/image",
+                    headers: { "auth-token": token },
+                    data
+                }).then((res) => {
+                    console.log("posttextres", res);
+                    window.location.reload();
+                });
             }
         }
         if (tab === 3) {
             if ((this.state.option[0] === "" && this.state.option[1] === "") || this.state.title === "") {
+                console.log("Why are you running", this.state.option[0], this.state.option[1], this.state.title)
                 this.setState({ poll_error: "Minimum Two Inputs" })
+            } else {
+                let { email, title, option } = this.state
+                let data = { title, email, option }
+                let token = localStorage.getItem("auth-token");
+                return axios({
+                    method: "post",
+                    url: "/api/post/poll",
+                    headers: { "auth-token": token },
+                    data
+                }).then((res) => {
+                    console.log("posttextres", res);
+                    window.location.reload();
+                });
             }
         }
         console.log(this.state.activeItem)
@@ -97,7 +124,7 @@ class TabsDefault extends Component {
                                 <MDBTabPane tabId="1" role="tabpanel">
                                     <div>
                                         <label for="exampleForm2" className="mt-2"><b>Title</b></label>
-                                        <input type="text" id="exampleForm2" class="form-control" onChange={(e) => {
+                                        <input type="text" id="exampleForm1" class="form-control" onChange={(e) => {
                                             this.setState({ title: e.target.value })
                                         }}></input><br /><br />
                                         <CKEditor editor={ClassicEditor} onChange={(event, editor) => {
@@ -114,7 +141,9 @@ class TabsDefault extends Component {
                                 <MDBTabPane tabId="2" role="tabpanel">
                                     <div>
                                         <label for="exampleForm2" className="mt-2"><b>Title</b></label>
-                                        <input type="text" id="exampleForm2" class="form-control"></input><br /><br />
+                                        <input type="text" id="exampleForm2" class="form-control" onChange={(e) => {
+                                            this.setState({ title: e.target.value })
+                                        }} ></input><br /><br />
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -134,8 +163,10 @@ class TabsDefault extends Component {
                                     </div>
                                 </MDBTabPane>
                                 <MDBTabPane tabId="3" role="tabpanel">
-                                    <label for="exampleForm2" className="mt-2"><b>Title</b></label>
-                                    <input type="text" id="exampleForm2" class="form-control"></input>
+                                    <label for="exampleForm2" className="mt-2"  ><b>Title</b></label>
+                                    <input type="text" id="exampleForm3" class="form-control" onChange={(e) => {
+                                        this.setState({ title: e.target.value })
+                                    }} ></input>
                                     <label for="exampleForm2" className="mt-2"><b>Options</b></label>
                                     <MDBBtn disabled={this.state.option.length >= 6} color="dark-green ml-3" size="sm" onClick={() => this.setState({
                                         option: [...this.state.option, '']
