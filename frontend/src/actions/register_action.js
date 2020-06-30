@@ -108,7 +108,7 @@ export function sendEditProfileData(data) {
   return (dispatch) => {
     return axios({
       method: "put",
-      url: "http://localhost:8000/register/update_profile",
+      url: "/register/update_profile",
       data,
     })
       .then((res) => {
@@ -128,7 +128,7 @@ export function sendImageUrl(data) {
   return (dispatch) => {
     return axios({
       method: "put",
-      url: "http://localhost:8000/register/update_profile_pic",
+      url: "/register/update_profile_pic",
       data,
     })
       .then((res) => {

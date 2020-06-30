@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { bindActionCreators } from "redux";
+import axios from 'axios'
 import { connect } from "react-redux";
 import '../../styles/landing.css'
 import Navbar from '../navbar/navbar'
@@ -10,6 +11,7 @@ import { MDBContainer, MDBTabPane, MDBTabContent, MDBNav, MDBNavItem, MDBNavLink
 class TabsDefault extends Component {
     state = {
         activeItem: "1",
+        email: "",
         title: "",
         text: "",
         pic: "",
@@ -19,7 +21,6 @@ class TabsDefault extends Component {
         image_error: "",
         poll_error: ""
     };
-
     toggle = tab => e => {
         if (this.state.activeItem !== tab) {
             this.setState({
@@ -31,30 +32,44 @@ class TabsDefault extends Component {
         this.state.option[i] = event.target.value
         this.setState({ option: this.state.option })
     }
-    postAction = () => {
+    postAction = async () => {
+        await this.setState({ email: this.props.user.email })
         if (this.state.title === "") {
             this.setState({ error: "Empty Title" })
         }
         let tab = Number(this.state.activeItem)
-        if (tab == 1) {
-            if (this.state.text === "") {
+        if (tab === 1) {
+            if (this.state.text === "" || this.state.title === "") {
                 this.setState({ post_error: "Empty Text Field" })
+            } else {
+                let { email, title, text } = this.state
+                let data = { title, text, email }
+                let token = localStorage.getItem("auth-token");
+                return axios({
+                    method: "post",
+                    url: "/api/post/text",
+                    headers: { "auth-token": token },
+                    data
+                }).then((res) => {
+                    console.log("posttextres", res);
+                    window.location.reload();
+                });
             }
         }
-        if (tab == 2) {
-            if (this.state.pic === "") {
+        if (tab === 2) {
+            if (this.state.pic === "" || this.state.title === "") {
                 this.setState({ image_error: "Please select a File" })
             }
         }
-        if (tab == 3) {
-            if (this.state.option[0] === "" && this.state.option[1] === "") {
+        if (tab === 3) {
+            if ((this.state.option[0] === "" && this.state.option[1] === "") || this.state.title === "") {
                 this.setState({ poll_error: "Minimum Two Inputs" })
             }
         }
         console.log(this.state.activeItem)
     }
     render() {
-        console.log("Create Post", this.state)
+        console.log("Create Post", this.state, this.props.user)
         return (
             <div>
                 <nav className="mb-2"><Navbar /></nav>
@@ -133,7 +148,7 @@ class TabsDefault extends Component {
                                         {this.state.option.map((e, i) => {
                                             return (
                                                 <li>
-                                                    <input type="text" id="exampleForm2" class="form-control" onChange={(event) => this.pollEvent(e, i, event)}></input>
+                                                    <input key={i} type="text" id="exampleForm2" class="form-control" onChange={(event) => this.pollEvent(e, i, event)}></input>
                                                 </li>
                                             )
                                         })}
@@ -158,7 +173,7 @@ class TabsDefault extends Component {
 }
 const mapStateToProps = (state) => {
     return {
-        state: state
+        user: state.user.user,
     }
 }
 const mapDispatchToProps = (dispatch) => {
