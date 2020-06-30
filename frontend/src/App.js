@@ -58,7 +58,11 @@ function App() {
         <Route path='/searchUser' component={SearchUsers} exact strict></Route>
       </div>
       <div className='wrapper'>
-        <Route path='/userProfile' component={UserProfile} exact strict></Route>
+        <Route
+          path='/userProfile/:id'
+          component={UserProfile}
+          exact
+          strict></Route>
       </div>
     </BrowserRouter>
   );

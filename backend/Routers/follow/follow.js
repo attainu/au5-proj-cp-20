@@ -10,5 +10,7 @@ route.post("/search_users", follow.search_users);
 route.post("/following", follow.get_following);
 route.post("/followers", follow.get_followers);
 route.post("/user-profile", follow.user_profile);
+route.post("/selected/following", follow.get_selected_following);
+route.post("/selected/followers", follow.get_selected_followers);
 
 module.exports = route;

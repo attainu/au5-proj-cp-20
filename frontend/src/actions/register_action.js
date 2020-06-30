@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export function sendSignupData(data) {
-  console.log("data in action", data);
+  // console.log("data in action", data);
   return (dispatch) => {
     return axios({
       method: "post",
@@ -10,7 +10,7 @@ export function sendSignupData(data) {
     })
       .then((res) => {
         window.location.assign("/login");
-        console.log(res);
+        // console.log(res);
         dispatch({
           type: "SIGNUP_RESPONSE",
           payload: res.data,
@@ -22,7 +22,7 @@ export function sendSignupData(data) {
   };
 }
 export function sendLoginData(data) {
-  console.log("data in action", data);
+  // console.log("data in action", data);
   return (dispatch) => {
     dispatch({
       type: "LOGIN",
@@ -39,9 +39,9 @@ export function verifyToken() {
       url: "/main/home",
       headers: { "auth-token": token },
     }).then((res) => {
-      console.log("BACKEND", res);
+      // console.log("BACKEND", res);
       let data = res.data;
-      console.log("ResDATA", data);
+      // console.log("ResDATA", data);
       dispatch({
         type: "LOGIN",
         payload: data,
@@ -51,7 +51,7 @@ export function verifyToken() {
 }
 
 export function sendLoginDataGoogle(data) {
-  console.log("Google Data : ", data);
+  // console.log("Google Data : ", data);
   return (dispatch) => {
     dispatch({
       type: "GOOGLE_LOGIN",
@@ -79,6 +79,7 @@ export function articleCall(querry) {
       .then((res) => res.data)
       .then((data) => data.data.children.map((data) => data.data))
       .then((soup) => {
+        // console.log(soup);
         let arr = [];
         soup.forEach((e) => {
           if (e.preview) {
@@ -88,10 +89,11 @@ export function articleCall(querry) {
               image: e.preview.images[0].source.url,
               post: e.url,
             };
+            // console.log(e.preview.images[0].source);
             return arr.push(data);
           }
         });
-        console.log(arr);
+        // console.log(arr);
         dispatch({
           type: "ARTICLE",
           payload: arr,
@@ -168,7 +170,7 @@ export function sendFollowData(data) {
     })
       .then((res) => {
         dispatch({
-          type: "FOLLOWERS",
+          type: "FOLLOWED",
           payload: res.data,
         });
       })
@@ -217,7 +219,7 @@ export function searchUsers(data) {
 }
 
 export function getFollowing(data) {
-  console.log("Data in following", data);
+  // console.log("Data in following", data);
   return (dispatch) => {
     return axios({
       method: "post",
@@ -237,7 +239,7 @@ export function getFollowing(data) {
 }
 
 export function getFollowers(data) {
-  console.log("Data in followers", data);
+  // console.log("Data in followers", data);
   return (dispatch) => {
     return axios({
       method: "post",
@@ -256,8 +258,48 @@ export function getFollowers(data) {
   };
 }
 
+export function getSelectedUserFollowing(data) {
+  // console.log("Data in following", data);
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/selected/following",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "SELECTED_FOLLOWING",
+          payload: res.data[0].following,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getSelectedUserFollowers(data) {
+  // console.log("Data in followers", data);
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/selected/followers",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "SELECTED_FOLLOWERS",
+          payload: res.data[0].followers,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 export function sendUserProfileId(data) {
-  console.log("Data in followers", data);
+  console.log("Data in UserProfile actions", data);
   return (dispatch) => {
     return axios({
       method: "post",
@@ -265,10 +307,10 @@ export function sendUserProfileId(data) {
       data,
     })
       .then((res) => {
-        console.log("User_profile", res.data);
+        console.log("User_profile", res.data[0]);
         dispatch({
           type: "GET_USER_PROFILE",
-          payload: res.data,
+          payload: res.data[0],
         });
       })
       .catch((error) => {

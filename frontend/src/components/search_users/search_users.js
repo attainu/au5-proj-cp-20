@@ -9,10 +9,11 @@ import {
   sendFollowData,
   sendUnfollowData,
   searchUsers,
-  sendUserProfileId,
 } from "../../actions/register_action";
 import "../../styles/search_users.css";
 import { MDBInput, MDBBtn } from "mdbreact";
+import { useParams } from "react-router-dom";
+var { _id } = useParams;
 
 class SearchUsers extends React.Component {
   constructor(props) {
@@ -20,11 +21,11 @@ class SearchUsers extends React.Component {
     this.state = {
       search_query: "",
     };
-
     this.props.verifyToken();
   }
 
   componentDidMount = () => {
+    console.log("in ID", _id);
     this.props.getAllUsers();
   };
   handleSearch = (event) => {
@@ -41,31 +42,13 @@ class SearchUsers extends React.Component {
     this.props.searchUsers(data);
   };
 
-  handleFollowClick = (id) => {
-    const data = {
-      logged_user_id: this.props.user._id,
-      selected_user_id: id,
-    };
-    this.props.sendFollowData(data);
-  };
-
-  handleUnfollowClick = (id) => {
-    const data = {
-      logged_user_id: this.props.user._id,
-      selected_user_id: id,
-    };
-    this.props.sendUnfollowData(data);
-  };
-
   getUserProfile = (_id) => {
-    const data = {
-      user_id: _id,
-    };
-    this.props.sendUserProfileId(data);
+    this.props.sendUserProfileId(_id);
   };
 
   render() {
     console.log("in component", this.props.all_users);
+    console.log("this is ID", _id);
     return (
       <div className='user-search'>
         <Navbar />
@@ -88,10 +71,10 @@ class SearchUsers extends React.Component {
             </div>
           </div>
           <div className='search-results'>
-            {!this.props.searched_users
+            {this.props.searched_users.length === 0
               ? this.props.all_users.map((users, index) => {
                   return (
-                    <div className='folowers-div mt-4'>
+                    <div className='folowers-div mt-4' key={index}>
                       <div className='small-logo-image '>
                         <div className='col-3 ml-5'>
                           <img
@@ -104,61 +87,35 @@ class SearchUsers extends React.Component {
                         <div className=' col-5 followers-name-div mt-2'>
                           <h3>{users.name}</h3>
                         </div>
-                        <div className='col-4 ml-2'>
-                          <MDBBtn
-                            outline
-                            color='green'
-                            onClick={() => this.handleFollowClick(users._id)}>
-                            Follow
-                          </MDBBtn>
-                          <MDBBtn
-                            outline
-                            color='red'
-                            onClick={() => this.handleUnfollowClick(users._id)}>
-                            Unfollow
-                          </MDBBtn>
-                        </div>
+                        <div className='col-4 ml-2'></div>
                       </div>
                     </div>
                   );
                 })
-              : this.props.searched_users.map((users, index) => {
+              : this.props.searched_users.map((user, index) => {
                   return (
-                    <div
-                      className='folowers-div mt-4'
-                      onClick={() => this.getUserProfile(users._id)}>
+                    <div className='folowers-div mt-4' key={index}>
                       <div className='small-logo-image '>
                         <div className='col-3 ml-5'>
                           <img
                             className='avatar_img_small'
                             htmlFor='file'
-                            src={users.image_url}
+                            src={user.image_url}
                             alt=''
                           />
                         </div>
                         <div className=' col-5 followers-name-div mt-2'>
                           <Link
                             to={{
-                              pathname: "/userProfile",
-                              aboutProps: { _id: users._id },
+                              pathname: `/userProfile/${user._id}`,
+                              aboutProps: {
+                                _id: user._id,
+                              },
                             }}>
-                            <h3>{users.name}</h3>
+                            <h3>{user.name}</h3>
                           </Link>
                         </div>
-                        <div className='col-4 ml-2'>
-                          <MDBBtn
-                            outline
-                            color='green'
-                            onClick={() => this.handleFollowClick(users._id)}>
-                            Follow
-                          </MDBBtn>
-                          <MDBBtn
-                            outline
-                            color='red'
-                            onClick={() => this.handleUnfollowClick(users._id)}>
-                            Unfollow
-                          </MDBBtn>
-                        </div>
+                        <div className='col-4 ml-2'></div>
                       </div>
                     </div>
                   );
@@ -171,6 +128,7 @@ class SearchUsers extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
+  console.log("In searched Users", state.user.searched_users);
   return {
     all_users: state.user.all_users,
     user: state.user.user,
@@ -186,7 +144,6 @@ const giveDataToRedux = (dispatch) => {
       sendFollowData,
       sendUnfollowData,
       searchUsers,
-      sendUserProfileId,
     },
     dispatch
   );

@@ -2,7 +2,12 @@ import React from "react";
 import "../../../styles/profile.css";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import { sendEditProfileData } from "../../../actions/register_action";
+import {
+  sendUserProfileId,
+  sendFollowData,
+  sendUnfollowData,
+} from "../../../actions/register_action";
+import { MDBInput, MDBBtn } from "mdbreact";
 
 class InfoCard extends React.Component {
   constructor(props) {
@@ -10,12 +15,34 @@ class InfoCard extends React.Component {
     this.state = {};
   }
 
+  componentDidMount = () => {
+    const data = {
+      user_id: this.props.user_id,
+    };
+    this.props.sendUserProfileId(data);
+  };
+
+  handleFollowClick = (id) => {
+    const data = {
+      logged_user_id: this.props.user._id,
+      selected_user_id: id,
+    };
+    this.props.sendFollowData(data);
+  };
+
+  handleUnfollowClick = (id) => {
+    const data = {
+      logged_user_id: this.props.user._id,
+      selected_user_id: id,
+    };
+    this.props.sendUnfollowData(data);
+  };
+
   render() {
+    // console.log("ID in infocard", this.props.user_profile.followers);
     return (
       <div className='flip-card-div'>
-        <div
-          className='container'
-          onTouchStart="this.classList.toggle('hover');">
+        <div className='container'>
           <div className='card' id='card'>
             <div className='card_front' id='card_front'>
               <div className='upper-card-div'></div>
@@ -39,16 +66,60 @@ class InfoCard extends React.Component {
                 </div>
                 <div className='col-10 ml-5'>
                   <div>
-                    <a href='#' class='btn follow-btn'>
-                      Follow <i class='fas fa-user-plus'></i>
-                    </a>
+                    {this.props.user_profile ? (
+                      <div>
+                        {this.props.show_follow ? (
+                          <a
+                            className='btn follow-btnn'
+                            onClick={() =>
+                              this.handleFollowClick(
+                                this.props.user_profile._id
+                              )
+                            }>
+                            Follow <i className='fas fa-user-plus'></i>
+                          </a>
+                        ) : (
+                          // <MDBBtn
+                          //   outline
+                          //   color='green'
+                          //   onClick={() =>
+                          //     this.handleFollowClick(
+                          //       this.props.user_profile._id
+                          //     )
+                          //   }>
+                          //   Follow<i class='fas fa-user-plus'></i>
+                          // </MDBBtn>
+                          <a
+                            className='btn unfollow-btnn'
+                            onClick={() =>
+                              this.handleUnfollowClick(
+                                this.props.user_profile._id
+                              )
+                            }>
+                            Unfollow <i className='fas fa-user-plus'></i>
+                          </a>
+                          // <MDBBtn
+                          //   outline
+                          //   color='red'
+                          //   onClick={() =>
+                          //     this.handleUnfollowClick(
+                          //       this.props.user_profile._id
+                          //     )
+                          //   }>
+                          //   Unfollow<i class='fas fa-user-minus'></i>
+                          // </MDBBtn>
+                        )}
+                      </div>
+                    ) : (
+                      <div></div>
+                    )}
                   </div>
                 </div>
                 <div>
                   <div class='ds-info'>
                     <div class='ds pens col-6'>
-                      <h6 title='Number of pens created by the user'>
-                        Followers{" "}
+                      <h6>
+                        Followers
                         <i class='fa fa-user-plus' aria-hidden='true'></i>
                       </h6>
 
@@ -59,7 +130,7 @@ class InfoCard extends React.Component {
                       )}
                     </div>
                     <div class='ds projects col-6'>
-                      <h6 title='Number of projects created by the user'>
+                      <h6>
                         following{" "}
                         <i class='fa fa-user-plus' aria-hidden='true'></i>
                       </h6>
@@ -82,17 +153,20 @@ class InfoCard extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  console.log("in EP", state.user.user_profile);
   return {
     login: state.user.login,
     user: state.user.user,
     google: state.user.google,
     user_profile: state.user.user_profile,
+    show_follow: state.user.show_follow,
   };
 };
 
 const giveDataToRedux = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators(
+    { sendUserProfileId, sendFollowData, sendUnfollowData },
+    dispatch
+  );
 };
 
 export default connect(getDataFromRedux, giveDataToRedux)(InfoCard);
