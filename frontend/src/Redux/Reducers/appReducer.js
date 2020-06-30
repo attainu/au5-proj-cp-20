@@ -7,7 +7,10 @@ let userdata = {
   searched_users: [],
   following: [],
   followers: [],
+  selected_following: [],
+  selected_followers: [],
   user_profile: "",
+  show_follow: true,
 };
 
 function userReducer(state = userdata, action) {
@@ -30,7 +33,6 @@ function userReducer(state = userdata, action) {
       stateCopy.user = action.payload;
       return stateCopy;
     case "ARTICLE":
-      console.log("article", action);
       stateCopy.article = action.payload;
       return stateCopy;
 
@@ -52,9 +54,27 @@ function userReducer(state = userdata, action) {
       stateCopy.followers = action.payload;
       return stateCopy;
 
+    case "SELECTED_FOLLOWING":
+      console.log("S_following", action.payload);
+      stateCopy.selected_following = action.payload;
+      return stateCopy;
+
+    case "SELECTED_FOLLOWERS":
+      console.log("S_followers", action.payload);
+      stateCopy.selected_followers = action.payload;
+      return stateCopy;
+
     case "GET_USER_PROFILE":
       stateCopy.user_profile = action.payload;
-      console.log("user_profile", stateCopy.user_profile);
+      const followStatus = stateCopy.user.following.includes(
+        action.payload._id
+      );
+      if (followStatus === true) {
+        stateCopy.show_follow = false;
+      } else {
+        stateCopy.show_follow = true;
+      }
+
       return stateCopy;
 
     default:

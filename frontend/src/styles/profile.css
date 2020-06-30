@@ -450,6 +450,26 @@ p {
   font-size: 12px;
 }
 
-.follow-btn {
+.follow-btnn {
+  color: crimson;
+  background-color: green;
+  border-radius: 20px;
+}
+
+.unfollow-btnn {
+  color: crimson;
   background-color: crimson;
+  border-radius: 20px;
+}
+
+.follow-btnn:hover {
+  color: crimson;
+  background-color: green;
+  border-radius: 40px;
+}
+
+.unfollow-btnn:hover {
+  color: crimson;
+  background-color: crimson;
+  border-radius: 40px;
 }

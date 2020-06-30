@@ -14,7 +14,7 @@ follow.search_users = async (req, res) => {
     data
   ) {
     res.send(data);
-    console.log(data);
+    // console.log(data);
   });
   // userModel.signup
   //   .find({ search_query })
@@ -100,7 +100,7 @@ follow.get_following = async (req, res) => {
     .find({ _id: _id })
     .populate("following")
     .exec(function (err, data) {
-      console.log("event:", data);
+      // console.log("event:", data);
       console.log("err:", err);
       res.send(data);
     });
@@ -108,11 +108,36 @@ follow.get_following = async (req, res) => {
 
 follow.get_followers = async (req, res) => {
   const { _id } = req.body;
+  console.log("SURA2:", _id);
   const users = await userModel.signup
     .find({ _id: _id })
     .populate("followers")
     .exec(function (err, data) {
-      console.log("event:", data);
+      // console.log("event:", data);
+      console.log("err:", err);
+      res.send(data);
+    });
+};
+
+follow.get_selected_following = async (req, res) => {
+  const { _id } = req.body;
+  console.log("SURA1:", _id);
+  const users = await userModel.signup
+    .find({ _id: _id })
+    .populate("following")
+    .exec(function (err, data) {
+      console.log("err:", err);
+      res.send(data);
+    });
+};
+
+follow.get_selected_followers = async (req, res) => {
+  const { _id } = req.body;
+  const users = await userModel.signup
+    .find({ _id: _id })
+    .populate("followers")
+    .exec(function (err, data) {
+      console.log("SURA:", data);
       console.log("err:", err);
       res.send(data);
     });
@@ -120,11 +145,11 @@ follow.get_followers = async (req, res) => {
 
 follow.user_profile = async (req, res) => {
   const { user_id } = req.body;
-  console.log(user_id);
+  console.log("search id", user_id);
   const users = await userModel.signup
     .find({ _id: user_id })
     .exec(function (err, data) {
-      console.log("event:", data);
+      console.log("UP data:", data);
       console.log("err:", err);
       res.send(data);
     });
