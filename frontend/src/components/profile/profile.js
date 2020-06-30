@@ -57,6 +57,7 @@ class Profile extends React.Component {
   handleImageUpload = (nr, pr, email) => {
     let useremail = email;
     const { croppedImageUrl } = this.state;
+    console.log("target :", croppedImageUrl);
     const uploadTask = storage
       .ref(`images/${croppedImageUrl.name}`)
       .put(croppedImageUrl);

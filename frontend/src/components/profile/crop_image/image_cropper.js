@@ -10,7 +10,7 @@ export const getCroppedImg = (image, crop, fileName) => {
   canvas.width = crop.width;
   canvas.height = crop.height;
   const ctx = canvas.getContext("2d");
-
+  var date = new Date();
   ctx.drawImage(
     image,
     crop.x * scaleX,
@@ -27,7 +27,7 @@ export const getCroppedImg = (image, crop, fileName) => {
   return new Promise((resolve, reject) => {
     canvas.toBlob(
       (blob) => {
-        blob.name = fileName;
+        blob.name = fileName + date;
         resolve(blob);
       },
       "image/jpeg",

@@ -104,7 +104,6 @@ export function articleCall(querry) {
 }
 
 export function sendEditProfileData(data) {
-  console.log("from EDIT PROFILE", data);
   return (dispatch) => {
     return axios({
       method: "put",
@@ -124,7 +123,6 @@ export function sendEditProfileData(data) {
 }
 
 export function sendImageUrl(data) {
-  console.log(data);
   return (dispatch) => {
     return axios({
       method: "put",
@@ -134,6 +132,142 @@ export function sendImageUrl(data) {
       .then((res) => {
         dispatch({
           type: "EDIT_PROFILE_PIC",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getAllUsers() {
+  return (dispatch) => {
+    return axios({
+      method: "get",
+      url: "/users/all_users",
+    })
+      .then((res) => {
+        dispatch({
+          type: "ALL_USERS",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function sendFollowData(data) {
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: "/users/follow",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "FOLLOWERS",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function sendUnfollowData(data) {
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: `/users/unfollow`,
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "UNFOLLOWED",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function searchUsers(data) {
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/search_users",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "SEARCH_RESULTS",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getFollowing(data) {
+  console.log("Data in following", data);
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/following",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "FOLLOWING",
+          payload: res.data[0].following,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getFollowers(data) {
+  console.log("Data in followers", data);
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/followers",
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "FOLLOWERS",
+          payload: res.data[0].followers,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function sendUserProfileId(data) {
+  console.log("Data in followers", data);
+  return (dispatch) => {
+    return axios({
+      method: "post",
+      url: "/users/user-profile",
+      data,
+    })
+      .then((res) => {
+        console.log("User_profile", res.data);
+        dispatch({
+          type: "GET_USER_PROFILE",
           payload: res.data,
         });
       })

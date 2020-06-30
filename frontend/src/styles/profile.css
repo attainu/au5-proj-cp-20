@@ -1,3 +1,7 @@
+@import url("https://fonts.googleapis.com/css?family=Krub:400,700");
+html {
+  background-color: rgba(0, 0, 0, 0.685);
+}
 .main_profile {
   width: 100%;
   padding: 1rem;
@@ -44,10 +48,11 @@
 }
 
 .avatar_img {
-  width: 80%;
-  height: 60%;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
-  border: 3px double whitesmoke;
+  margin-left: 24%;
+  margin-top: -23%;
 }
 
 .avatar_img_small {
@@ -306,8 +311,8 @@ input[type="File"] {
 #card,
 #card_front,
 #card_back {
-  width: 20rem;
-  height: 25rem;
+  width: 18rem;
+  height: 30rem;
 }
 
 #card_front,
@@ -352,12 +357,9 @@ input[type="File"] {
   padding: 1em;
 }
 
-#card_front > *,
+/* #card_front > *,
 #card_back > * {
-  background-color: #212121;
-  background-color: #212121;
-  color: whitesmoke;
-}
+} */
 
 #card-text {
   padding: 0 4.5em 1em;
@@ -369,23 +371,16 @@ input[type="File"] {
   perspective: 1000px;
 }
 
-.container:hover .card,
+/* .container:hover .card,
 .container.hover {
   transform: rotateY(-180deg);
-}
+} */
 
 .card {
   transition: 0.6s;
   transform-style: preserve-3d;
   position: relative;
-}
-
-.card_front,
-.card_back {
-  backface-visibility: hidden;
-  position: absolute;
-  top: 0;
-  left: 0;
+  font-family: "Krub", sans-serif;
 }
 
 .card_front {
@@ -393,15 +388,68 @@ input[type="File"] {
   transform: rotateY(0deg);
   display: flex;
   flex-direction: column;
-  background-color: #212121;
-  border: 3px solid whitesmoke;
-  border-radius: 30px;
+  border-radius: 2px solid #212121;
 }
 
 .card_back {
   transform: rotateY(-180deg);
   background-color: #212121;
   padding: 3px;
-  border: 3px solid whitesmoke;
-  border-radius: 30px;
+}
+
+.card-name-div {
+  text-transform: capitalize;
+  border-radius: 10px;
+  margin-top: 0;
+  display: flex;
+  justify-content: center;
+  font-size: 25px;
+  margin-top: 0.5rem;
+}
+
+.upper-card-div {
+  height: 22%;
+  width: 100%;
+  background-color: crimson;
+  margin-top: 0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.lower-card-div {
+  height: 78%;
+  width: 100%;
+  background-color: #191919;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  color: whitesmoke;
+}
+
+.ds-info {
+  display: flex;
+  flex-direction: row;
+  height: 40px;
+  margin: auto;
+}
+
+.pens,
+.projects,
+.posts {
+  position: relative;
+  width: calc(250px / 3);
+  text-align: center;
+  color: white;
+  animation: fadeInMove 2s;
+  animation-fill-mode: forwards;
+}
+
+h6 {
+  text-transform: uppercase;
+  color: crimson;
+}
+p {
+  font-size: 12px;
+}
+
+.follow-btn {
+  background-color: crimson;
 }

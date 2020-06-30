@@ -3,6 +3,11 @@ let userdata = {
   user: "",
   google: "",
   article: null,
+  all_users: [],
+  searched_users: [],
+  following: [],
+  followers: [],
+  user_profile: "",
 };
 
 function userReducer(state = userdata, action) {
@@ -28,6 +33,30 @@ function userReducer(state = userdata, action) {
       console.log("article", action);
       stateCopy.article = action.payload;
       return stateCopy;
+
+    case "ALL_USERS":
+      stateCopy.all_users = action.payload;
+      return stateCopy;
+
+    case "SEARCH_RESULTS":
+      stateCopy.searched_users = action.payload;
+      return stateCopy;
+
+    case "FOLLOWING":
+      // console.log("following", action.payload);
+      stateCopy.following = action.payload;
+      return stateCopy;
+
+    case "FOLLOWERS":
+      // console.log("followers", action.payload);
+      stateCopy.followers = action.payload;
+      return stateCopy;
+
+    case "GET_USER_PROFILE":
+      stateCopy.user_profile = action.payload;
+      console.log("user_profile", stateCopy.user_profile);
+      return stateCopy;
+
     default:
       return stateCopy;
   }

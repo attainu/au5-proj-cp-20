@@ -6,7 +6,9 @@ import Land from "./components/home/landing";
 import Login from "./components/login/login";
 import Register from "./components/register/register";
 import Profile from "./components/profile/profile.js";
-import TabsDefault from "../src/components/home/postCreate"
+import TabsDefault from "../src/components/home/postCreate";
+import SearchUsers from "./components/search_users/search_users";
+import UserProfile from "./components/user_profile/user_profile";
 import "react-notifications/lib/notifications.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
@@ -43,10 +45,20 @@ function App() {
         </Route>
       </div>
       <div className='wrapper'>
-        <Route path='/change-password/:slug' component={ResetPassword} strict exact></Route>
+        <Route
+          path='/change-password/:slug'
+          component={ResetPassword}
+          strict
+          exact></Route>
       </div>
       <div className='wrapper'>
         <Route path='/create' component={TabsDefault} exact strict></Route>
+      </div>
+      <div className='wrapper'>
+        <Route path='/searchUser' component={SearchUsers} exact strict></Route>
+      </div>
+      <div className='wrapper'>
+        <Route path='/userProfile' component={UserProfile} exact strict></Route>
       </div>
     </BrowserRouter>
   );

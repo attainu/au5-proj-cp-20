@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 var register = {};
+const { ObjectId } = mongoose.Schema.Types;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -36,6 +37,8 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  followers: [{ type: ObjectId, ref: "user" }],
+  following: [{ type: ObjectId, ref: "user" }],
   updatedDate: {
     type: Date,
     default: null,
