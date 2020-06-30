@@ -1,9 +1,9 @@
 const express = require("express");
 const route = express.Router();
-const posts = require("../../Controller/posts_controller");
-
-//Routes for Login Signup
-route.post("/send", posts.user_post_submit);
-route.get("/display", posts.user_post_display);
-
+const userValid = require('../jwt');
+const controller = require("../../Controller/protected");
+//Routes POST REQUESTS
+route.post("/image", userValid, controller.imageposts);
+route.post("/text", userValid, controller.textposts);
+route.post("/poll", userValid, controller.pollposts)
 module.exports = route;

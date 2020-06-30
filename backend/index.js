@@ -2,6 +2,7 @@ const express = require("express");
 const app = express();
 const registerRoute = require("./Routers/login/login");
 const postsRoute = require("./Routers/posts/posts_route");
+const getRoute = require('./Routers/posts/get_route')
 const followRoute = require("./Routers/follow/follow");
 const main = require("./Routers/main");
 const bodyParser = require("body-parser");
@@ -38,7 +39,8 @@ mongoose.connection.on("error", (err) => {
 
 //Middlewears for Registrations
 app.use("/register/", registerRoute);
-app.use("/posts/", postsRoute);
+app.use("/api/post", postsRoute);
+app.use("/api/get", getRoute)
 
 //Middlewears After Registrations
 app.use("/main/", main);
