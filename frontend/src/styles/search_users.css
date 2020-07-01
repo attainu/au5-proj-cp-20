@@ -1,0 +1,23 @@
+.user-search {
+  background-color: #080808cc;
+}
+.cont-div {
+  height: 100vh;
+}
+
+.searchbar-div {
+  background-color: #2e2e2e;
+  color: whitesmoke;
+  padding: 0.5rem;
+  border: 3px solid whitesmoke;
+  width: 700px;
+  margin-left: 200px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.followers-name-div {
+  text-transform: uppercase;
+}
