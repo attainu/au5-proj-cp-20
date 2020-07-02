@@ -1,10 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Krub:400,700");
-html {
+/* html {
   background-color: rgba(0, 0, 0, 0.685);
-}
+} */
 .main_profile {
   width: 100%;
   padding: 1rem;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   background-color: rgba(0, 0, 0, 0.76);
@@ -57,8 +58,8 @@ html {
 
 .avatar_img_small {
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border: 2px solid whitesmoke;
 }
 .avatar_img_navbar {
@@ -158,96 +159,6 @@ input[type="File"] {
   height: 150px;
   margin-left: 10rem;
   background-color: rgb(255, 255, 255);
-}
-
-@media screen and (device-width: 768px) and (device-height: 1024px) {
-  .user-contents {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .main_profile {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-  }
-
-  .pp-div {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 1rem 0 1rem 0;
-  }
-  .nav-div {
-    flex: 1;
-    margin-left: 0;
-    width: 100%;
-  }
-  #nav {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-/* for Ipad pro */
-
-@media screen and (device-width: 1024px) and (device-height: 1366px) {
-  .user-contents {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .main_profile {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-  }
-
-  .pp-div {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 1rem 0 1rem 0;
-  }
-  .nav-div {
-    flex: 1;
-    margin-left: 0;
-    width: 100%;
-  }
-  #nav {
-    width: 100%;
-    margin-left: 0;
-  }
-}
-
-@media screen and (max-width: 1060px) {
-  .user-contents {
-    display: flex;
-    flex-direction: column-reverse;
-  }
-  .main_profile {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-  }
-
-  .pp-div {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin: 1rem 0 1rem 0;
-  }
-  .nav-div {
-    flex: 1;
-    margin-left: 0;
-    width: 100%;
-  }
-  #nav {
-    width: 100%;
-    margin-left: 0;
-  }
-  #file-upload {
-    margin: 0 10px 0 10px;
-    width: 90%;
-  }
 }
 
 .edit-profile {
@@ -442,7 +353,7 @@ input[type="File"] {
   animation-fill-mode: forwards;
 }
 
-h6 {
+.ds h6 {
   text-transform: uppercase;
   color: crimson;
 }
@@ -472,4 +383,158 @@ p {
   color: crimson;
   background-color: crimson;
   border-radius: 40px;
+}
+
+.flip-card-div,
+#card,
+#card_front,
+#container {
+  background-color: #ffffff00;
+}
+
+#card {
+  margin-left: 3rem;
+}
+
+@media screen and (device-width: 768px) and (device-height: 1024px) {
+  .user-contents {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main_profile {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .pp-div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+  }
+  .nav-div {
+    flex: 1;
+    margin-left: 0;
+    width: 100%;
+  }
+  #nav {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* for Ipad pro */
+
+@media screen and (device-width: 1024px) and (device-height: 1366px) {
+  .user-contents {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main_profile {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .pp-div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+  }
+  .nav-div {
+    flex: 1;
+    margin-left: 0;
+    width: 100%;
+  }
+  #nav {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+@media screen and (max-width: 1060px) {
+  .user-contents {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main_profile {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .pp-div {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 1rem 0 1rem 0;
+  }
+  .nav-div {
+    flex: 1;
+    margin-left: 0;
+    width: 100%;
+    margin-top: 0;
+  }
+  #nav {
+    width: 100%;
+    margin-left: 0;
+  }
+  #file-upload {
+    margin: 0 10px 0 10px;
+    width: 90%;
+  }
+
+  .avatar_img {
+    width: 55%;
+    height: 55%;
+    margin-left: 22.5%;
+    margin-bottom: 0;
+    box-shadow: 0px 0px 14px -4px rgba(255, 255, 255, 1);
+  }
+
+  #container,
+  #card,
+  #card_front,
+  #card_back {
+    width: 320px;
+    margin: 0;
+    height: 30rem;
+  }
+
+  .card-body {
+    padding: 0;
+  }
+  #card-content {
+    margin: 0;
+    margin-right: 5px;
+    width: 100%;
+  }
+  .md-form {
+    margin: 0;
+  }
+}
+
+.forbidden-top {
+  background-color: #2121217c;
+  color: whitesmoke;
+  width: 100%;
+  height: 100vh;
+  margin-top: 0;
+  position: absolute;
+}
+
+.forbidden-inner {
+  background-color: #212121;
+  color: whitesmoke;
+  padding: 3rem;
+  margin-left: 20%;
+  border-radius: 20px;
+  border: 2px solid whitesmoke;
+  margin-top: 2rem;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

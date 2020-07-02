@@ -55,16 +55,13 @@ class Navbar extends Component {
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id='navbarCollapse3' isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Home</MDBNavLink>
+            <MDBNavItem className='ml-2 mt-1'>
+              <MDBNavLink to='/'>Home</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Features</MDBNavLink>
+            <MDBNavItem className='ml-2 mt-1'>
+              <MDBNavLink to='/search-users'>Search Users</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Pricing</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
+            <MDBNavItem className='ml-2 mt-1'>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
                   <span className='mr-2'>Posts Filter</span>
@@ -122,7 +119,7 @@ class Navbar extends Component {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className='dropdown-default'>
                       <MDBDropdownItem href='/profile' size='sm'>
-                        My Profile
+                        {this.props.user.name}
                       </MDBDropdownItem>
                       <MDBDropdownItem href='/create' size='sm'>
                         Create Post

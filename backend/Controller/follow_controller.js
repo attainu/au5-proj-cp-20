@@ -9,13 +9,21 @@ follow.all_users = async (req, res) => {
 
 follow.search_users = async (req, res) => {
   var search_query = req.body.search_query;
-  const users = await userModel.signup.find({ name: search_query }, function (
-    err,
-    data
-  ) {
-    res.send(data);
-    // console.log(data);
-  });
+  var pattern = search_query
+    .split("")
+    .map((x) => {
+      return `(?=.*${x})`;
+    })
+    .join("");
+  var regex = new RegExp(`${pattern}`, "g");
+
+  const users = await userModel.signup.find(
+    { name: { $regex: regex } },
+    function (err, data) {
+      res.send(data);
+      // console.log(data);
+    }
+  );
   // userModel.signup
   //   .find({ search_query })
   //   .then((user) => {
@@ -121,7 +129,6 @@ follow.get_followers = async (req, res) => {
 
 follow.get_selected_following = async (req, res) => {
   const { _id } = req.body;
-  console.log("SURA1:", _id);
   const users = await userModel.signup
     .find({ _id: _id })
     .populate("following")

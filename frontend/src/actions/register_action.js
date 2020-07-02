@@ -39,13 +39,17 @@ export function verifyToken() {
       url: "/main/home",
       headers: { "auth-token": token },
     }).then((res) => {
-      // console.log("BACKEND", res);
-      let data = res.data;
-      // console.log("ResDATA", data);
-      dispatch({
-        type: "LOGIN",
-        payload: data,
-      });
+      if (res) {
+        // console.log("BACKEND", res);
+        let data = res.data;
+        // console.log("ResDATA", data);
+        dispatch({
+          type: "LOGIN",
+          payload: data,
+        });
+      } else {
+        window.location.assign("/forbidden");
+      }
     });
   };
 }
@@ -74,7 +78,7 @@ export function articleCall(querry) {
   return (dispatch) => {
     axios({
       method: "get",
-      url: `https://www.reddit.com/search.json?q=${querry}&sort=relevance&limit=50&raw_json=1`,
+      url: `https://www.reddit.com/search.json?q=${querry}&sort=popular&limit=50&raw_json=1`,
     })
       .then((res) => res.data)
       .then((data) => data.data.children.map((data) => data.data))

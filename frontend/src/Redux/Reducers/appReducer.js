@@ -37,11 +37,31 @@ function userReducer(state = userdata, action) {
       return stateCopy;
 
     case "ALL_USERS":
-      stateCopy.all_users = action.payload;
+      console.log("IN SEARCHED USERS", stateCopy.user.email, action.payload);
+
+      const resultArray = action.payload;
+      for (var i in action.payload) {
+        if (resultArray[i].email === stateCopy.user.email) {
+          resultArray.splice(i, 1);
+          console.log("filteredAry", resultArray);
+          stateCopy.all_users = resultArray;
+          break;
+        }
+      }
+
       return stateCopy;
 
     case "SEARCH_RESULTS":
-      stateCopy.searched_users = action.payload;
+      const resultArray2 = action.payload;
+      for (var i in action.payload) {
+        if (resultArray2[i].email === stateCopy.user.email) {
+          resultArray2.splice(i, 1);
+          console.log("filteredAry2", resultArray2);
+          stateCopy.searched_users = resultArray2;
+          break;
+        }
+      }
+
       return stateCopy;
 
     case "FOLLOWING":

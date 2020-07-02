@@ -7,8 +7,11 @@ import Navbar from "../navbar/navbar";
 import ReactCrop from "react-image-crop";
 import { storage } from "../../config/firebase_config";
 import { getCroppedImg } from "./crop_image/image_cropper";
-// import Login from "../login/login";
-// import Forbidden from "../forbidden/forbidden";
+import Login from "../login/login";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import Loader from "react-loader-spinner";
+import Forbidden from "../forbidden/forbidden";
+import { Redirect } from "react-router-dom";
 import { verifyToken, sendImageUrl } from "../../actions/register_action";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
@@ -33,6 +36,8 @@ class Profile extends React.Component {
       modal12: false,
       progress: 0,
       src: null,
+      loading: true,
+      timeout: true,
       crop: {
         unit: "%",
         width: 30,
@@ -40,10 +45,13 @@ class Profile extends React.Component {
         aspect: 16 / 14,
       },
     };
+  }
+
+  componentDidMount = () => {
     this.props.verifyToken();
     this.handleImage = this.handleImage.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-  }
+  };
 
   toggle = (nr) => () => {
     console.log("NR3", nr);
@@ -124,6 +132,14 @@ class Profile extends React.Component {
     }
   }
 
+  timeout = () => {
+    setTimeout(() => {
+      this.setState({
+        timeout: false,
+      });
+    }, 1000);
+  };
+
   handlePicture = (nr, mr) => {
     console.log(nr, mr);
     document.getElementById("filePicture").click();
@@ -157,15 +173,16 @@ class Profile extends React.Component {
 
   render() {
     const { crop } = this.state;
-    console.log("progress", this.state);
+    console.log("progress", this.props.login);
     return (
       <div>
-        <Navbar />
-        <div className='the-bg'></div>
-        {this.props.login === true ? (
-          <div>
-            <div className='main_profile'>
-              {/* <MDBContainer>
+        <div>
+          <Navbar />
+          <div className='the-bg'></div>
+          {this.props.login ? (
+            <div>
+              <div className='main_profile'>
+                {/* <MDBContainer>
                 <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)}>
                   <MDBModalHeader toggle={this.toggle(2)}>
                     MDBModal title
@@ -186,87 +203,93 @@ class Profile extends React.Component {
                   </MDBModalFooter>
                 </MDBModal>
               </MDBContainer> */}
-              <div className='user-contents'>
-                <div className='nav-div'>
-                  <ProfileTabs toggle={this.toggle(14)} />
+                <div className='user-contents'>
+                  <div className='nav-div'>
+                    <ProfileTabs toggle={this.toggle(14)} />
+                  </div>
+                  <div className='pp-div'>
+                    <InfoCard />
+                  </div>
                 </div>
-                <div className='pp-div'>
-                  <InfoCard />
+                <div className='option-modal'>
+                  {this.state.src && (
+                    <MDBModal
+                      isOpen={this.state.modal12}
+                      toggle={this.toggle(12)}>
+                      <MDBModalHeader toggle={this.toggle(12)}>
+                        Crop Image
+                      </MDBModalHeader>
+                      <MDBModalBody id='modal-body'>
+                        <ReactCrop
+                          id='image-crop'
+                          src={this.state.src}
+                          crop={crop}
+                          ruleOfThirds
+                          onImageLoaded={this.onImageLoaded}
+                          onComplete={this.onCropComplete}
+                          onChange={this.onCropChange}
+                        />
+                      </MDBModalBody>
+                      <MDBModalFooter>
+                        <MDBBtn
+                          outline
+                          color='elegant'
+                          onClick={this.toggle(12)}>
+                          Close
+                        </MDBBtn>
+                        <MDBBtn
+                          outline
+                          color='primary'
+                          onClick={() =>
+                            this.handleImageUpload(12, 2, this.props.user.email)
+                          }>
+                          Upload Image
+                        </MDBBtn>
+                      </MDBModalFooter>
+                    </MDBModal>
+                  )}
                 </div>
-              </div>
-              <div className='option-modal'>
-                {this.state.src && (
+                <div className='modal-div'>
                   <MDBModal
-                    isOpen={this.state.modal12}
-                    toggle={this.toggle(12)}>
-                    <MDBModalHeader toggle={this.toggle(12)}>
-                      Crop Image
+                    isOpen={this.state.modal14}
+                    toggle={this.toggle(14)}
+                    centered>
+                    <MDBModalHeader toggle={this.toggle(14)}>
+                      Update Profile Picture
                     </MDBModalHeader>
                     <MDBModalBody id='modal-body'>
-                      <ReactCrop
-                        id='image-crop'
-                        src={this.state.src}
-                        crop={crop}
-                        ruleOfThirds
-                        onImageLoaded={this.onImageLoaded}
-                        onComplete={this.onCropComplete}
-                        onChange={this.onCropChange}
+                      <img
+                        id='file-upload'
+                        src='https://cdn3.iconfinder.com/data/icons/cloudcon-colored/512/upload-512.png'
+                        alt=''
+                        width='250'
+                        height='250'
                       />
                     </MDBModalBody>
                     <MDBModalFooter>
-                      <MDBBtn outline color='elegant' onClick={this.toggle(12)}>
-                        Close
-                      </MDBBtn>
                       <MDBBtn
                         outline
-                        color='primary'
-                        onClick={() =>
-                          this.handleImageUpload(12, 2, this.props.user.email)
-                        }>
-                        Upload Image
+                        color='secondary'
+                        onClick={() => this.handlePicture(14, 12)}>
+                        Upload From Device
                       </MDBBtn>
                     </MDBModalFooter>
                   </MDBModal>
-                )}
+                </div>
+                <input
+                  onChange={(event) => this.handleImage(event)}
+                  type='file'
+                  id='filePicture'
+                  accept='image/*'
+                />
               </div>
-              <div className='modal-div'>
-                <MDBModal
-                  isOpen={this.state.modal14}
-                  toggle={this.toggle(14)}
-                  centered>
-                  <MDBModalHeader toggle={this.toggle(14)}>
-                    Update Profile Picture
-                  </MDBModalHeader>
-                  <MDBModalBody id='modal-body'>
-                    <img
-                      id='file-upload'
-                      src='https://cdn3.iconfinder.com/data/icons/cloudcon-colored/512/upload-512.png'
-                      alt=''
-                      width='250'
-                      height='250'
-                    />
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn
-                      outline
-                      color='secondary'
-                      onClick={() => this.handlePicture(14, 12)}>
-                      Upload From Device
-                    </MDBBtn>
-                  </MDBModalFooter>
-                </MDBModal>
-              </div>
-              <input
-                onChange={(event) => this.handleImage(event)}
-                type='file'
-                id='filePicture'
-                accept='image/*'
-              />
             </div>
-          </div>
-        ) : (
-          <div>{/* <Redirect to='/login' Component={Login} /> */}</div>
-        )}
+          ) : (
+            <div>
+              <Forbidden />
+            </div>
+          )}
+        </div>
       </div>
     );
   }

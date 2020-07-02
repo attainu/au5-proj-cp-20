@@ -5,8 +5,14 @@ html {
 #tab-nav {
   background-color: #212121;
   margin-top: 2rem;
+  margin-left: 3rem;
+  position: sticky;
+  top: 0;
 }
 
+#nav-tabContent {
+  margin-left: 3rem;
+}
 .nav-link {
   color: blueviolet;
 }
@@ -23,11 +29,24 @@ html {
 }
 
 .folowers-div {
-  border: 3px solid whitesmoke;
   padding: 0.5rem;
   background-color: #212121;
 }
 
 .followers-name-div {
   color: whitesmoke;
+}
+
+@media screen and (max-width: 1060px) {
+  #tab-nav {
+    background-color: #212121;
+    margin-top: 2rem;
+    margin-left: 0;
+    position: sticky;
+    top: 0;
+  }
+
+  #nav-tabContent {
+    margin-left: 0;
+  }
 }

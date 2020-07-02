@@ -1,22 +1,30 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 
-class Forbidden extends React.Component {
-  render() {
-    return (
-      <Route path='/forbidden'>
+function Forbidden() {
+  return (
+    <div className='forbidden-top'>
+      <div className='forbidden-inner'>
         <div>
-          <h1>Forbidden</h1>
-          <img
-            src='https://docs.litespeedtech.com/imgs/cp/cpanel/troubleshoot/403.png'
-            alt=''
-          />
+          <p style={{ fontSize: "100px" }}>403 Forbidden</p>
+          <hr />
+        </div>
+        <div>
+          <h3>Access to this resource on the server is denied</h3>
+        </div>
+        <div>
+          <h6>You need to be logged in as a user to access this page</h6>
         </div>
         <hr />
-        <div>You do not have permission to access this page</div>
-      </Route>
-    );
-  }
+        <div>
+          <h6>
+            Click on <Link to='/login'>LOGIN</Link> to login. If not registered
+            click on <Link to='/register'>REGISTER</Link>
+          </h6>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Forbidden;
