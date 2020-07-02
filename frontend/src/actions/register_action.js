@@ -318,3 +318,24 @@ export function sendUserProfileId(data) {
       });
   };
 }
+
+export function getallPost() {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    return axios({
+      method: "get",
+      url: "/api/get/all",
+      headers: { "auth-token": token },
+    })
+      .then((res) => {
+        // console.log("ALL POST", res)
+        dispatch({
+          type: "ALLPOST",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}

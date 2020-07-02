@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Navbar from '../navbar/navbar'
+import Posts from '../posts_component/posts_component'
 import '../../styles/landing.css'
 class Land extends React.Component {
     render() {
@@ -24,10 +25,9 @@ class Land extends React.Component {
                 </article>
                 <div className='row'>
                     <div className="col-8 main" >
-
+                        <Posts />
                     </div>
                     <div className="col-4 side">
-
                     </div>
                 </div>
             </div>

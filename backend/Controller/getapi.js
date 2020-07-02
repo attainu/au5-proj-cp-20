@@ -3,7 +3,7 @@ var getcontrol = {}
 // Text post Get API
 getcontrol.textpost = async (req, res) => {
     post.main.find()
-        .populate('textposts').exec((err, result) => {
+        .populate('textposts').populate('imageposts').populate('pollposts').exec((err, result) => {
             if (err) console.log(err)
             res.json(result)
         })

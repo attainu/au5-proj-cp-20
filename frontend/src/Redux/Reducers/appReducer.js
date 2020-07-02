@@ -11,6 +11,7 @@ let userdata = {
   selected_followers: [],
   user_profile: "",
   show_follow: true,
+  all_posts: ''
 };
 
 function userReducer(state = userdata, action) {
@@ -74,8 +75,20 @@ function userReducer(state = userdata, action) {
       } else {
         stateCopy.show_follow = true;
       }
+      return stateCopy
 
-      return stateCopy;
+    case "ALLPOST":
+      console.log(action.payload)
+      let arr = action.payload
+      let allpost = []
+      arr.forEach((el) => {
+        allpost.push(...el.textposts)
+        allpost.push(...el.imageposts)
+        allpost.push(...el.pollposts)
+      })
+      stateCopy.all_posts = allpost
+      console.log(stateCopy.all_posts)
+      return stateCopy
 
     default:
       return stateCopy;

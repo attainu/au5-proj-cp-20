@@ -6,6 +6,7 @@ import {
   verifyToken,
   logoutAgain,
   articleCall,
+  getallPost
 } from "../../actions/register_action";
 import { connect } from "react-redux";
 import {
@@ -29,6 +30,7 @@ class Navbar extends Component {
     super(props);
     this.props.verifyToken();
     this.props.articleCall("Reddit");
+    this.props.getallPost()
   }
   state = {
     isOpen: false,
@@ -110,33 +112,33 @@ class Navbar extends Component {
                 </Link>
               </Fragment>
             ) : (
-              <div>
-                <MDBNavItem>
-                  <MDBDropdown dropleft>
-                    <MDBDropdownToggle nav caret>
-                      <img
-                        className='avatar_img_navbar'
-                        src={this.props.user.image_url}
-                        alt=''
-                      />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default'>
-                      <MDBDropdownItem href='/profile' size='sm'>
-                        My Profile
+                <div>
+                  <MDBNavItem>
+                    <MDBDropdown dropleft>
+                      <MDBDropdownToggle nav caret>
+                        <img
+                          className='avatar_img_navbar'
+                          src={this.props.user.image_url}
+                          alt=''
+                        />
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default'>
+                        <MDBDropdownItem href='/profile' size='sm'>
+                          My Profile
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='/create' size='sm'>
-                        Create Post
+                        <MDBDropdownItem href='/create' size='sm'>
+                          Create Post
                       </MDBDropdownItem>
-                      <MDBDropdownItem
-                        onClick={() => this.props.logoutAgain()}
-                        size='sm'>
-                        Logout
+                        <MDBDropdownItem
+                          onClick={() => this.props.logoutAgain()}
+                          size='sm'>
+                          Logout
                       </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-              </div>
-            )}
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                </div>
+              )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
@@ -151,7 +153,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { verifyToken, logoutAgain, articleCall },
+    { verifyToken, logoutAgain, articleCall, getallPost },
     dispatch
   );
 };

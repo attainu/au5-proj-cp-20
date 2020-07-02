@@ -60,9 +60,29 @@ class TabsDefault extends Component {
             if (this.state.pic === "" || this.state.title === "") {
                 this.setState({ image_error: "Please select a File" })
             } else {
-                let { email, title, text } = this.state
-                let data = { title, text, email }
+                console.log("PIC UPLOAD", this.state.pic)
+                var url;
+                var form = new FormData()
+                form.append("file", this.state.pic)
+                form.append("upload_preset", "ml_default")
+                form.append("cloud_name", "dtzdoldcm")
+                console.log(form)
+                await fetch("https://api.cloudinary.com/v1_1/dtzdoldcm/image/upload", {
+                    method: "POST",
+                    body: form
+                }).then(res => res.json())
+                    .then(blue => {
+                        url = blue.url
+                    }).catch(err => {
+                        console.log(err)
+                    })
+                var data = {
+                    title: this.state.title,
+                    email: this.state.email,
+                    pic: url
+                }
                 let token = localStorage.getItem("auth-token");
+                console.log(data)
                 return axios({
                     method: "post",
                     url: "/api/post/image",
@@ -150,7 +170,7 @@ class TabsDefault extends Component {
                                             </div>
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                                    aria-describedby="inputGroupFileAddon01" />
+                                                    aria-describedby="inputGroupFileAddon01" onChange={(e) => this.setState({ pic: e.target.files[0] })} />
                                                 <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                             </div>
                                         </div>

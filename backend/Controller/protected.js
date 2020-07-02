@@ -33,6 +33,9 @@ controller.textposts = async (req, res) => {
 }
 controller.imageposts = async (req, res) => {
     console.log("IMAGE post")
+    const { email, title, pic } = req.body
+    console.log(email, title, pic)
+
     var found = await post.main.findOne({ email: req.body.email });
     if (found) {
         console.log("exists")
