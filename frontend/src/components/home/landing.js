@@ -5,6 +5,7 @@ import Navbar from "../navbar/navbar";
 import "../../styles/landing.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import Posts from "../posts_component/posts_component";
 var responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -83,17 +84,19 @@ class Land extends React.Component {
               })
             )}
           </Carousel>
-          ;
         </div>
 
         <div className='row'>
-          <div className='col-8 main'></div>
+          <div className='col-8 main'>
+            <Posts />
+          </div>
           <div className='col-4 side'></div>
         </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
     state: state,

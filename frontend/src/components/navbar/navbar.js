@@ -6,6 +6,7 @@ import {
   verifyToken,
   logoutAgain,
   articleCall,
+  getallPost,
 } from "../../actions/register_action";
 import { connect } from "react-redux";
 import {
@@ -29,6 +30,7 @@ class Navbar extends Component {
     super(props);
     this.props.verifyToken();
     this.props.articleCall("Reddit");
+    this.props.getallPost();
   }
   state = {
     isOpen: false,
@@ -148,7 +150,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
-    { verifyToken, logoutAgain, articleCall },
+    { verifyToken, logoutAgain, articleCall, getallPost },
     dispatch
   );
 };
