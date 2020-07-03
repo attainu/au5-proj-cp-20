@@ -1,0 +1,28 @@
+*{
+    margin: 0rem;   
+}
+body{
+    margin: 0rem;
+    padding: 0;
+    background-color: bisque;
+    overflow-x: hidden;
+}
+article{
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+    align-items: flex-start;
+}
+.card{
+    flex-basis:auto;
+    align-self: auto;
+}
+#create{
+    
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    /* box-shadow: 0 41.8px 33.4px rgba(0, 0, 0, 0.086);
+    padding-top: 1px; */
+    background-color:whitesmoke;
+}

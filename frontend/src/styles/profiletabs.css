@@ -1,0 +1,33 @@
+html {
+  background-color: rgba(0, 0, 0, 0.685);
+}
+
+#tab-nav {
+  background-color: #212121;
+  margin-top: 2rem;
+}
+
+.nav-link {
+  color: blueviolet;
+}
+
+.profile-nav-link {
+  color: whitesmoke;
+  border-radius: 10px;
+}
+
+.nav-link:hover {
+  color: rgb(255, 255, 255);
+  background-color: rgba(255, 0, 0, 0.452);
+  border-radius: 20px;
+}
+
+.folowers-div {
+  border: 3px solid whitesmoke;
+  padding: 0.5rem;
+  background-color: #212121;
+}
+
+.followers-name-div {
+  color: whitesmoke;
+}
