@@ -15,6 +15,7 @@ import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import Forgetpassword from "./components/login/forgot_password";
 import ResetPassword from "./components/login/reset_password";
+import Forbidden from "./components/forbidden/forbidden";
 
 function App() {
   return (
@@ -35,9 +36,7 @@ function App() {
         </Route>
       </div>
       <div className='wrapper-profile'>
-        <Route path='/profile'>
-          <Profile />
-        </Route>
+        <Route path='/profile' component={Profile} />
       </div>
       <div className='wrapper'>
         <Route path='/login/reset_password'>
@@ -55,7 +54,11 @@ function App() {
         <Route path='/create' component={TabsDefault} exact strict></Route>
       </div>
       <div className='wrapper'>
-        <Route path='/searchUser' component={SearchUsers} exact strict></Route>
+        <Route
+          path='/search-users'
+          component={SearchUsers}
+          exact
+          strict></Route>
       </div>
       <div className='wrapper'>
         <Route
@@ -63,6 +66,9 @@ function App() {
           component={UserProfile}
           exact
           strict></Route>
+      </div>
+      <div className='forbidden'>
+        <Route path='/forbidden' component={Forbidden}></Route>
       </div>
     </BrowserRouter>
   );

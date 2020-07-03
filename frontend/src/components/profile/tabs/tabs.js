@@ -129,6 +129,7 @@ class ProfileTabs extends React.Component {
             role='tabpanel'
             aria-labelledby='nav-followers-tab'>
             <h3 style={{ color: "white", margin: "1rem" }}>FOLLOWERS</h3>
+            <hr />
             {this.props.selected_user_id ? (
               <div>
                 {this.props.selected_followers.map((ele, index) => (
@@ -185,6 +186,7 @@ class ProfileTabs extends React.Component {
             role='tabpanel'
             aria-labelledby='nav-following-tab'>
             <h3 style={{ color: "white", margin: "1rem" }}>FOLLOWING</h3>
+            <hr />
             {this.props.selected_user_id ? (
               <div>
                 {this.props.selected_following.map((ele, index) => (

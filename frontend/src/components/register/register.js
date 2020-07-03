@@ -25,7 +25,8 @@ class Register extends React.Component {
   };
 
   handleName(event) {
-    this.setState({ name: event.target.value });
+    const name = event.target.value;
+    this.setState({ name: name.toLowerCase() });
   }
 
   handleEmail(event) {

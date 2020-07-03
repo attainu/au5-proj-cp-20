@@ -13,6 +13,8 @@ import {
 import "../../styles/search_users.css";
 import { MDBInput, MDBBtn } from "mdbreact";
 import { useParams } from "react-router-dom";
+import Forbidden from "../forbidden/forbidden";
+import { Redirect } from "react-router-dom";
 var { _id } = useParams;
 
 class SearchUsers extends React.Component {
@@ -29,15 +31,12 @@ class SearchUsers extends React.Component {
     this.props.getAllUsers();
   };
   handleSearch = (event) => {
-    console.log(event.target.value);
-    this.setState({
-      search_query: event.target.value,
-    });
-  };
-
-  handleSearchClick = () => {
+    console.log();
+    // this.setState({
+    //   search_query: event.target.value,
+    // });
     const data = {
-      search_query: this.state.search_query,
+      search_query: event.target.value,
     };
     this.props.searchUsers(data);
   };
@@ -61,20 +60,12 @@ class SearchUsers extends React.Component {
                 onChange={(event) => this.handleSearch(event)}
               />
             </div>
-            <div className='col-4 mt-3'>
-              <MDBBtn
-                outline
-                color='light'
-                onClick={() => this.handleSearchClick()}>
-                Search
-              </MDBBtn>
-            </div>
           </div>
           <div className='search-results'>
             {this.props.searched_users.length === 0
               ? this.props.all_users.map((users, index) => {
                   return (
-                    <div className='folowers-div mt-4' key={index}>
+                    <div className='folowers-div ' key={index}>
                       <div className='small-logo-image '>
                         <div className='col-3 ml-5'>
                           <img
@@ -85,9 +76,34 @@ class SearchUsers extends React.Component {
                           />
                         </div>
                         <div className=' col-5 followers-name-div mt-2'>
-                          <h3>{users.name}</h3>
+                          <h5>
+                            <strong>{users.name}</strong>
+                          </h5>
+                          <h6>{users.email}</h6>
                         </div>
-                        <div className='col-4 ml-2'></div>
+                        <div className='col-4 ml-2'>
+                          {this.props.login ? (
+                            <Link
+                              to={{
+                                pathname: `/userProfile/${users._id}`,
+                                aboutProps: {
+                                  _id: users._id,
+                                },
+                              }}>
+                              <MDBBtn size='sm' outline color='amber'>
+                                View Profile
+                              </MDBBtn>
+                            </Link>
+                          ) : (
+                            <div>
+                              <Link to='/forbidden'>
+                                <MDBBtn size='sm' outline color='amber'>
+                                  View Profile
+                                </MDBBtn>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
@@ -105,17 +121,34 @@ class SearchUsers extends React.Component {
                           />
                         </div>
                         <div className=' col-5 followers-name-div mt-2'>
-                          <Link
-                            to={{
-                              pathname: `/userProfile/${user._id}`,
-                              aboutProps: {
-                                _id: user._id,
-                              },
-                            }}>
-                            <h3>{user.name}</h3>
-                          </Link>
+                          <h5>
+                            <strong>{user.name}</strong>
+                          </h5>
+                          <h6>{user.email}</h6>
                         </div>
-                        <div className='col-4 ml-2'></div>
+                        <div className='col-4 ml-2'>
+                          {this.props.login ? (
+                            <Link
+                              to={{
+                                pathname: `/userProfile/${user._id}`,
+                                aboutProps: {
+                                  _id: user._id,
+                                },
+                              }}>
+                              <MDBBtn size='sm' outline color='amber'>
+                                View Profile
+                              </MDBBtn>
+                            </Link>
+                          ) : (
+                            <div>
+                              <Link to='/forbidden'>
+                                <MDBBtn size='sm' outline color='amber'>
+                                  View Profile
+                                </MDBBtn>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
                       </div>
                     </div>
                   );
@@ -128,8 +161,9 @@ class SearchUsers extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  console.log("In searched Users", state.user.searched_users);
+  console.log("In searched Users", state.user.all_users);
   return {
+    login: state.user.login,
     all_users: state.user.all_users,
     user: state.user.user,
     searched_users: state.user.searched_users,

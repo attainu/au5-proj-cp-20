@@ -12,9 +12,13 @@ let userdata = {
   user_profile: "",
   show_follow: true,
 <<<<<<< HEAD
+<<<<<<< HEAD
   all_posts: ''
 =======
 >>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
+=======
+  all_posts: ''
+>>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
 };
 
 function userReducer(state = userdata, action) {
@@ -41,11 +45,31 @@ function userReducer(state = userdata, action) {
       return stateCopy;
 
     case "ALL_USERS":
-      stateCopy.all_users = action.payload;
+      console.log("IN SEARCHED USERS", stateCopy.user.email, action.payload);
+
+      const resultArray = action.payload;
+      for (var i in action.payload) {
+        if (resultArray[i].email === stateCopy.user.email) {
+          resultArray.splice(i, 1);
+          console.log("filteredAry", resultArray);
+          stateCopy.all_users = resultArray;
+          break;
+        }
+      }
+
       return stateCopy;
 
     case "SEARCH_RESULTS":
-      stateCopy.searched_users = action.payload;
+      const resultArray2 = action.payload;
+      for (var i in action.payload) {
+        if (resultArray2[i].email === stateCopy.user.email) {
+          resultArray2.splice(i, 1);
+          console.log("filteredAry2", resultArray2);
+          stateCopy.searched_users = resultArray2;
+          break;
+        }
+      }
+
       return stateCopy;
 
     case "FOLLOWING":
@@ -79,6 +103,7 @@ function userReducer(state = userdata, action) {
         stateCopy.show_follow = true;
       }
 <<<<<<< HEAD
+<<<<<<< HEAD
       return stateCopy
 
     case "ALLPOST":
@@ -97,6 +122,22 @@ function userReducer(state = userdata, action) {
 
       return stateCopy;
 >>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
+=======
+      return stateCopy
+
+    case "ALLPOST":
+      console.log(action.payload)
+      let arr = action.payload
+      let allpost = []
+      arr.forEach((el) => {
+        allpost.push(...el.textposts)
+        allpost.push(...el.imageposts)
+        allpost.push(...el.pollposts)
+      })
+      stateCopy.all_posts = allpost
+      console.log(stateCopy.all_posts)
+      return stateCopy
+>>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
 
     default:
       return stateCopy;

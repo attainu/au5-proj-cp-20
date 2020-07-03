@@ -7,6 +7,8 @@ import { verifyToken } from "../../actions/register_action";
 import "react-circular-progressbar/dist/styles.css";
 import ProfileTabs from "../profile/tabs/tabs";
 import InfoCard from "../profile/info_card/infocard";
+import Forbidden from "../forbidden/forbidden";
+import { Redirect } from "react-router-dom";
 
 class UserProfile extends React.Component {
   constructor(props) {
@@ -47,7 +49,9 @@ class UserProfile extends React.Component {
             </div>
           </div>
         ) : (
-          <div>{/* <Redirect to='/login' Component={Login} /> */}</div>
+          <div>
+            <Redirect to='/forbidden' />{" "}
+          </div>
         )}
       </div>
     );

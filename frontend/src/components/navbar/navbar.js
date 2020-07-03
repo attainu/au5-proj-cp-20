@@ -7,9 +7,13 @@ import {
   logoutAgain,
   articleCall,
 <<<<<<< HEAD
+<<<<<<< HEAD
   getallPost
 =======
 >>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
+=======
+  getallPost,
+>>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
 } from "../../actions/register_action";
 import { connect } from "react-redux";
 import {
@@ -34,9 +38,13 @@ class Navbar extends Component {
     this.props.verifyToken();
     this.props.articleCall("Reddit");
 <<<<<<< HEAD
+<<<<<<< HEAD
     this.props.getallPost()
 =======
 >>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
+=======
+    this.props.getallPost();
+>>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
   }
   state = {
     isOpen: false,
@@ -63,16 +71,13 @@ class Navbar extends Component {
         <MDBNavbarToggler onClick={this.toggleCollapse} />
         <MDBCollapse id='navbarCollapse3' isOpen={this.state.isOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Home</MDBNavLink>
+            <MDBNavItem className='ml-2 mt-1'>
+              <MDBNavLink to='/'>Home</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Features</MDBNavLink>
+            <MDBNavItem className='ml-2 mt-1'>
+              <MDBNavLink to='/search-users'>Search Users</MDBNavLink>
             </MDBNavItem>
-            <MDBNavItem className='ml-2'>
-              <MDBNavLink to='#!'>Pricing</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem>
+            <MDBNavItem className='ml-2 mt-1'>
               <MDBDropdown>
                 <MDBDropdownToggle nav caret>
                   <span className='mr-2'>Posts Filter</span>
@@ -159,7 +164,7 @@ class Navbar extends Component {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className='dropdown-default'>
                       <MDBDropdownItem href='/profile' size='sm'>
-                        My Profile
+                        {this.props.user.name}
                       </MDBDropdownItem>
                       <MDBDropdownItem href='/create' size='sm'>
                         Create Post
@@ -190,10 +195,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
 <<<<<<< HEAD
+<<<<<<< HEAD
     { verifyToken, logoutAgain, articleCall, getallPost },
 =======
     { verifyToken, logoutAgain, articleCall },
 >>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
+=======
+    { verifyToken, logoutAgain, articleCall, getallPost },
+>>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
     dispatch
   );
 };

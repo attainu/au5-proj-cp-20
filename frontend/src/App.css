@@ -26,3 +26,9 @@
     no-repeat center fixed;
   background-size: cover;
 }
+
+.forbidden {
+  background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
+    no-repeat center fixed;
+  background-size: cover;
+}
