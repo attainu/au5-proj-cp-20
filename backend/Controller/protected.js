@@ -99,6 +99,7 @@ controller.dvote_text = async (req, res) => {
     })
 }
 controller.upvote_img = async (req, res) => {
+    console.log(req.body)
     let img = await post.imgposts.findById({ _id: req.body.id })
     img.upvote.push({ email: req.body.email })
     img.save(function (err, result) {
