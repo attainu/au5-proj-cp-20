@@ -80,78 +80,78 @@ class Postdiv extends React.Component {
         {this.props.state.all_posts.length === 0 ? (
           <div></div>
         ) : (
-          this.props.state.all_posts.map((e, i) => {
-            return (
-              <div key={i} className='posts_div'>
-                <div className='contents-tools-div'>
-                  <div className='title-div'>
-                    <h4>{e.title}</h4>
+            this.props.state.all_posts.map((e, i) => {
+              return (
+                <div key={i} className='posts_div'>
+                  <div className='contents-tools-div'>
+                    <div className='title-div'>
+                      <h4>{e.title}</h4>
+                    </div>
+                    {e.pic && (
+                      <div>
+                        <div className='post-content-div'>
+                          <img id='post-image' src={e.pic} alt='REDDIT' />
+                        </div>
+                        <div className='tools'>
+                          <div id='up-arrow'>
+                            <i
+                              className='fas fa-arrow-up fa-2x'
+                              onClick={() => this.upvote_img(e._id)}></i>
+                          </div>
+                          <div id='count'>
+                            <span className='badge badge-pill badge-light'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </div>
+                          <div id='down-arrow'>
+                            <i
+                              className='fas fa-arrow-down fa-2x'
+                              onClick={() => this.downvote_img(e._id)}></i>
+                          </div>
+                          <div id='comments'>
+                            <span className='badge badge-light'>
+                              <i className='fas fa-comment-alt black-text'></i>{" "}
+                              <strong>Comments</strong>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    {e.text && (
+                      <div>
+                        <div className='post-content-div'>
+                          {ReactHtmlParser(e.text)}
+                        </div>
+                        <div className='tools'>
+                          <div id='up-arrow'>
+                            <i
+                              className='fas fa-arrow-up fa-2x'
+                              onClick={() => this.upvote_text(e._id)}></i>
+                          </div>
+                          <div id='count'>
+                            <span className='badge badge-pill badge-light'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </div>
+                          <div id='down-arrow'>
+                            <i
+                              className='fas fa-arrow-down fa-2x'
+                              onClick={() => this.downvote_text(e._id)}></i>
+                          </div>
+                          <div id='comments'>
+                            <span className='badge badge-light'>
+                              <i className='fas fa-comment-alt black-text'></i>{" "}
+                              <strong>Comments</strong>
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  {e.pic && (
-                    <div>
-                      <div className='post-content-div'>
-                        <img id='post-image' src={e.pic} alt='REDDIT' />
-                      </div>
-                      <div className='tools'>
-                        <div id='up-arrow'>
-                          <i
-                            className='fas fa-arrow-up fa-2x'
-                            onClick={() => this.upvote_img(e._id)}></i>
-                        </div>
-                        <div id='count'>
-                          <span className='badge badge-pill badge-light'>
-                            {Number(e.upvote.length - e.dvote.length)}
-                          </span>
-                        </div>
-                        <div id='down-arrow'>
-                          <i
-                            className='fas fa-arrow-down fa-2x'
-                            onClick={() => this.downvote_img(e._id)}></i>
-                        </div>
-                        <div id='comments'>
-                          <span className='badge badge-light'>
-                            <i className='fas fa-comment-alt black-text'></i>{" "}
-                            <strong>Comments</strong>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  {e.text && (
-                    <div>
-                      <div className='post-content-div'>
-                        {ReactHtmlParser(e.text)}
-                      </div>
-                      <div className='tools'>
-                        <div id='up-arrow'>
-                          <i
-                            className='fas fa-arrow-up fa-2x'
-                            onClick={() => this.upvote_text(e._id)}></i>
-                        </div>
-                        <div id='count'>
-                          <span className='badge badge-pill badge-light'>
-                            {Number(e.upvote.length - e.dvote.length)}
-                          </span>
-                        </div>
-                        <div id='down-arrow'>
-                          <i
-                            className='fas fa-arrow-down fa-2x'
-                            onClick={() => this.downvote_text(e._id)}></i>
-                        </div>
-                        <div id='comments'>
-                          <span className='badge badge-light'>
-                            <i className='fas fa-comment-alt black-text'></i>{" "}
-                            <strong>Comments</strong>
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
-              </div>
-            );
-          })
-        )}
+              );
+            })
+          )}
       </div>
     );
   }
