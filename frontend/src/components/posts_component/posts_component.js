@@ -5,7 +5,28 @@ import { getallPost } from "../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
+import {
+  MDBBtn,
+  MDBBadge,
+  MDBInput,
+  MDBModal,
+  MDBModalBody,
+  MDBModalHeader,
+  MDBModalFooter,
+} from "mdbreact";
+
 class Postdiv extends React.Component {
+  state = {
+    modal10: false,
+  };
+
+  toggle = (nr) => () => {
+    let modalNumber = "modal" + nr;
+    this.setState({
+      [modalNumber]: !this.state[modalNumber],
+    });
+  };
+
   componentDidMount() {
     console.log("ARE YOU RUNNING");
     this.setState({ email: this.props.state.user.email });
@@ -73,6 +94,7 @@ class Postdiv extends React.Component {
     }
     return false;
   };
+
   render() {
     console.log(this.props.state.all_posts, this.state);
     return (
@@ -109,10 +131,15 @@ class Postdiv extends React.Component {
                             onClick={() => this.downvote_img(e._id)}></i>
                         </div>
                         <div id='comments'>
-                          <span className='badge badge-light'>
-                            <i className='fas fa-comment-alt black-text'></i>{" "}
-                            <strong>Comments</strong>
-                          </span>
+                          <MDBBtn
+                            color='elegant'
+                            size='md'
+                            onClick={this.toggle(12)}>
+                            Comments
+                            <MDBBadge color='danger' className='ml-2'>
+                              4
+                            </MDBBadge>
+                          </MDBBtn>
                         </div>
                       </div>
                     </div>
@@ -120,7 +147,9 @@ class Postdiv extends React.Component {
                   {e.text && (
                     <div>
                       <div className='post-content-div'>
-                        {ReactHtmlParser(e.text)}
+                        <div className='text-post-div'>
+                          {ReactHtmlParser(e.text)}
+                        </div>
                       </div>
                       <div className='tools'>
                         <div id='up-arrow'>
@@ -139,10 +168,15 @@ class Postdiv extends React.Component {
                             onClick={() => this.downvote_text(e._id)}></i>
                         </div>
                         <div id='comments'>
-                          <span className='badge badge-light'>
-                            <i className='fas fa-comment-alt black-text'></i>{" "}
-                            <strong>Comments</strong>
-                          </span>
+                          <MDBBtn color='light' size='md'>
+                            Comments
+                            <MDBBadge
+                              color='danger'
+                              className='ml-2'
+                              onClick={this.toggle(12)}>
+                              4
+                            </MDBBadge>
+                          </MDBBtn>
                         </div>
                       </div>
                     </div>
@@ -152,6 +186,25 @@ class Postdiv extends React.Component {
             );
           })
         )}
+        <div>
+          <MDBModal
+            isOpen={this.state.modal12}
+            toggle={this.toggle(12)}
+            backdrop={false}>
+            <MDBModalHeader toggle={this.toggle(12)}>
+              MDBModal title
+            </MDBModalHeader>
+            <MDBModalBody>
+              <MDBInput label='Username' icon='comment' />
+            </MDBModalBody>
+            <MDBModalFooter>
+              <MDBBtn color='secondary' onClick={this.toggle(12)}>
+                Close
+              </MDBBtn>
+              <MDBBtn color='primary'>Save changes</MDBBtn>
+            </MDBModalFooter>
+          </MDBModal>
+        </div>
       </div>
     );
   }

@@ -37,6 +37,7 @@ class TabsDefault extends Component {
       });
     }
   };
+
   pollEvent = (el, i, event) => {
     this.state.option[i] = event.target.value;
     this.setState({ option: this.state.option });

@@ -6,6 +6,7 @@ import "../../styles/landing.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Posts from "../posts_component/posts_component";
+
 var responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -28,7 +29,6 @@ var responsive = {
 class Land extends React.Component {
   render() {
     console.log("From Landing page", this.props.state);
-
     return (
       <div className='landing-page'>
         <nav className='mb-2'>

@@ -344,7 +344,4 @@ export function getallPost() {
         console.log(error);
       });
   };
-
 }
-
-
