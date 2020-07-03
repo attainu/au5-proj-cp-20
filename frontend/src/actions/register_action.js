@@ -318,6 +318,7 @@ export function sendUserProfileId(data) {
       });
   };
 }
+<<<<<<< HEAD
 
 export function getallPost() {
   return (dispatch) => {
@@ -339,3 +340,5 @@ export function getallPost() {
       });
   };
 }
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4

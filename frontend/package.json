@@ -19,7 +19,10 @@
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.20",
+<<<<<<< HEAD
     "react-html-parser": "^2.0.2",
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
     "react-image-crop": "^8.6.4",
     "react-notifications": "^1.6.0",
     "react-redux": "^7.2.0",

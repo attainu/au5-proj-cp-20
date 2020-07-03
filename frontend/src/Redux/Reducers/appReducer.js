@@ -11,7 +11,10 @@ let userdata = {
   selected_followers: [],
   user_profile: "",
   show_follow: true,
+<<<<<<< HEAD
   all_posts: ''
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
 };
 
 function userReducer(state = userdata, action) {
@@ -75,6 +78,7 @@ function userReducer(state = userdata, action) {
       } else {
         stateCopy.show_follow = true;
       }
+<<<<<<< HEAD
       return stateCopy
 
     case "ALLPOST":
@@ -89,6 +93,10 @@ function userReducer(state = userdata, action) {
       stateCopy.all_posts = allpost
       console.log(stateCopy.all_posts)
       return stateCopy
+=======
+
+      return stateCopy;
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
 
     default:
       return stateCopy;

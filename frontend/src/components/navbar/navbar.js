@@ -6,7 +6,10 @@ import {
   verifyToken,
   logoutAgain,
   articleCall,
+<<<<<<< HEAD
   getallPost
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
 } from "../../actions/register_action";
 import { connect } from "react-redux";
 import {
@@ -30,7 +33,10 @@ class Navbar extends Component {
     super(props);
     this.props.verifyToken();
     this.props.articleCall("Reddit");
+<<<<<<< HEAD
     this.props.getallPost()
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
   }
   state = {
     isOpen: false,
@@ -112,6 +118,7 @@ class Navbar extends Component {
                 </Link>
               </Fragment>
             ) : (
+<<<<<<< HEAD
                 <div>
                   <MDBNavItem>
                     <MDBDropdown dropleft>
@@ -139,6 +146,35 @@ class Navbar extends Component {
                   </MDBNavItem>
                 </div>
               )}
+=======
+              <div>
+                <MDBNavItem>
+                  <MDBDropdown dropleft>
+                    <MDBDropdownToggle nav caret>
+                      <img
+                        className='avatar_img_navbar'
+                        src={this.props.user.image_url}
+                        alt=''
+                      />
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu className='dropdown-default'>
+                      <MDBDropdownItem href='/profile' size='sm'>
+                        My Profile
+                      </MDBDropdownItem>
+                      <MDBDropdownItem href='/create' size='sm'>
+                        Create Post
+                      </MDBDropdownItem>
+                      <MDBDropdownItem
+                        onClick={() => this.props.logoutAgain()}
+                        size='sm'>
+                        Logout
+                      </MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavItem>
+              </div>
+            )}
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
@@ -153,7 +189,11 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
+<<<<<<< HEAD
     { verifyToken, logoutAgain, articleCall, getallPost },
+=======
+    { verifyToken, logoutAgain, articleCall },
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
     dispatch
   );
 };

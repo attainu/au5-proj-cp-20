@@ -2,7 +2,10 @@ import React from 'react'
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Navbar from '../navbar/navbar'
+<<<<<<< HEAD
 import Posts from '../posts_component/posts_component'
+=======
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
 import '../../styles/landing.css'
 class Land extends React.Component {
     render() {
@@ -25,9 +28,16 @@ class Land extends React.Component {
                 </article>
                 <div className='row'>
                     <div className="col-8 main" >
+<<<<<<< HEAD
                         <Posts />
                     </div>
                     <div className="col-4 side">
+=======
+
+                    </div>
+                    <div className="col-4 side">
+
+>>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
                     </div>
                 </div>
             </div>
