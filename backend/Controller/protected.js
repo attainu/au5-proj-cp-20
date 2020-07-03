@@ -1,5 +1,5 @@
 const userModel = require("../model/auth");
-const post = require('../model/post')
+const post = require('../model/post');
 var controller = {}
 controller.main = async (req, res) => {
     console.log(req.user)
@@ -81,5 +81,37 @@ controller.pollposts = async (req, res) => {
             res.json(result)
         })
     }
+}
+controller.upvote_text = async (req, res) => {
+    let text = await post.textposts.findById({ _id: req.body.id })
+    text.upvote.push({ email: req.body.email })
+    text.save(function (err, result) {
+        if (err) return res.json(err)
+        res.json(result)
+    })
+}
+controller.dvote_text = async (req, res) => {
+    let text = await post.textposts.findById({ _id: req.body.id })
+    text.dvote.push({ email: req.body.email })
+    text.save(function (err, result) {
+        if (err) return res.json(err)
+        res.json(result)
+    })
+}
+controller.upvote_img = async (req, res) => {
+    let img = await post.imgposts.findById({ _id: req.body.id })
+    img.upvote.push({ email: req.body.email })
+    img.save(function (err, result) {
+        if (err) return res.json(err)
+        res.json(result)
+    })
+}
+controller.dvote_img = async (req, res) => {
+    let img = await post.imageposts.findById({ _id: req.body.id })
+    img.dvote.push({ email: req.body.email })
+    img.save(function (err, result) {
+        if (err) return res.json(err)
+        res.json(result)
+    })
 }
 module.exports = controller

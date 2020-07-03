@@ -151,6 +151,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators(
     { verifyToken, logoutAgain, articleCall, getallPost },
+
     dispatch
   );
 };

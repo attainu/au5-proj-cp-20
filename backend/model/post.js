@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const textpost = mongoose.Schema({
     title: { type: String, required: true },
     text: { type: String, required: true },
-    upvote: { type: Number, required: false },
-    dvote: { type: Number, required: false },
+    upvote: [{ _id: false, email: String }],
+    dvote: [{ _id: false, email: String }],
     comments: { type: String, required: false }
 })
 const imagepost = mongoose.Schema({
     title: { type: String, required: true },
     pic: { type: String, required: true },
-    upvote: { type: Number, required: false },
-    dvote: { type: Number, required: false },
+    upvote: [{ _id: false, email: String }],
+    dvote: [{ _id: false, email: String }],
     comments: { type: String, required: false }
 })
 const pollpost = mongoose.Schema({

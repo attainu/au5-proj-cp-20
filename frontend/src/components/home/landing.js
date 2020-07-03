@@ -91,7 +91,7 @@ class Land extends React.Component {
             )}
           </Carousel>
         </div>
-        <div></div>
+
         {this.props.state.user.article ? (
           <div>
             <div className='landing-heading' style={{ marginBottom: "1rem" }}>
