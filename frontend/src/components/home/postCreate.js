@@ -37,7 +37,6 @@ class TabsDefault extends Component {
       });
     }
   };
-
   pollEvent = (el, i, event) => {
     this.state.option[i] = event.target.value;
     this.setState({ option: this.state.option });
@@ -69,41 +68,6 @@ class TabsDefault extends Component {
     if (tab === 2) {
       if (this.state.pic === "" || this.state.title === "") {
         this.setState({ image_error: "Please select a File" });
-      } else {
-        console.log("PIC UPLOAD", this.state.pic);
-        var url;
-        var form = new FormData();
-        form.append("file", this.state.pic);
-        form.append("upload_preset", "ml_default");
-        form.append("cloud_name", "dtzdoldcm");
-        console.log(form);
-        await fetch("https://api.cloudinary.com/v1_1/dtzdoldcm/image/upload", {
-          method: "POST",
-          body: form,
-        })
-          .then((res) => res.json())
-          .then((blue) => {
-            url = blue.url;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-        var data = {
-          title: this.state.title,
-          email: this.state.email,
-          pic: url,
-        };
-        let token = localStorage.getItem("auth-token");
-        console.log(data);
-        return axios({
-          method: "post",
-          url: "/api/post/image",
-          headers: { "auth-token": token },
-          data,
-        }).then((res) => {
-          console.log("posttextres", res);
-          window.location.reload();
-        });
       }
     }
     if (tab === 3) {
@@ -111,26 +75,6 @@ class TabsDefault extends Component {
         (this.state.option[0] === "" && this.state.option[1] === "") ||
         this.state.title === ""
       ) {
-        console.log(
-          "Why are you running",
-          this.state.option[0],
-          this.state.option[1],
-          this.state.title
-        );
-        this.setState({ poll_error: "Minimum Two Inputs" });
-      } else {
-        let { email, title, option } = this.state;
-        let data = { title, email, option };
-        let token = localStorage.getItem("auth-token");
-        return axios({
-          method: "post",
-          url: "/api/post/poll",
-          headers: { "auth-token": token },
-          data,
-        }).then((res) => {
-          console.log("posttextres", res);
-          window.location.reload();
-        });
         this.setState({ poll_error: "Minimum Two Inputs" });
       }
     }
@@ -190,10 +134,9 @@ class TabsDefault extends Component {
                     <label for='exampleForm2' className='mt-2'>
                       <b>Title</b>
                     </label>
-
                     <input
                       type='text'
-                      id='exampleForm1'
+                      id='exampleForm2'
                       class='form-control'
                       onChange={(e) => {
                         this.setState({ title: e.target.value });
@@ -227,17 +170,12 @@ class TabsDefault extends Component {
                     <label for='exampleForm2' className='mt-2'>
                       <b>Title</b>
                     </label>
-
                     <input
                       type='text'
                       id='exampleForm2'
-                      class='form-control'
-                      onChange={(e) => {
-                        this.setState({ title: e.target.value });
-                      }}></input>
+                      class='form-control'></input>
                     <br />
                     <br />
-
                     <div class='input-group'>
                       <div class='input-group-prepend'>
                         <span
@@ -252,11 +190,7 @@ class TabsDefault extends Component {
                           class='custom-file-input'
                           id='inputGroupFile01'
                           aria-describedby='inputGroupFileAddon01'
-                          onChange={(e) =>
-                            this.setState({ pic: e.target.files[0] })
-                          }
                         />
-
                         <label class='custom-file-label' for='inputGroupFile01'>
                           Choose file
                         </label>
@@ -284,12 +218,8 @@ class TabsDefault extends Component {
                   </label>
                   <input
                     type='text'
-                    id='exampleForm3'
-                    class='form-control'
-                    onChange={(e) => {
-                      this.setState({ title: e.target.value });
-                    }}></input>
-
+                    id='exampleForm2'
+                    class='form-control'></input>
                   <label for='exampleForm2' className='mt-2'>
                     <b>Options</b>
                   </label>
