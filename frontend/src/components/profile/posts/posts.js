@@ -5,10 +5,9 @@ class Posts extends React.Component {
     return (
       <div>
         <div>
-          <h4>Posts</h4>
+          <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>Posts</h4>
         </div>
         <hr />
-        <div>You have no posts yet</div>
         <Postdiv />
       </div>
     );

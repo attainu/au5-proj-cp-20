@@ -19,14 +19,7 @@
     "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.13.1",
     "react-google-login": "^5.1.20",
-<<<<<<< HEAD
-<<<<<<< HEAD
     "react-html-parser": "^2.0.2",
-=======
->>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
-=======
-    "react-html-parser": "^2.0.2",
->>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
     "react-image-crop": "^8.6.4",
     "react-loader-spinner": "^3.1.14",
     "react-multi-carousel": "^2.5.5",

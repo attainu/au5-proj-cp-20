@@ -34,6 +34,7 @@ class Profile extends React.Component {
       url: "",
       modal14: false,
       modal12: false,
+      login: false,
       progress: 0,
       src: null,
       loading: true,
@@ -51,6 +52,7 @@ class Profile extends React.Component {
     this.props.verifyToken();
     this.handleImage = this.handleImage.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
+    console.log("login", this.props.login);
   };
 
   toggle = (nr) => () => {
@@ -285,11 +287,10 @@ class Profile extends React.Component {
               </div>
             </div>
           ) : (
-            <div>
-              <Forbidden />
-            </div>
+            <div></div>
           )}
         </div>
+        <div></div>
       </div>
     );
   }

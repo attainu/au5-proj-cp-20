@@ -48,6 +48,7 @@ export function verifyToken() {
           payload: data,
         });
       } else {
+        Promise.reject({ redirectTo: "/no-access" });
         window.location.assign("/forbidden");
       }
     });
@@ -91,9 +92,10 @@ export function articleCall(querry) {
               title: e.title.substring(0, 150),
               text: e.selftext.substring(0, 150),
               image: e.preview.images[0].source.url,
+              subreddit: e.subreddit,
               post: e.url,
             };
-            // console.log(e.preview.images[0].source);
+            console.log(e.preview.images[0].source);
             return arr.push(data);
           }
         });
@@ -322,10 +324,6 @@ export function sendUserProfileId(data) {
       });
   };
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
 
 export function getallPost() {
   return (dispatch) => {
@@ -346,10 +344,7 @@ export function getallPost() {
         console.log(error);
       });
   };
-<<<<<<< HEAD
+
 }
-=======
->>>>>>> ebc8f5a84d2fd086addec9cc80c6567bdd257ea4
-=======
-}
->>>>>>> 5862aefbb9300fcf4b1c0928bce71dff5e604b79
+
+
