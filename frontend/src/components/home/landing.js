@@ -18,7 +18,7 @@ var responsive = {
   },
   tablet: {
     breakpoint: { max: 1024, min: 464 },
-    items: 2,
+    items: 1,
   },
   mobile: {
     breakpoint: { max: 464, min: 0 },
@@ -41,6 +41,7 @@ class Land extends React.Component {
         </div>
         <div>
           <Carousel
+            additionalTransfrom={0}
             className='carousel'
             swipeable={true}
             draggable={true}
@@ -49,9 +50,9 @@ class Land extends React.Component {
             ssr={true} // means to render carousel on server-side.
             infinite={true}
             autoPlay={this.props.deviceType !== "mobile" ? true : false}
-            autoPlaySpeed={1000}
+            autoPlaySpeed={1500}
             keyBoardControl={true}
-            customTransition='all .5'
+            customTransition='all 1s linear'
             transitionDuration={1500}
             containerClass='carousel-container'
             removeArrowOnDeviceType={["tablet", "mobile"]}
@@ -66,11 +67,16 @@ class Land extends React.Component {
                   <div>
                     <div className='wrapper' id='wrapper3-landing'>
                       <div id='card-landing'>
-                        <img src={el.image} />
+                        <img src={el.image} alt='' />
                         <div className='info' id='info-landing'>
+                          <h2>
+                            <span className='logo-title2' id='hash'>
+                              #
+                            </span>
+                            <u>{el.subreddit}</u>
+                          </h2>
                           <p>{el.title}</p>
                           <a
-                            className='btn btn-green'
                             target='_blank'
                             rel='noopener noreferrer'
                             href={el.post}>
@@ -85,13 +91,21 @@ class Land extends React.Component {
             )}
           </Carousel>
         </div>
-
-        <div className='row'>
-          <div className='col-8 main'>
-            <Posts />
+        <div></div>
+        {this.props.state.user.article ? (
+          <div>
+            <div className='landing-heading' style={{ marginBottom: "1rem" }}>
+              <h3 style={{ color: "whitesmoke" }}>
+                <strong>Recent Posts</strong>
+              </h3>
+            </div>
+            <div className='col-12 main' id='col-12'>
+              <Posts />
+            </div>
           </div>
-          <div className='col-4 side'></div>
-        </div>
+        ) : (
+          <div></div>
+        )}
       </div>
     );
   }

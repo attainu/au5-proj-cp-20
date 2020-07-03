@@ -2,13 +2,15 @@ import React from "react";
 import "../../styles/posts_div.css";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import ReactHtmlParser from 'react-html-parser';
+import ReactHtmlParser from "react-html-parser";
 class Postdiv extends React.Component {
   render() {
-    console.log(this.props.state.all_posts, this.state)
+    console.log(this.props.state.all_posts, this.state);
     return (
-      <div>
-        {this.props.state.all_posts.length === 0 ? <div></div> :
+      <div className='pd-top'>
+        {this.props.state.all_posts.length === 0 ? (
+          <div></div>
+        ) : (
           this.props.state.all_posts.map((e) => {
             return (
               <div className='posts_div'>
@@ -16,18 +18,16 @@ class Postdiv extends React.Component {
                   <div className='title-div'>
                     <h4>{e.title}</h4>
                   </div>
-                  {e.pic &&
+                  {e.pic && (
                     <div class='post-content-div'>
-                      <img
-                        id='post-image'
-                        src={e.pic}
-                        alt='REDDIT'
-                      />
+                      <img id='post-image' src={e.pic} alt='REDDIT' />
                     </div>
-                  }
-                  {e.text &&
-                    <div class='post-content-div'>{ReactHtmlParser(e.text)}</div>
-                  }
+                  )}
+                  {e.text && (
+                    <div class='post-content-div'>
+                      {ReactHtmlParser(e.text)}
+                    </div>
+                  )}
                   <div class='tools'>
                     <div id='up-arrow'>
                       <i class='fas fa-arrow-up fa-2x'></i>
@@ -40,16 +40,16 @@ class Postdiv extends React.Component {
                     </div>
                     <div id='comments'>
                       <span className='badge badge-light'>
-                        <i class='fas fa-comment-alt black-text'></i>{" "}
+                        <i class='fas fa-comment-alt black-text'></i>
                         <strong>Comments</strong>
                       </span>
                     </div>
                   </div>
                 </div>
               </div>
-            )
+            );
           })
-        }
+        )}
       </div>
     );
   }
@@ -57,10 +57,10 @@ class Postdiv extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    state: state.user
-  }
-}
+    state: state.user,
+  };
+};
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch)
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Postdiv)
+  return bindActionCreators({}, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Postdiv);
