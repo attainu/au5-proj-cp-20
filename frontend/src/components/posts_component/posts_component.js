@@ -16,23 +16,22 @@ import {
 } from "mdbreact";
 
 class Postdiv extends React.Component {
+  constructor(props) {
+    super(props)
+    if (this.props.state.user.email) {
+      console.log("Calling", this.props.state.user.email)
+      this.setState({ email: this.props.state.user.email })
+    }
+  }
   state = {
     modal10: false,
+    email: this.props.state.user.email,
   };
-
   toggle = (nr) => () => {
     let modalNumber = "modal" + nr;
     this.setState({
       [modalNumber]: !this.state[modalNumber],
     });
-  };
-
-  componentDidMount() {
-    console.log("ARE YOU RUNNING");
-    this.setState({ email: this.props.state.user.email });
-  }
-  state = {
-    email: "",
   };
   upvote_text = (id) => {
     let token = localStorage.getItem("auth-token");
@@ -96,7 +95,7 @@ class Postdiv extends React.Component {
   };
 
   render() {
-    console.log(this.props.state.all_posts, this.state);
+    console.log("sda", this.props.state.all_posts, this.state);
     return (
       <div className='pd-top'>
         {this.props.state.all_posts.length === 0 ? (

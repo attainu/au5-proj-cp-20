@@ -24,6 +24,7 @@ class SearchUsers extends React.Component {
       search_query: "",
     };
     this.props.verifyToken();
+    this.props.getAllUsers();
   }
 
   componentDidMount = () => {
@@ -64,37 +65,37 @@ class SearchUsers extends React.Component {
           <div className='search-results'>
             {this.props.searched_users.length === 0
               ? this.props.all_users.map((users, index) => {
-                  return (
-                    <div className='folowers-div ' key={index}>
-                      <div className='small-logo-image '>
-                        <div className='col-3 ml-5'>
-                          <img
-                            className='avatar_img_small'
-                            htmlFor='file'
-                            src={users.image_url}
-                            alt=''
-                          />
-                        </div>
-                        <div className=' col-5 followers-name-div mt-2'>
-                          <h5>
-                            <strong>{users.name}</strong>
-                          </h5>
-                          <h6>{users.email}</h6>
-                        </div>
-                        <div className='col-4 ml-2'>
-                          {this.props.login ? (
-                            <Link
-                              to={{
-                                pathname: `/userProfile/${users._id}`,
-                                aboutProps: {
-                                  _id: users._id,
-                                },
-                              }}>
-                              <MDBBtn size='sm' outline color='amber'>
-                                View Profile
+                return (
+                  <div className='folowers-div ' key={index}>
+                    <div className='small-logo-image '>
+                      <div className='col-3 ml-5'>
+                        <img
+                          className='avatar_img_small'
+                          htmlFor='file'
+                          src={users.image_url}
+                          alt=''
+                        />
+                      </div>
+                      <div className=' col-5 followers-name-div mt-2'>
+                        <h5>
+                          <strong>{users.name}</strong>
+                        </h5>
+                        <h6>{users.email}</h6>
+                      </div>
+                      <div className='col-4 ml-2'>
+                        {this.props.login ? (
+                          <Link
+                            to={{
+                              pathname: `/userProfile/${users._id}`,
+                              aboutProps: {
+                                _id: users._id,
+                              },
+                            }}>
+                            <MDBBtn size='sm' outline color='amber'>
+                              View Profile
                               </MDBBtn>
-                            </Link>
-                          ) : (
+                          </Link>
+                        ) : (
                             <div>
                               <Link to='/forbidden'>
                                 <MDBBtn size='sm' outline color='amber'>
@@ -103,43 +104,43 @@ class SearchUsers extends React.Component {
                               </Link>
                             </div>
                           )}
-                        </div>
                       </div>
                     </div>
-                  );
-                })
+                  </div>
+                );
+              })
               : this.props.searched_users.map((user, index) => {
-                  return (
-                    <div className='folowers-div mt-4' key={index}>
-                      <div className='small-logo-image '>
-                        <div className='col-3 ml-5'>
-                          <img
-                            className='avatar_img_small'
-                            htmlFor='file'
-                            src={user.image_url}
-                            alt=''
-                          />
-                        </div>
-                        <div className=' col-5 followers-name-div mt-2'>
-                          <h5>
-                            <strong>{user.name}</strong>
-                          </h5>
-                          <h6>{user.email}</h6>
-                        </div>
-                        <div className='col-4 ml-2'>
-                          {this.props.login ? (
-                            <Link
-                              to={{
-                                pathname: `/userProfile/${user._id}`,
-                                aboutProps: {
-                                  _id: user._id,
-                                },
-                              }}>
-                              <MDBBtn size='sm' outline color='amber'>
-                                View Profile
+                return (
+                  <div className='folowers-div mt-4' key={index}>
+                    <div className='small-logo-image '>
+                      <div className='col-3 ml-5'>
+                        <img
+                          className='avatar_img_small'
+                          htmlFor='file'
+                          src={user.image_url}
+                          alt=''
+                        />
+                      </div>
+                      <div className=' col-5 followers-name-div mt-2'>
+                        <h5>
+                          <strong>{user.name}</strong>
+                        </h5>
+                        <h6>{user.email}</h6>
+                      </div>
+                      <div className='col-4 ml-2'>
+                        {this.props.login ? (
+                          <Link
+                            to={{
+                              pathname: `/userProfile/${user._id}`,
+                              aboutProps: {
+                                _id: user._id,
+                              },
+                            }}>
+                            <MDBBtn size='sm' outline color='amber'>
+                              View Profile
                               </MDBBtn>
-                            </Link>
-                          ) : (
+                          </Link>
+                        ) : (
                             <div>
                               <Link to='/forbidden'>
                                 <MDBBtn size='sm' outline color='amber'>
@@ -148,11 +149,11 @@ class SearchUsers extends React.Component {
                               </Link>
                             </div>
                           )}
-                        </div>
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
           </div>
         </div>
       </div>

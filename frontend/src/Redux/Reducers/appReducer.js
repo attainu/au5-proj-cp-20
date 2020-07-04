@@ -11,7 +11,10 @@ let userdata = {
   selected_followers: [],
   user_profile: "",
   show_follow: true,
-  all_posts: ''
+  all_posts: '',
+  logged_all: '',
+  logged_up: '',
+  logged_dowm: ''
 };
 
 function userReducer(state = userdata, action) {
@@ -107,9 +110,21 @@ function userReducer(state = userdata, action) {
         allpost.push(...el.pollposts)
       })
       stateCopy.all_posts = allpost
-      console.log(stateCopy.all_posts)
+      console.log("All posts", stateCopy.all_posts)
       return stateCopy
 
+    case "LOGGEDPOST":
+      console.log("Logged Post", action.payload)
+      stateCopy.logged_all = action.payload
+      return stateCopy
+    case "LOGGEDUP":
+      console.log("Logged Post UP", action.payload)
+      stateCopy.logged_up = action.payload
+      return stateCopy
+    case "LOGGEDDOWN":
+      console.log("Logged Post DOWN", action.payload)
+      stateCopy.logged_down = action.payload
+      return stateCopy
     default:
       return stateCopy;
   }

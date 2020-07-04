@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Navbar from "../navbar/navbar";
 import "../../styles/landing.css";
+import { loggedPost } from "../../actions/register_action";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Posts from "../posts_component/posts_component";
@@ -27,6 +28,11 @@ var responsive = {
   },
 };
 class Land extends React.Component {
+  componentDidMount() {
+    if (this.props.state.user.email) {
+      this.props.loggedPost(this.props.state.user.email)
+    }
+  }
   render() {
     console.log("From Landing page", this.props.state);
     return (
@@ -117,6 +123,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ loggedPost }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Land);

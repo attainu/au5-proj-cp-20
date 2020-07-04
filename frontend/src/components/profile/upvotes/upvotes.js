@@ -1,46 +1,77 @@
 import React from "react";
-import { MDBInput, MDBBtn } from "mdbreact";
-
-class Upvotes extends React.Component {
+import "../../../styles/posts_div.css";
+import axios from "axios";
+import { loggedPostup } from "../../../actions/register_action";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import ReactHtmlParser from "react-html-parser";
+class UpVote extends React.Component {
+  componentDidMount() {
+    if (this.props.state.user.email) {
+      this.props.loggedPostup(this.props.state.user.email)
+    }
+  }
   render() {
+    console.log("Up and Down", this.props.state)
     return (
       <div>
-        <div class='card bg-dark' id='edit-profile-card'>
-          <div class='card-header' style={{ color: "white" }}>
-            <h3>Title Here</h3>
-          </div>
-          <div class='card-body'>
-            <div className='md-form' id='card-content'>
-              <img
-                id='post-image'
-                src='https://www.iconspng.com/images/post-3d-scan-head-avatar/post-3d-scan-head-avatar.jpg'
-                alt=''
-              />
+        <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>Your Up Voted Post</h4>
+        {this.props.state.logged_up.length === 0 ? <div></div> : this.props.state.logged_up.map((e, i) => {
+          return (
+            <div className='posts_div mt-3'>
+              <div className='upvote-downvote-div'>
+                <div className='col-3'>
+                  <i class='fas fa-arrow-alt-circle-up fa-2x green-text'></i>
+                </div>
+                <div className='col-6 text-center'>{Number(e.upvote.length - e.dvote.length)}</div>
+                <div className='col-3'>
+                  <i class='fas fa-arrow-alt-circle-down fa-2x red-text'></i>
+                </div>
+              </div>
+              {e.pic &&
+                <div className='contents-tools-div'>
+                  <div class='post-content-div'>
+                    <img
+                      src={e.pic}
+                      alt='post'
+                      width='400'
+                      height='300'
+                    />
+                  </div>
+                  <div class='tools'>
+                    <span class='badge fa-2x badge-pill amber'>
+                      <i class='far fa-comments fa-lg' aria-hidden='true'></i>
+                      <span> </span>Comment
+                              </span>
+                  </div>
+                </div>
+              }
+              {e.text &&
+                <div className='contents-tools-div'>
+                  <div class='post-content-div'>
+                    {ReactHtmlParser(e.text)}
+                  </div>
+                  <div class='tools'>
+                    <span class='badge fa-2x badge-pill amber'>
+                      <i class='far fa-comments fa-lg' aria-hidden='true'></i>
+                      <span> </span>Comment
+                              </span>
+                  </div>
+                </div>
+              }
             </div>
-          </div>
-          <div class='card-footer text-muted'>
-            <div class='tools'>
-              <div id='up-arrow'>
-                <i class='fas fa-arrow-up fa-2x'></i>
-              </div>
-              <div id='count'>
-                <span class='badge badge-pill badge-light'>2.5k</span>
-              </div>
-              <div id='down-arrow'>
-                <i class='fas fa-arrow-down fa-2x'></i>
-              </div>
-              <div id='comments'>
-                <span className='badge badge-light'>
-                  <i class='fas fa-comment-alt black-text'></i>{" "}
-                  <strong>Comments</strong>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
+          )
+        })}
       </div>
-    );
+    )
   }
 }
-
-export default Upvotes;
+const mapStateToProps = (state) => {
+  return {
+    state: state.user,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ loggedPostup }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UpVote);

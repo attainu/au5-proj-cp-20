@@ -177,4 +177,58 @@ controller.comment_image = async (req, res) => {
             res.send(data);
         });
 };
+controller.userposts = async (req, res) => {
+    console.log("WWW", req.body)
+    post.main.find({ email: req.body.email }).populate('textposts').populate('imageposts').exec((err, result) => {
+        if (err) console.log(err)
+        let array = []
+        console.log(result)
+        result.forEach((el) => {
+            array.push(...el.textposts)
+            array.push(...el.imageposts)
+            array.push(...el.pollposts)
+        })
+        res.json(array)
+    })
+}
+controller.userdown = async (req, res) => {
+    console.log("WWW", req.body)
+    post.main.find({ email: req.body.email }).populate('textposts').populate('imageposts').exec((err, result) => {
+        if (err) console.log(err)
+        let array = []
+        console.log(result)
+        result.forEach((el) => {
+            array.push(...el.textposts)
+            array.push(...el.imageposts)
+            array.push(...el.pollposts)
+        })
+        let dvote = []
+        array.forEach((el) => {
+            if ((el.upvote.length - el.dvote.length) < 0) {
+                dvote.push(el)
+            }
+        })
+        res.json(dvote)
+    })
+}
+controller.userup = async (req, res) => {
+    console.log("WWW", req.body)
+    post.main.find({ email: req.body.email }).populate('textposts').populate('imageposts').exec((err, result) => {
+        if (err) console.log(err)
+        let array = []
+        console.log(result)
+        result.forEach((el) => {
+            array.push(...el.textposts)
+            array.push(...el.imageposts)
+            array.push(...el.pollposts)
+        })
+        let upvote = []
+        array.forEach((el) => {
+            if ((el.upvote.length - el.dvote.length) >= 0) {
+                upvote.push(el)
+            }
+        })
+        res.json(upvote)
+    })
+}
 module.exports = controller;
