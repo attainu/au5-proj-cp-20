@@ -28,6 +28,12 @@ article {
   background-color: whitesmoke;
 }
 
+.spinner-div {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
 .carousel {
   padding: 2rem 0;
   width: 90%;

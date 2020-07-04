@@ -12,5 +12,8 @@ route.post("/upvote/img", userValid, controller.upvote_img);
 route.post("/dvote/img", userValid, controller.dvote_img);
 route.put("/comment/text", controller.comment_text);
 route.put("/comment/image", controller.comment_image);
+route.post('/userposts', userValid, controller.userposts)
+route.post('/userup', userValid, controller.userup)
+route.post('/userdown', userValid, controller.userdown)
 module.exports = route;
 controller.comment_image;

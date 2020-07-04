@@ -1,5 +1,5 @@
 import React from "react";
-import Postdiv from "../../posts_component/posts_component";
+import Logerpost from '../../posts_component/logerposts'
 class Posts extends React.Component {
   render() {
     return (
@@ -8,7 +8,7 @@ class Posts extends React.Component {
           <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>Posts</h4>
         </div>
         <hr />
-        <Postdiv />
+        <Logerpost />
       </div>
     );
   }

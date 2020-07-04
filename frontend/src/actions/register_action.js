@@ -5,7 +5,7 @@ export function sendSignupData(data) {
   return (dispatch) => {
     return axios({
       method: "post",
-      url: "http://localhost:8000/register/signup",
+      url: "/register/signup",
       data,
     })
       .then((res) => {
@@ -95,7 +95,7 @@ export function articleCall(querry) {
               subreddit: e.subreddit,
               post: e.url,
             };
-            console.log(e.preview.images[0].source);
+            // console.log(e.preview.images[0].source);
             return arr.push(data);
           }
         });
@@ -346,6 +346,28 @@ export function getallPost() {
   };
 }
 
+export function loggedPost(email) {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    let data = { email: email };
+    return axios({
+      method: "post",
+      url: "/api/post/userposts",
+      headers: { "auth-token": token },
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "LOGGEDPOST",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 export function sendCommentDataText(data) {
   return (dispatch) => {
     return axios({
@@ -366,6 +388,28 @@ export function sendCommentDataText(data) {
   };
 }
 
+export function loggedPostup(email) {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    let data = { email: email };
+    return axios({
+      method: "post",
+      url: "/api/post/userup",
+      headers: { "auth-token": token },
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "LOGGEDUP",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
 export function sendCommentDataImage(data) {
   return (dispatch) => {
     return axios({
@@ -377,6 +421,7 @@ export function sendCommentDataImage(data) {
         console.log("COMMENTS ACTION", res);
         dispatch({
           type: "COMMENTS",
+
           payload: res.data,
         });
       })
@@ -398,6 +443,29 @@ export function getCommentDataImage() {
         console.log("Image Post", res.data);
         dispatch({
           type: "COMMENTS_IMAGE",
+
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function loggedPostdown(email) {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    let data = { email: email };
+    return axios({
+      method: "post",
+      url: "/api/post/userdown",
+      headers: { "auth-token": token },
+      data,
+    })
+      .then((res) => {
+        dispatch({
+          type: "LOGGEDDOWN",
           payload: res.data,
         });
       })
@@ -419,6 +487,7 @@ export function getCommentDataText() {
         console.log("text Post", res.data);
         dispatch({
           type: "COMMENTS_TEXT",
+
           payload: res.data,
         });
       })

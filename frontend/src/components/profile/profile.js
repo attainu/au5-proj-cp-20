@@ -52,7 +52,7 @@ class Profile extends React.Component {
     this.props.verifyToken();
     this.handleImage = this.handleImage.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-    console.log("login", this.props.login);
+    // console.log("login", this.props.login);
   };
 
   toggle = (nr) => () => {
@@ -175,7 +175,7 @@ class Profile extends React.Component {
 
   render() {
     const { crop } = this.state;
-    console.log("progress", this.props.login);
+    // console.log("progress", this.props.login, this.props.user.email);
     return (
       <div>
         <div>
@@ -287,8 +287,8 @@ class Profile extends React.Component {
               </div>
             </div>
           ) : (
-            <div></div>
-          )}
+              <div></div>
+            )}
         </div>
         <div></div>
       </div>
@@ -297,7 +297,7 @@ class Profile extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  console.log("in profile", state.user.google);
+  // console.log("in profile", state.user.google);
   return {
     login: state.user.login,
     user: state.user.user,

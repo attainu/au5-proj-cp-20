@@ -3,6 +3,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import Navbar from "../navbar/navbar";
 import "../../styles/landing.css";
+import { loggedPost } from "../../actions/register_action";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Posts from "../posts_component/posts_component";
@@ -31,6 +32,11 @@ class Land extends React.Component {
   componentDidUpdate() {
     this.props.getallPost();
   }
+  componentDidMount() {
+    if (this.props.state.user.email) {
+      this.props.loggedPost(this.props.state.user.email);
+    }
+  }
   render() {
     console.log("From Landing page", this.props.state);
     return (
@@ -43,59 +49,69 @@ class Land extends React.Component {
             <strong>Trending Today</strong>
           </h3>
         </div>
-        <div>
-          <Carousel
-            additionalTransfrom={0}
-            className='carousel'
-            swipeable={true}
-            draggable={true}
-            showDots={false}
-            responsive={responsive}
-            ssr={true} // means to render carousel on server-side.
-            infinite={true}
-            autoPlay={this.props.deviceType !== "mobile" ? true : false}
-            autoPlaySpeed={1500}
-            keyBoardControl={true}
-            customTransition='all 1s linear'
-            transitionDuration={1500}
-            containerClass='carousel-container'
-            removeArrowOnDeviceType={["tablet", "mobile"]}
-            deviceType={this.props.deviceType}
-            dotListClass='custom-dot-list-style'
-            itemClass='carousel-item-padding-20-px'>
-            {this.props.state.user.article == null ? (
-              <div></div>
-            ) : (
-              this.props.state.user.article.map((el, i) => {
-                return (
-                  <div>
-                    <div className='wrapper' id='wrapper3-landing'>
-                      <div id='card-landing'>
-                        <img src={el.image} alt='' />
-                        <div className='info' id='info-landing'>
-                          <h2>
-                            <span className='logo-title2' id='hash'>
-                              #
-                            </span>
-                            <u>{el.subreddit}</u>
-                          </h2>
-                          <p>{el.title}</p>
-                          <a
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            href={el.post}>
-                            See post
-                          </a>
+        {this.props.state.user.article ? (
+          <div>
+            <Carousel
+              additionalTransfrom={0}
+              className='carousel'
+              swipeable={true}
+              draggable={true}
+              showDots={false}
+              responsive={responsive}
+              ssr={true} // means to render carousel on server-side.
+              infinite={true}
+              autoPlay={this.props.deviceType !== "mobile" ? true : false}
+              autoPlaySpeed={1500}
+              keyBoardControl={true}
+              customTransition='all 1s linear'
+              transitionDuration={1500}
+              containerClass='carousel-container'
+              removeArrowOnDeviceType={["tablet", "mobile"]}
+              deviceType={this.props.deviceType}
+              dotListClass='custom-dot-list-style'
+              itemClass='carousel-item-padding-20-px'>
+              {this.props.state.user.article == null ? (
+                <div></div>
+              ) : (
+                this.props.state.user.article.map((el, i) => {
+                  return (
+                    <div>
+                      <div className='wrapper' id='wrapper3-landing'>
+                        <div id='card-landing'>
+                          <img src={el.image} alt='' />
+                          <div className='info' id='info-landing'>
+                            <h2>
+                              <span className='logo-title2' id='hash'>
+                                #
+                              </span>
+                              <u>{el.subreddit}</u>
+                            </h2>
+                            <p>{el.title}</p>
+                            <a
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              href={el.post}>
+                              See post
+                            </a>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })
-            )}
-          </Carousel>
-        </div>
-
+                  );
+                })
+              )}
+            </Carousel>
+          </div>
+        ) : (
+          <div className='spinner-div'>
+            <div
+              class='spinner-border text-light'
+              style={{ width: "5rem", height: "5rem" }}
+              role='status'>
+              <span class='sr-only'>Loading...</span>
+            </div>
+          </div>
+        )}
         {this.props.state.user.article ? (
           <div>
             <div className='landing-heading' style={{ marginBottom: "1rem" }}>
@@ -121,6 +137,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getallPost }, dispatch);
+  return bindActionCreators({ loggedPost, getallPost }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Land);

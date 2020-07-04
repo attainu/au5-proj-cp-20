@@ -14,6 +14,9 @@ let userdata = {
   all_posts: "",
   comments_text: [],
   comments_image: [],
+  logged_all: "",
+  logged_up: "",
+  logged_dowm: "",
 };
 
 function userReducer(state = userdata, action) {
@@ -122,6 +125,18 @@ function userReducer(state = userdata, action) {
       stateCopy.comments_image = action.payload;
       return stateCopy;
 
+    case "LOGGEDPOST":
+      console.log("Logged Post", action.payload);
+      stateCopy.logged_all = action.payload;
+      return stateCopy;
+    case "LOGGEDUP":
+      console.log("Logged Post UP", action.payload);
+      stateCopy.logged_up = action.payload;
+      return stateCopy;
+    case "LOGGEDDOWN":
+      console.log("Logged Post DOWN", action.payload);
+      stateCopy.logged_down = action.payload;
+      return stateCopy;
     default:
       return stateCopy;
   }

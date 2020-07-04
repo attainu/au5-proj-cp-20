@@ -55,10 +55,10 @@ class InfoCard extends React.Component {
                     this.props.user_profile
                       ? this.props.user_profile.image_url
                       : [
-                          this.props.user.image_url
-                            ? this.props.user.image_url
-                            : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png",
-                        ]
+                        this.props.user.image_url
+                          ? this.props.user.image_url
+                          : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png",
+                      ]
                   }
                   alt=''
                 />
@@ -66,8 +66,8 @@ class InfoCard extends React.Component {
                   {this.props.user_profile ? (
                     <h3>{this.props.user_profile.name}</h3>
                   ) : (
-                    <h3>{this.props.user.name}</h3>
-                  )}
+                      <h3>{this.props.user.name}</h3>
+                    )}
                 </div>
                 <div className='col-10 ml-5'>
                   <div>
@@ -84,20 +84,20 @@ class InfoCard extends React.Component {
                             Follow <i className='fas fa-user-plus'></i>
                           </a>
                         ) : (
-                          <a
-                            className='btn unfollow-btnn'
-                            onClick={() =>
-                              this.handleUnfollowClick(
-                                this.props.user_profile._id
-                              )
-                            }>
-                            Unfollow <i className='fas fa-user-plus'></i>
-                          </a>
-                        )}
+                            <a
+                              className='btn unfollow-btnn'
+                              onClick={() =>
+                                this.handleUnfollowClick(
+                                  this.props.user_profile._id
+                                )
+                              }>
+                              Unfollow <i className='fas fa-user-plus'></i>
+                            </a>
+                          )}
                       </div>
                     ) : (
-                      <div></div>
-                    )}
+                        <div></div>
+                      )}
                   </div>
                 </div>
                 <div>
@@ -111,8 +111,8 @@ class InfoCard extends React.Component {
                       {this.props.user_profile ? (
                         <p> {this.props.user_profile.followers.length}</p>
                       ) : (
-                        <p> {this.props.user.followers.length}</p>
-                      )}
+                          <p> {this.props.user.followers.length}</p>
+                        )}
                     </div>
                     <div class='ds projects col-6'>
                       <h6>
@@ -122,8 +122,8 @@ class InfoCard extends React.Component {
                       {this.props.user_profile ? (
                         <p> {this.props.user_profile.following.length}</p>
                       ) : (
-                        <p> {this.props.user.following.length}</p>
-                      )}
+                          <p> {this.props.user.following.length}</p>
+                        )}
                     </div>
                   </div>
                 </div>
@@ -132,8 +132,8 @@ class InfoCard extends React.Component {
                   {this.props.user_profile ? (
                     <div> {this.props.user_profile.bio}</div>
                   ) : (
-                    <div> {this.props.user.bio}</div>
-                  )}
+                      <div> {this.props.user.bio}</div>
+                    )}
                 </div>
               </div>
             </div>
@@ -145,7 +145,7 @@ class InfoCard extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  console.log("infocard", state.user);
+  // console.log("infocard", state.user);
   return {
     login: state.user.login,
     user: state.user.user,

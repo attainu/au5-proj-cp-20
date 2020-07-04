@@ -43,7 +43,7 @@ class Navbar extends Component {
     this.setState({ isOpen: !this.state.isOpen });
   };
   render() {
-    console.log("Navbar", this.props.state.user, "state", this.state);
+    // console.log("Navbar", this.props.state.user, "state", this.state);
     // verifyToken()
     return (
       <MDBNavbar color='elegant-color' dark expand='md'>
@@ -62,19 +62,6 @@ class Navbar extends Component {
             </MDBNavItem>
             <MDBNavItem className='ml-2 mt-1'>
               <MDBNavLink to='/search-users'>Search Users</MDBNavLink>
-            </MDBNavItem>
-            <MDBNavItem className='ml-2 mt-1'>
-              <MDBDropdown>
-                <MDBDropdownToggle nav caret>
-                  <span className='mr-2'>Posts Filter</span>
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem href='#!'>All Posts</MDBDropdownItem>
-                  <MDBDropdownItem href='#!'>Popular</MDBDropdownItem>
-                  <MDBDropdownItem href='#!'>Up Voted</MDBDropdownItem>
-                  <MDBDropdownItem href='#!'>Down Voted</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
             </MDBNavItem>
             <div className='md-form my-0 ml-2'>
               <input
@@ -109,33 +96,33 @@ class Navbar extends Component {
                 </Link>
               </Fragment>
             ) : (
-              <div>
-                <MDBNavItem>
-                  <MDBDropdown dropleft>
-                    <MDBDropdownToggle nav caret>
-                      <img
-                        className='avatar_img_navbar'
-                        src={this.props.user.image_url}
-                        alt=''
-                      />
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu className='dropdown-default'>
-                      <MDBDropdownItem href='/profile' size='sm'>
-                        {this.props.user.name}
+                <div>
+                  <MDBNavItem>
+                    <MDBDropdown dropleft>
+                      <MDBDropdownToggle nav caret>
+                        <img
+                          className='avatar_img_navbar'
+                          src={this.props.user.image_url}
+                          alt=''
+                        />
+                      </MDBDropdownToggle>
+                      <MDBDropdownMenu className='dropdown-default'>
+                        <MDBDropdownItem href='/profile' size='sm'>
+                          {this.props.user.name}
+                        </MDBDropdownItem>
+                        <MDBDropdownItem href='/create' size='sm'>
+                          Create Post
                       </MDBDropdownItem>
-                      <MDBDropdownItem href='/create' size='sm'>
-                        Create Post
+                        <MDBDropdownItem
+                          onClick={() => this.props.logoutAgain()}
+                          size='sm'>
+                          Logout
                       </MDBDropdownItem>
-                      <MDBDropdownItem
-                        onClick={() => this.props.logoutAgain()}
-                        size='sm'>
-                        Logout
-                      </MDBDropdownItem>
-                    </MDBDropdownMenu>
-                  </MDBDropdown>
-                </MDBNavItem>
-              </div>
-            )}
+                      </MDBDropdownMenu>
+                    </MDBDropdown>
+                  </MDBNavItem>
+                </div>
+              )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
