@@ -24,6 +24,7 @@ class UserProfile extends React.Component {
       _id: this.props.user._id,
     };
   };
+
   sendDataFromEDP = () => {
     this.props.toggle();
   };
