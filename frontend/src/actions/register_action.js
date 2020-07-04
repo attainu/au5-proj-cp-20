@@ -49,7 +49,6 @@ export function verifyToken() {
         });
       } else {
         Promise.reject({ redirectTo: "/no-access" });
-        window.location.assign("/forbidden");
       }
     });
   };
@@ -175,6 +174,8 @@ export function sendFollowData(data) {
       data,
     })
       .then((res) => {
+        getFollowers();
+        getFollowing();
         dispatch({
           type: "FOLLOWED",
           payload: res.data,
@@ -194,6 +195,8 @@ export function sendUnfollowData(data) {
       data,
     })
       .then((res) => {
+        getFollowers();
+        getFollowing();
         dispatch({
           type: "UNFOLLOWED",
           payload: res.data,
@@ -376,11 +379,14 @@ export function sendCommentDataText(data) {
       data,
     })
       .then((res) => {
+        getallPost();
         console.log("COMMENTS ACTION", res);
         dispatch({
           type: "COMMENTS",
           payload: res.data,
         });
+
+        getallPost();
       })
       .catch((error) => {
         console.log(error);
@@ -418,10 +424,10 @@ export function sendCommentDataImage(data) {
       data,
     })
       .then((res) => {
+        getallPost();
         console.log("COMMENTS ACTION", res);
         dispatch({
           type: "COMMENTS",
-
           payload: res.data,
         });
       })
@@ -443,7 +449,6 @@ export function getCommentDataImage() {
         console.log("Image Post", res.data);
         dispatch({
           type: "COMMENTS_IMAGE",
-
           payload: res.data,
         });
       })

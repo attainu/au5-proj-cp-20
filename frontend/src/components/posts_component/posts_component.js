@@ -32,6 +32,7 @@ class Postdiv extends React.Component {
       email: "",
       myclass: "",
       display: "none",
+      callApi: false,
     };
     // if (this.props.state.user.email) {
     //   console.log("Calling", this.props.state.user.email);
@@ -42,8 +43,9 @@ class Postdiv extends React.Component {
   componentDidMount() {
     console.log("ARE YOU RUNNING");
     this.setState({ email: this.props.state.user.email });
-    this.props.getCommentDataText();
+    this.props.getallPost();
     this.props.getCommentDataImage();
+    this.props.getCommentDataText();
   }
 
   upvote_text = (id) => {
@@ -75,6 +77,10 @@ class Postdiv extends React.Component {
     };
     this.props.sendCommentDataText(data);
     this.props.getCommentDataText();
+    this.props.getallPost();
+    // setTimeout(function () {
+    //   this.setState({ callApi: false });
+    // }, 1500);
   };
 
   handleCommentSaveImage = (text, imageId) => {
@@ -86,6 +92,7 @@ class Postdiv extends React.Component {
     };
     this.props.sendCommentDataImage(data);
     this.props.getCommentDataImage();
+    this.props.getallPost();
   };
 
   downvote_text = (id) => {
@@ -347,7 +354,7 @@ class Postdiv extends React.Component {
                             <form
                               onSubmit={(event) => {
                                 event.preventDefault();
-                                this.handleCommentSaveImage(
+                                this.handleCommentSaveText(
                                   event.target[0].value,
                                   e._id,
                                   this.props.user._id
@@ -407,6 +414,7 @@ const mapStateToProps = (state) => {
   return {
     state: state.user,
     user: state.user.user,
+    all_posts: state.user.all_posts,
     comments_text: state.user.comments_text,
     comments_image: state.user.comments_image,
   };

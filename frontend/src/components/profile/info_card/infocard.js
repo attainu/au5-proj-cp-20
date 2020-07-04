@@ -6,6 +6,9 @@ import {
   sendUserProfileId,
   sendFollowData,
   sendUnfollowData,
+  getAllUsers,
+  getFollowers,
+  getFollowing,
 } from "../../../actions/register_action";
 import { verifyToken } from "../../../actions/register_action";
 
@@ -21,6 +24,9 @@ class InfoCard extends React.Component {
       user_id: this.props.user_id,
     };
     this.props.sendUserProfileId(data);
+    this.props.getAllUsers();
+    this.props.getFollowers();
+    this.props.getFollowing();
   };
 
   handleFollowClick = (id) => {
@@ -29,6 +35,8 @@ class InfoCard extends React.Component {
       selected_user_id: id,
     };
     this.props.sendFollowData(data);
+    this.props.getFollowers();
+    this.props.getFollowing();
   };
 
   handleUnfollowClick = (id) => {
@@ -37,16 +45,36 @@ class InfoCard extends React.Component {
       selected_user_id: id,
     };
     this.props.sendUnfollowData(data);
+    this.props.getAllUsers();
+    this.props.getFollowers();
+    this.props.getFollowing();
   };
 
   render() {
-    // console.log("ID in infocard", this.props.user_profile.followers);
+    console.log("loading in infocard", this.props.loading);
     return (
       <div className='flip-card-div'>
         <div id='container'>
           <div className='card' id='card'>
             <div className='card_front' id='card_front'>
-              <div className='upper-card-div'></div>
+              <div className='upper-card-div'>
+                {!this.props.loading ? (
+                  <div></div>
+                ) : (
+                  <div className='spinner-div'>
+                    <div
+                      class='spinner-border text-success'
+                      style={{
+                        width: "5rem",
+                        height: "5rem",
+                        marginTop: "2rem",
+                      }}
+                      role='status'>
+                      <span class='sr-only'>Loading...</span>
+                    </div>
+                  </div>
+                )}
+              </div>
               <div className='lower-card-div'>
                 <img
                   className='avatar_img'
@@ -55,19 +83,20 @@ class InfoCard extends React.Component {
                     this.props.user_profile
                       ? this.props.user_profile.image_url
                       : [
-                        this.props.user.image_url
-                          ? this.props.user.image_url
-                          : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png",
-                      ]
+                          this.props.user.image_url
+                            ? this.props.user.image_url
+                            : "https://cdn.dribbble.com/users/446910/screenshots/10953246/avatar-dribble_1x.png",
+                        ]
                   }
                   alt=''
                 />
+
                 <div className='card-name-div'>
                   {this.props.user_profile ? (
                     <h3>{this.props.user_profile.name}</h3>
                   ) : (
-                      <h3>{this.props.user.name}</h3>
-                    )}
+                    <h3>{this.props.user.name}</h3>
+                  )}
                 </div>
                 <div className='col-10 ml-5'>
                   <div>
@@ -84,20 +113,20 @@ class InfoCard extends React.Component {
                             Follow <i className='fas fa-user-plus'></i>
                           </a>
                         ) : (
-                            <a
-                              className='btn unfollow-btnn'
-                              onClick={() =>
-                                this.handleUnfollowClick(
-                                  this.props.user_profile._id
-                                )
-                              }>
-                              Unfollow <i className='fas fa-user-plus'></i>
-                            </a>
-                          )}
+                          <a
+                            className='btn unfollow-btnn'
+                            onClick={() =>
+                              this.handleUnfollowClick(
+                                this.props.user_profile._id
+                              )
+                            }>
+                            Unfollow <i className='fas fa-user-plus'></i>
+                          </a>
+                        )}
                       </div>
                     ) : (
-                        <div></div>
-                      )}
+                      <div></div>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -111,8 +140,8 @@ class InfoCard extends React.Component {
                       {this.props.user_profile ? (
                         <p> {this.props.user_profile.followers.length}</p>
                       ) : (
-                          <p> {this.props.user.followers.length}</p>
-                        )}
+                        <p> {this.props.user.followers.length}</p>
+                      )}
                     </div>
                     <div class='ds projects col-6'>
                       <h6>
@@ -122,8 +151,8 @@ class InfoCard extends React.Component {
                       {this.props.user_profile ? (
                         <p> {this.props.user_profile.following.length}</p>
                       ) : (
-                          <p> {this.props.user.following.length}</p>
-                        )}
+                        <p> {this.props.user.following.length}</p>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -132,8 +161,8 @@ class InfoCard extends React.Component {
                   {this.props.user_profile ? (
                     <div> {this.props.user_profile.bio}</div>
                   ) : (
-                      <div> {this.props.user.bio}</div>
-                    )}
+                    <div> {this.props.user.bio}</div>
+                  )}
                 </div>
               </div>
             </div>
@@ -157,7 +186,15 @@ const getDataFromRedux = (state) => {
 
 const giveDataToRedux = (dispatch) => {
   return bindActionCreators(
-    { sendUserProfileId, sendFollowData, sendUnfollowData, verifyToken },
+    {
+      sendUserProfileId,
+      sendFollowData,
+      sendUnfollowData,
+      verifyToken,
+      getFollowers,
+      getFollowing,
+      getAllUsers,
+    },
     dispatch
   );
 };

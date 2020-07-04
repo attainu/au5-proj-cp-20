@@ -29,14 +29,16 @@ var responsive = {
   },
 };
 class Land extends React.Component {
-  componentDidUpdate() {
-    this.props.getallPost();
+  constructor() {
+    super();
+    this.state = {};
   }
   componentDidMount() {
     if (this.props.state.user.email) {
       this.props.loggedPost(this.props.state.user.email);
     }
   }
+
   render() {
     console.log("From Landing page", this.props.state);
     return (
@@ -134,6 +136,7 @@ class Land extends React.Component {
 const mapStateToProps = (state) => {
   return {
     state: state,
+    all_posts: state.user.all_posts,
   };
 };
 const mapDispatchToProps = (dispatch) => {

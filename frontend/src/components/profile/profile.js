@@ -37,7 +37,7 @@ class Profile extends React.Component {
       login: false,
       progress: 0,
       src: null,
-      loading: true,
+      loading: false,
       timeout: true,
       crop: {
         unit: "%",
@@ -65,6 +65,9 @@ class Profile extends React.Component {
   };
 
   handleImageUpload = (nr, pr, email) => {
+    this.setState({
+      loading: true,
+    });
     let useremail = email;
     const { croppedImageUrl } = this.state;
     console.log("target :", croppedImageUrl);
@@ -93,7 +96,7 @@ class Profile extends React.Component {
           .child(croppedImageUrl.name)
           .getDownloadURL()
           .then((url) => {
-            this.setState({ url });
+            this.setState({ url: url, loading: false });
             console.log(url);
             this.props.sendImageUrl({ url: url, email: useremail });
           });
@@ -184,33 +187,12 @@ class Profile extends React.Component {
           {this.props.login ? (
             <div>
               <div className='main_profile'>
-                {/* <MDBContainer>
-                <MDBModal isOpen={this.state.modal2} toggle={this.toggle(2)}>
-                  <MDBModalHeader toggle={this.toggle(2)}>
-                    MDBModal title
-                  </MDBModalHeader>
-                  <MDBModalBody>
-                    <div className='prog-bar'>
-                      <CircularProgressbar
-                        value={this.state.progress}
-                        text={`${this.state.progress}%`}
-                      />
-                    </div>
-                  </MDBModalBody>
-                  <MDBModalFooter>
-                    <MDBBtn color='secondary' onClick={this.toggle(2)}>
-                      Close
-                    </MDBBtn>
-                    <MDBBtn color='primary'>Save changes</MDBBtn>
-                  </MDBModalFooter>
-                </MDBModal>
-              </MDBContainer> */}
                 <div className='user-contents'>
                   <div className='nav-div'>
                     <ProfileTabs toggle={this.toggle(14)} />
                   </div>
                   <div className='pp-div'>
-                    <InfoCard />
+                    <InfoCard loading={this.state.loading} />
                   </div>
                 </div>
                 <div className='option-modal'>
@@ -287,8 +269,8 @@ class Profile extends React.Component {
               </div>
             </div>
           ) : (
-              <div></div>
-            )}
+            <div></div>
+          )}
         </div>
         <div></div>
       </div>
