@@ -26,6 +26,7 @@ class Postdiv extends React.Component {
   state = {
     modal10: false,
     email: this.props.state.user.email,
+    text: "",
   };
   toggle = (nr) => () => {
     let modalNumber = "modal" + nr;
@@ -46,6 +47,21 @@ class Postdiv extends React.Component {
       console.log("Upvoted", res);
     });
   };
+
+  handleComment = (event) => {
+    this.setState({
+      text: event.target.value,
+    });
+  };
+
+  handleCommentSave = (userId) => {
+    const data = {
+      postId: this.setState.postId,
+      text: this.state.text,
+      userId: userId,
+    };
+  };
+
   downvote_text = (id) => {
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
@@ -194,13 +210,21 @@ class Postdiv extends React.Component {
               MDBModal title
             </MDBModalHeader>
             <MDBModalBody>
-              <MDBInput label='Username' icon='comment' />
+              <MDBInput
+                label='Username'
+                icon='comment'
+                onChange={() => this.handleComment()}
+              />
             </MDBModalBody>
             <MDBModalFooter>
               <MDBBtn color='secondary' onClick={this.toggle(12)}>
                 Close
               </MDBBtn>
-              <MDBBtn color='primary'>Save changes</MDBBtn>
+              <MDBBtn
+                color='primary'
+                onClick={() => this.handleCommentSave(this.props.user._id)}>
+                Save
+              </MDBBtn>
             </MDBModalFooter>
           </MDBModal>
         </div>
@@ -212,6 +236,7 @@ class Postdiv extends React.Component {
 const mapStateToProps = (state) => {
   return {
     state: state.user,
+    user: state.user.user,
   };
 };
 const mapDispatchToProps = (dispatch) => {
