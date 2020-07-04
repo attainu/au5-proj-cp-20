@@ -345,3 +345,85 @@ export function getallPost() {
       });
   };
 }
+
+export function sendCommentDataText(data) {
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: "/api/post/comment/text",
+      data,
+    })
+      .then((res) => {
+        console.log("COMMENTS ACTION", res);
+        dispatch({
+          type: "COMMENTS",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function sendCommentDataImage(data) {
+  return (dispatch) => {
+    return axios({
+      method: "put",
+      url: "/api/post/comment/image",
+      data,
+    })
+      .then((res) => {
+        console.log("COMMENTS ACTION", res);
+        dispatch({
+          type: "COMMENTS",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getCommentDataImage() {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    return axios({
+      method: "get",
+      url: "/api/get/comment/image",
+      headers: { "auth-token": token },
+    })
+      .then((res) => {
+        console.log("Image Post", res.data);
+        dispatch({
+          type: "COMMENTS_IMAGE",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}
+
+export function getCommentDataText() {
+  return (dispatch) => {
+    let token = localStorage.getItem("auth-token");
+    return axios({
+      method: "get",
+      url: "/api/get/comment/text",
+      headers: { "auth-token": token },
+    })
+      .then((res) => {
+        console.log("text Post", res.data);
+        dispatch({
+          type: "COMMENTS_TEXT",
+          payload: res.data,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+}

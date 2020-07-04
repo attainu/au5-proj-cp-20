@@ -14,6 +14,7 @@ controller.textposts = async (req, res) => {
     let ba = await new post.textposts({
       title: req.body.title,
       text: req.body.text,
+      postedBy: req.user._id,
     });
     ba.save();
     found.textposts.push(ba);
@@ -133,21 +134,23 @@ controller.dvote_img = async (req, res) => {
 };
 
 controller.comment_text = async (req, res) => {
+  const { user_id, text_id, text } = req.body;
+  console.log("data comment", user_id, text_id, text);
   const comment = {
-    text: req.body.text,
-    postedBy: req.body.user_id,
+    text: text,
+    postedBy: user_id,
   };
 
   post.textposts
     .findByIdAndUpdate(
-      { _id: req.body.id },
+      { _id: text_id },
       {
         $push: { comments: comment },
       },
       { new: true }
     )
-    .populate("comments.postedBy", "_id")
-    .populate("postedBy", "_id")
+    .populate("comments.postedBy", "_id name image_url")
+    .populate("postedBy", "_id name image_url")
     .exec(function (err, data) {
       // console.log("event:", data);
       console.log("err:", err);
@@ -156,21 +159,22 @@ controller.comment_text = async (req, res) => {
 };
 
 controller.comment_image = async (req, res) => {
+  const { user_id, image_id, text } = req.body;
   const comment = {
-    text: req.body.text,
-    postedBy: req.body.user_id,
+    text: text,
+    postedBy: user_id,
   };
 
   post.imageposts
     .findByIdAndUpdate(
-      { _id: req.body.id },
+      { _id: image_id },
       {
         $push: { comments: comment },
       },
       { new: true }
     )
-    .populate("comments.postedBy", "_id")
-    .populate("postedBy", "_id")
+    .populate("comments.postedBy", "_id name image_url")
+    .populate("postedBy", "_id name image_url")
     .exec(function (err, data) {
       // console.log("event:", data);
       console.log("err:", err);

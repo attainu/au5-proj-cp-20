@@ -4,6 +4,40 @@
   color: black;
   width: 60%;
   margin-left: 20%;
+  margin-top: 2rem;
+}
+.input-div {
+  background-color: #222222;
+  display: flex;
+  flex-direction: row;
+  padding-bottom: 0.5rem;
+}
+
+.comment-input {
+  background-color: #222222;
+  color: whitesmoke;
+  border-radius: 50px;
+  width: 100%;
+}
+
+.comment-content {
+  display: flex;
+  flex-direction: row;
+}
+.comments-display {
+  background-color: #212121;
+  color: whitesmoke;
+  padding: 1rem;
+  border-top: 1px double whitesmoke;
+}
+
+#comment-text {
+  background-color: grey;
+  border: 1px solid grey;
+  border-radius: 4px 30px 30px 50px;
+  color: black;
+  padding: 0 0 0.3rem 2rem;
+  margin-bottom: 5px;
 }
 
 .col-12 .posts_div {
@@ -57,10 +91,11 @@
 }
 
 .tools {
-  padding: 1rem;
+  padding: 0.3rem;
   background-color: #212121;
   color: beige;
   display: flex;
+  flex-shrink: 10;
   flex-direction: row;
 }
 
@@ -95,7 +130,7 @@
   justify-content: center;
 }
 #count {
-  margin: 0.5rem;
+  margin: 0.6rem;
 }
 
 .title-div {
@@ -104,13 +139,14 @@
 }
 
 #up-arrow {
-  margin: 0.5rem;
+  margin-top: 0.7rem;
+  margin-right: 0;
 }
 #down-arrow {
-  margin: 0.5rem;
+  margin-top: 0.7rem;
 }
 
-#comments {
+.comments-badge {
   margin: 0.5rem;
 }
 .title-div {

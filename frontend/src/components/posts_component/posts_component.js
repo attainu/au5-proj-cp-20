@@ -4,6 +4,12 @@ import axios from "axios";
 import { getallPost } from "../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
+import {
+  sendCommentDataText,
+  sendCommentDataImage,
+  getCommentDataText,
+  getCommentDataImage,
+} from "../../actions/register_action";
 import ReactHtmlParser from "react-html-parser";
 import {
   MDBBtn,
@@ -16,10 +22,18 @@ import {
 } from "mdbreact";
 
 class Postdiv extends React.Component {
-  state = {
-    modal10: false,
-    text: "",
-  };
+  constructor() {
+    super();
+    this.state = {
+      modal10: false,
+      text: "",
+      text_id: "",
+      post_id: "",
+      email: "",
+      myclass: "",
+      display: "none",
+    };
+  }
 
   toggle = (nr) => () => {
     let modalNumber = "modal" + nr;
@@ -31,10 +45,10 @@ class Postdiv extends React.Component {
   componentDidMount() {
     console.log("ARE YOU RUNNING");
     this.setState({ email: this.props.state.user.email });
+    this.props.getCommentDataText();
+    this.props.getCommentDataImage();
   }
-  state = {
-    email: "",
-  };
+
   upvote_text = (id) => {
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
@@ -55,12 +69,26 @@ class Postdiv extends React.Component {
     });
   };
 
-  handleCommentSave = (userId) => {
+  handleCommentSaveText = (text, textId) => {
+    console.log("Comment Data", text, this.props.user._id, textId);
     const data = {
-      postId: this.setState.postId,
-      text: this.state.text,
-      userId: userId,
+      text_id: textId,
+      text: text,
+      user_id: this.props.user._id,
     };
+    this.props.sendCommentDataText(data);
+    this.props.getCommentDataText();
+  };
+
+  handleCommentSaveImage = (text, imageId) => {
+    console.log("Comment Data", text, this.props.user._id, imageId);
+    const data = {
+      image_id: imageId,
+      text: text,
+      user_id: this.props.user._id,
+    };
+    this.props.sendCommentDataImage(data);
+    this.props.getCommentDataImage();
   };
 
   downvote_text = (id) => {
@@ -111,6 +139,35 @@ class Postdiv extends React.Component {
     return false;
   };
 
+  handleHide = (id) => {
+    const divId = document.getElementById(id);
+    console.log("divid", divId);
+    if (divId.style.display === "none") {
+      divId.style.display = "";
+    } else {
+      divId.style.display = "none";
+    }
+  };
+
+  // divclicked = (id) => {
+  //   if()
+  //   const divId = document.getElementById(id);
+  //   divId.setAttribute("display", "none");
+  //   // console.log("divid", id);
+  //   // if (id === divId) {
+
+  //   // }
+  //   // if (this.state.display === "none" && ) {
+  //   //   this.setState({
+  //   //     display: "",
+  //   //   });
+  //   // } else {
+  //   //   this.setState({
+  //   //     display: "none",
+  //   //   });
+  //   // }
+  // };
+
   render() {
     console.log(this.props.state.all_posts, this.state);
     return (
@@ -123,6 +180,23 @@ class Postdiv extends React.Component {
               <div key={i} className='posts_div'>
                 <div className='contents-tools-div'>
                   <div className='title-div'>
+                    {/* {e.postedBy.map((el) => (
+                      <div>
+                        <div className='col-1'>
+                          <img
+                            src={el.image_url}
+                            width='30'
+                            height='30'
+                            style={{
+                              borderRadius: "50%",
+                              border: "2px solid whitesmoke",
+                            }}
+                            alt=''
+                          />
+                        </div>
+                        <div className='col-5'>{el.name}</div>{" "}
+                      </div>
+                    ))} */}
                     <h4>{e.title}</h4>
                   </div>
                   {e.pic && (
@@ -132,30 +206,100 @@ class Postdiv extends React.Component {
                       </div>
                       <div className='tools'>
                         <div id='up-arrow'>
-                          <i
-                            className='fas fa-arrow-up fa-2x'
-                            onClick={() => this.upvote_img(e._id)}></i>
-                        </div>
-                        <div id='count'>
-                          <span className='badge badge-pill badge-light'>
-                            {Number(e.upvote.length - e.dvote.length)}
+                          <span class='badge badge-success ml-2'>
+                            <i
+                              className='fas fa-arrow-up fa-2x'
+                              onClick={() => this.upvote_img(e._id)}></i>
                           </span>
                         </div>
-                        <div id='down-arrow'>
-                          <i
-                            className='fas fa-arrow-down fa-2x'
-                            onClick={() => this.downvote_img(e._id)}></i>
+                        <div id='count'>
+                          <h4>
+                            <span className='badge badge-light ml-2'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </h4>
                         </div>
-                        <div id='comments'>
-                          <MDBBtn
-                            color='elegant'
-                            size='md'
-                            onClick={this.toggle(12)}>
-                            Comments
-                            <MDBBadge color='danger' className='ml-2'>
-                              4
+                        <div id='down-arrow'>
+                          <span class='badge badge-danger ml-2'>
+                            <i
+                              className='fas fa-arrow-down fa-2x'
+                              onClick={() => this.downvote_img(e._id)}></i>
+                          </span>
+                        </div>
+                        <div className='comments-badge' id='comments'>
+                          <h4>
+                            <MDBBadge
+                              color='light'
+                              className='ml-2 fa-2x'
+                              onClick={() => this.handleHide(e._id)}>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
+                              COMMENTS{" "}
+                              <span class='badge badge-danger ml-2'>
+                                {e.comments.length}
+                              </span>
                             </MDBBadge>
-                          </MDBBtn>
+                          </h4>
+                        </div>
+                      </div>
+                      <div id='comment-div'>
+                        <div className='input-div'>
+                          <div className='col-1'>
+                            <img
+                              src={this.props.user.image_url}
+                              alt=''
+                              width='35'
+                              height='35'
+                              style={{
+                                borderRadius: "50%",
+                                border: "2px solid whitesmoke",
+                              }}
+                            />
+                          </div>
+                          <div className='col-11'>
+                            <form
+                              onSubmit={(event) => {
+                                event.preventDefault();
+                                this.handleCommentSaveImage(
+                                  event.target[0].value,
+                                  e._id,
+                                  this.props.user._id
+                                );
+                              }}>
+                              <input
+                                type='text'
+                                placeholder='Add your comment'
+                                className='form-control comment-input'
+                              />
+                            </form>
+                          </div>
+                        </div>
+
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content' key={index}>
+                              <div className='col-1'>
+                                <img
+                                  src={el.postedBy.image_url}
+                                  alt=''
+                                  width='35'
+                                  height='35'
+                                  style={{
+                                    borderRadius: "50%",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-11' id='comment-text'>
+                                <div>
+                                  <strong>{el.postedBy.name}</strong>
+                                </div>
+                                <div>{el.text}</div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -174,25 +318,88 @@ class Postdiv extends React.Component {
                             onClick={() => this.upvote_text(e._id)}></i>
                         </div>
                         <div id='count'>
-                          <span className='badge badge-pill badge-light'>
-                            {Number(e.upvote.length - e.dvote.length)}
-                          </span>
+                          <h4>
+                            <span className='badge badge-pill badge-light'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </h4>
                         </div>
                         <div id='down-arrow'>
                           <i
                             className='fas fa-arrow-down fa-2x'
                             onClick={() => this.downvote_text(e._id)}></i>
                         </div>
-                        <div id='comments'>
-                          <MDBBtn color='light' size='md'>
-                            Comments
-                            <MDBBadge
-                              color='danger'
-                              className='ml-2'
-                              onClick={this.toggle(12)}>
-                              4
+                        <div
+                          id='comments'
+                          onClick={() => this.handleHide(e._id)}>
+                          <h4>
+                            <MDBBadge color='light' className='ml-2 fa-2x'>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
+                              COMMENTS{" "}
+                              <span class='badge badge-danger ml-2'>
+                                {e.comments.length}
+                              </span>
                             </MDBBadge>
-                          </MDBBtn>
+                          </h4>
+                        </div>
+                      </div>
+                      <div className='comment-div'>
+                        <div className='input-div'>
+                          <div className='col-1'>
+                            <img
+                              src={this.props.user.image_url}
+                              alt=''
+                              width='35'
+                              height='35'
+                              style={{
+                                borderRadius: "50%",
+                                border: "2px solid whitesmoke",
+                              }}
+                            />
+                          </div>
+                          <div className='col-11'>
+                            <form
+                              onSubmit={(event) => {
+                                event.preventDefault();
+                                this.handleCommentSaveText(
+                                  event.target[0].value,
+                                  e._id
+                                );
+                              }}>
+                              <input
+                                type='text'
+                                placeholder='Add your comment'
+                                className='form-control comment-input'
+                              />
+                            </form>
+                          </div>
+                        </div>
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content'>
+                              <div className='col-1'>
+                                <img
+                                  src={this.props.user.image_url}
+                                  alt=''
+                                  width='35'
+                                  height='35'
+                                  style={{
+                                    borderRadius: "50%",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-11' id='comment-text'>
+                                <div>
+                                  <strong>{el.postedBy.name}</strong>
+                                </div>
+                                <div>{el.text}</div>
+                              </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>
@@ -202,45 +409,30 @@ class Postdiv extends React.Component {
             );
           })
         )}
-        <div>
-          <MDBModal
-            isOpen={this.state.modal12}
-            toggle={this.toggle(12)}
-            backdrop={false}>
-            <MDBModalHeader toggle={this.toggle(12)}>
-              MDBModal title
-            </MDBModalHeader>
-            <MDBModalBody>
-              <MDBInput
-                label='Username'
-                icon='comment'
-                onChange={() => this.handleComment()}
-              />
-            </MDBModalBody>
-            <MDBModalFooter>
-              <MDBBtn color='secondary' onClick={this.toggle(12)}>
-                Close
-              </MDBBtn>
-              <MDBBtn
-                color='primary'
-                onClick={() => this.handleCommentSave(this.props.user._id)}>
-                Save
-              </MDBBtn>
-            </MDBModalFooter>
-          </MDBModal>
-        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => {
+  console.log("homepage", state.user.all_posts);
   return {
     state: state.user,
     user: state.user.user,
+    comments_text: state.user.comments_text,
+    comments_image: state.user.comments_image,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ getallPost }, dispatch);
+  return bindActionCreators(
+    {
+      getallPost,
+      sendCommentDataText,
+      sendCommentDataImage,
+      getCommentDataText,
+      getCommentDataImage,
+    },
+    dispatch
+  );
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Postdiv);

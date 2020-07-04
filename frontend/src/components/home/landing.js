@@ -6,6 +6,7 @@ import "../../styles/landing.css";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import Posts from "../posts_component/posts_component";
+import { getallPost } from "../../actions/register_action";
 
 var responsive = {
   superLargeDesktop: {
@@ -27,6 +28,9 @@ var responsive = {
   },
 };
 class Land extends React.Component {
+  componentDidUpdate() {
+    this.props.getallPost();
+  }
   render() {
     console.log("From Landing page", this.props.state);
     return (
@@ -62,33 +66,33 @@ class Land extends React.Component {
             {this.props.state.user.article == null ? (
               <div></div>
             ) : (
-                this.props.state.user.article.map((el, i) => {
-                  return (
-                    <div>
-                      <div className='wrapper' id='wrapper3-landing'>
-                        <div id='card-landing'>
-                          <img src={el.image} alt='' />
-                          <div className='info' id='info-landing'>
-                            <h2>
-                              <span className='logo-title2' id='hash'>
-                                #
+              this.props.state.user.article.map((el, i) => {
+                return (
+                  <div>
+                    <div className='wrapper' id='wrapper3-landing'>
+                      <div id='card-landing'>
+                        <img src={el.image} alt='' />
+                        <div className='info' id='info-landing'>
+                          <h2>
+                            <span className='logo-title2' id='hash'>
+                              #
                             </span>
-                              <u>{el.subreddit}</u>
-                            </h2>
-                            <p>{el.title}</p>
-                            <a
-                              target='_blank'
-                              rel='noopener noreferrer'
-                              href={el.post}>
-                              See post
+                            <u>{el.subreddit}</u>
+                          </h2>
+                          <p>{el.title}</p>
+                          <a
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            href={el.post}>
+                            See post
                           </a>
-                          </div>
                         </div>
                       </div>
                     </div>
-                  );
-                })
-              )}
+                  </div>
+                );
+              })
+            )}
           </Carousel>
         </div>
 
@@ -104,8 +108,8 @@ class Land extends React.Component {
             </div>
           </div>
         ) : (
-            <div></div>
-          )}
+          <div></div>
+        )}
       </div>
     );
   }
@@ -117,6 +121,6 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({}, dispatch);
+  return bindActionCreators({ getallPost }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Land);

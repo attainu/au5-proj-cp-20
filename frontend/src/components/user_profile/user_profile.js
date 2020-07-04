@@ -50,7 +50,7 @@ class UserProfile extends React.Component {
           </div>
         ) : (
           <div>
-            <Redirect to='/forbidden' />{" "}
+            <Redirect to='/forbidden' />
           </div>
         )}
       </div>

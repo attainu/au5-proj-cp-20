@@ -108,7 +108,7 @@ class InfoCard extends React.Component {
                         <i class='fa fa-user-plus' aria-hidden='true'></i>
                       </h6>
 
-                      {!this.props.user ? (
+                      {this.props.user_profile ? (
                         <p> {this.props.user_profile.followers.length}</p>
                       ) : (
                         <p> {this.props.user.followers.length}</p>
@@ -119,7 +119,7 @@ class InfoCard extends React.Component {
                         following
                         <i class='fa fa-user-plus' aria-hidden='true'></i>
                       </h6>
-                      {!this.props.user ? (
+                      {this.props.user_profile ? (
                         <p> {this.props.user_profile.following.length}</p>
                       ) : (
                         <p> {this.props.user.following.length}</p>
@@ -129,7 +129,7 @@ class InfoCard extends React.Component {
                 </div>
                 <div></div>
                 <div className='col-10 mt-4 offset-1'>
-                  {!this.props.user ? (
+                  {this.props.user_profile ? (
                     <div> {this.props.user_profile.bio}</div>
                   ) : (
                     <div> {this.props.user.bio}</div>

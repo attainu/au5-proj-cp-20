@@ -11,7 +11,9 @@ let userdata = {
   selected_followers: [],
   user_profile: "",
   show_follow: true,
-  all_posts: ''
+  all_posts: "",
+  comments_text: [],
+  comments_image: [],
 };
 
 function userReducer(state = userdata, action) {
@@ -95,20 +97,30 @@ function userReducer(state = userdata, action) {
       } else {
         stateCopy.show_follow = true;
       }
-      return stateCopy
+      return stateCopy;
 
     case "ALLPOST":
-      console.log(action.payload)
-      let arr = action.payload
-      let allpost = []
+      console.log("allpost", action.payload);
+      let arr = action.payload;
+      let allpost = [];
       arr.forEach((el) => {
-        allpost.push(...el.textposts)
-        allpost.push(...el.imageposts)
-        allpost.push(...el.pollposts)
-      })
-      stateCopy.all_posts = allpost
-      console.log(stateCopy.all_posts)
-      return stateCopy
+        allpost.push(...el.textposts);
+        allpost.push(...el.imageposts);
+        allpost.push(...el.pollposts);
+      });
+      stateCopy.all_posts = allpost;
+      console.log(stateCopy.all_posts);
+      return stateCopy;
+
+    case "COMMENTS_TEXT":
+      console.log("Red Comments1 text", action.payload.comments);
+
+      stateCopy.comments_text = action.payload;
+      return stateCopy;
+
+    case "COMMENTS_IMAGE":
+      stateCopy.comments_image = action.payload;
+      return stateCopy;
 
     default:
       return stateCopy;
