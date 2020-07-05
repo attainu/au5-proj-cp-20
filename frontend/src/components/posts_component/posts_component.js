@@ -25,6 +25,7 @@ class Postdiv extends React.Component {
       myclass: "",
       display: "none",
       callApi: false,
+      disable: "",
     };
     // if (this.props.state.user.email) {
     //   console.log("Calling", this.props.state.user.email);
@@ -40,7 +41,10 @@ class Postdiv extends React.Component {
     this.props.getCommentDataText();
   }
 
-  upvote_text = (id) => {
+  upvote_text = (id, elem) => {
+    let res = document.getElementById(elem);
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = "none";
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -87,7 +91,10 @@ class Postdiv extends React.Component {
     this.props.getallPost();
   };
 
-  downvote_text = (id) => {
+  downvote_text = (id, elem) => {
+    let res = document.getElementById(elem);
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = "none";
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -100,7 +107,10 @@ class Postdiv extends React.Component {
       console.log("DownVoted", res);
     });
   };
-  upvote_img = (id) => {
+  upvote_img = (id, elem) => {
+    let res = document.getElementById(elem);
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = "none";
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -113,7 +123,10 @@ class Postdiv extends React.Component {
       console.log("Upvoted", res);
     });
   };
-  downvote_img = (id) => {
+  downvote_img = (id, elem) => {
+    let res = document.getElementById(elem);
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = "none";
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -126,9 +139,10 @@ class Postdiv extends React.Component {
       console.log("DownVoted", res);
     });
   };
-  containsObject = (obj, list) => {
+  containsObject = (val, list) => {
+    console.log(list, val);
     for (let i = 0; i < list.length; i++) {
-      if (list[i] === obj) {
+      if (list[i].email === val) {
         return true;
       }
     }
@@ -144,7 +158,15 @@ class Postdiv extends React.Component {
       divId.style.display = "none";
     }
   };
-
+  disableArrow = (arr, i) => {
+    let val = this.containsObject(this.state.email, arr);
+    if (val) {
+      let res = document.getElementById(i);
+      console.log("on Working", res, val);
+      res.style.pointerEvents = "none";
+      // this.setState({ disable: { 'pointer-events': 'none  } })
+    }
+  };
   render() {
     console.log("sda", this.props.state.all_posts, this.state);
     return (
@@ -176,17 +198,23 @@ class Postdiv extends React.Component {
                     ))} */}
                     <h4>{e.title}</h4>
                   </div>
-                  {e.pic && e.comments.length > 0 && (
+                  {e.pic && (
                     <div>
                       <div className='post-content-div'>
                         <img id='post-image' src={e.pic} alt='REDDIT' />
                       </div>
                       <div className='tools'>
                         <div id='up-arrow'>
-                          <span class='badge badge-success ml-2'>
+                          <span className='badge badge-success ml-2'>
                             <i
                               className='fas fa-arrow-up fa-2x'
-                              onClick={() => this.upvote_img(e._id)}></i>
+                              id={i + "up"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "up")
+                              }
+                              onClick={() =>
+                                this.upvote_img(e._id, i + "up")
+                              }></i>
                           </span>
                         </div>
                         <div id='count'>
@@ -200,7 +228,13 @@ class Postdiv extends React.Component {
                           <span class='badge badge-danger ml-2'>
                             <i
                               className='fas fa-arrow-down fa-2x'
-                              onClick={() => this.downvote_img(e._id)}></i>
+                              id={i + "down"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.dvote, i + "down")
+                              }
+                              onClick={() =>
+                                this.downvote_img(e._id, i + "down")
+                              }></i>
                           </span>
                         </div>
                         <div className='comments-badge' id='comments'>
@@ -252,6 +286,7 @@ class Postdiv extends React.Component {
                             </form>
                           </div>
                         </div>
+
                         <div
                           className='comments-display'
                           id={e._id}
@@ -295,7 +330,13 @@ class Postdiv extends React.Component {
                           <span class='badge badge-success ml-2'>
                             <i
                               className='fas fa-arrow-up fa-2x'
-                              onClick={() => this.upvote_text(e._id)}></i>
+                              id={i + "up"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "up")
+                              }
+                              onClick={() =>
+                                this.upvote_text(e._id, i + "up")
+                              }></i>
                           </span>
                         </div>
                         <div id='count'>
@@ -309,7 +350,13 @@ class Postdiv extends React.Component {
                           <span class='badge badge-danger ml-2'>
                             <i
                               className='fas fa-arrow-down fa-2x'
-                              onClick={() => this.downvote_text(e._id)}></i>
+                              id={i + "down"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "down")
+                              }
+                              onClick={() =>
+                                this.downvote_text(e._id, i + "down")
+                              }></i>
                           </span>
                         </div>
                         <div className='comments-badge' id='comments'>
@@ -359,6 +406,7 @@ class Postdiv extends React.Component {
                             </form>
                           </div>
                         </div>
+
                         <div
                           className='comments-display'
                           id={e._id}

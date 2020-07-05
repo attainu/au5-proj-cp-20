@@ -16,7 +16,7 @@ let userdata = {
   comments_image: [],
   logged_all: "",
   logged_up: "",
-  logged_dowm: "",
+  logged_down: "",
 };
 
 function userReducer(state = userdata, action) {
