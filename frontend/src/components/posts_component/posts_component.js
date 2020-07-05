@@ -49,7 +49,10 @@ class Postdiv extends React.Component {
     this.props.getCommentDataText();
   }
 
-  upvote_text = (id) => {
+  upvote_text = (id, elem) => {
+    let res = document.getElementById(elem)
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = 'none'
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -96,7 +99,10 @@ class Postdiv extends React.Component {
     this.props.getallPost();
   };
 
-  downvote_text = (id) => {
+  downvote_text = (id, elem) => {
+    let res = document.getElementById(elem)
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = 'none'
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -109,7 +115,10 @@ class Postdiv extends React.Component {
       console.log("DownVoted", res);
     });
   };
-  upvote_img = (id) => {
+  upvote_img = (id, elem) => {
+    let res = document.getElementById(elem)
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = 'none'
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -122,7 +131,10 @@ class Postdiv extends React.Component {
       console.log("Upvoted", res);
     });
   };
-  downvote_img = (id) => {
+  downvote_img = (id, elem) => {
+    let res = document.getElementById(elem)
+    // console.log("on Working", res, val)
+    res.style.pointerEvents = 'none'
     let token = localStorage.getItem("auth-token");
     let data = { id: id, email: this.props.state.user.email };
     axios({
@@ -204,7 +216,7 @@ class Postdiv extends React.Component {
                             <span className='badge badge-success ml-2'>
                               <i
                                 className='fas fa-arrow-up fa-2x' id={i + 'up'} onMouseEnter={() => this.disableArrow(e.upvote, i + 'up')}
-                                onClick={() => this.upvote_img(e._id)}></i>
+                                onClick={() => this.upvote_img(e._id, i + 'up')}></i>
                             </span>
                           </div>
                           <div id='count'>
@@ -218,7 +230,7 @@ class Postdiv extends React.Component {
                             <span class='badge badge-danger ml-2'>
                               <i
                                 className='fas fa-arrow-down fa-2x' id={i + 'down'} onMouseEnter={() => this.disableArrow(e.dvote, i + 'down')}
-                                onClick={() => this.downvote_img(e._id)}></i>
+                                onClick={() => this.downvote_img(e._id, i + 'down')}></i>
                             </span>
                           </div>
                           <div className='comments-badge' id='comments'>
@@ -279,7 +291,7 @@ class Postdiv extends React.Component {
                               <div className='comment-content' key={index}>
                                 <div className='col-1'>
                                   <img
-                                    src={el.postedBy.image_url}
+                                    // src={el.postedBy.image_url}
                                     alt=''
                                     width='35'
                                     height='35'
@@ -291,7 +303,7 @@ class Postdiv extends React.Component {
                                 </div>
                                 <div className='col-11' id='comment-text'>
                                   <div>
-                                    <strong>{el.postedBy.name}</strong>
+                                    {/* <strong>{el.postedBy.name}</strong> */}
                                   </div>
                                   <div>{el.text}</div>
                                 </div>
@@ -314,7 +326,7 @@ class Postdiv extends React.Component {
                             <span class='badge badge-success ml-2'>
                               <i
                                 className='fas fa-arrow-up fa-2x' id={i + 'up'} onMouseEnter={() => this.disableArrow(e.upvote, i + 'up')}
-                                onClick={() => this.upvote_text(e._id)}></i>
+                                onClick={() => this.upvote_text(e._id, i + 'up')}></i>
                             </span>
                           </div>
                           <div id='count'>
@@ -328,7 +340,7 @@ class Postdiv extends React.Component {
                             <span class='badge badge-danger ml-2'>
                               <i
                                 className='fas fa-arrow-down fa-2x' id={i + 'down'} onMouseEnter={() => this.disableArrow(e.upvote, i + 'down')}
-                                onClick={() => this.downvote_text(e._id)}></i>
+                                onClick={() => this.downvote_text(e._id, i + 'down')}></i>
                             </span>
                           </div>
                           <div className='comments-badge' id='comments'>
@@ -387,7 +399,7 @@ class Postdiv extends React.Component {
                               <div className='comment-content' key={index}>
                                 <div className='col-1'>
                                   <img
-                                    src={el.postedBy.image_url}
+                                    // src={el.postedBy.image_url}
                                     alt=''
                                     width='35'
                                     height='35'
@@ -399,7 +411,7 @@ class Postdiv extends React.Component {
                                 </div>
                                 <div className='col-11' id='comment-text'>
                                   <div>
-                                    <strong>{el.postedBy.name}</strong>
+                                    {/* <strong>{el.postedBy.name}</strong> */}
                                   </div>
                                   <div>{el.text}</div>
                                 </div>

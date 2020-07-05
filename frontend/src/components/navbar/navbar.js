@@ -29,12 +29,12 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.props.verifyToken();
-    this.props.articleCall("Reddit");
+    this.props.articleCall("coding meme");
     this.props.getallPost();
   }
   state = {
     isOpen: false,
-    querry: "meme",
+    querry: "coding meme",
   };
   article = () => {
     this.props.articleCall(this.state.querry);
