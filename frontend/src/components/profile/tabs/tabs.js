@@ -37,42 +37,12 @@ class ProfileTabs extends React.Component {
           <div className='nav nav-tabs' id='nav-tab' role='tablist'>
             <a
               className='nav-item nav-link active profile-nav-link'
-              id='nav-posts-tab'
-              data-toggle='tab'
-              href='#nav-posts'
-              role='tab'
-              aria-controls='nav-posts'
-              aria-selected='true'>
-              POSTS
-            </a>
-            <a
-              className='nav-item nav-link profile-nav-link'
-              id='nav-upvotes-tab'
-              data-toggle='tab'
-              href='#nav-upvotes'
-              role='tab'
-              aria-controls='nav-upvotes'
-              aria-selected='false'>
-              UPVOTES
-            </a>
-            <a
-              className='nav-item nav-link profile-nav-link'
-              id='nav-downvotes-tab'
-              data-toggle='tab'
-              href='#nav-downvotes'
-              role='tab'
-              aria-controls='nav-downvotes'
-              aria-selected='false'>
-              DOWNVOTES
-            </a>
-            <a
-              className='nav-item nav-link profile-nav-link'
               id='nav-followers-tab'
               data-toggle='tab'
               href='#nav-followers'
               role='tab'
               aria-controls='nav-followers'
-              aria-selected='false'>
+              aria-selected='true'>
               FOLLOWERS
             </a>
             <a
@@ -85,6 +55,51 @@ class ProfileTabs extends React.Component {
               aria-selected='false'>
               FOLLOWING
             </a>
+            {this.props.selected_user_id ? (
+              <div></div>
+            ) : (
+              <a
+                className='nav-item nav-link profile-nav-link'
+                id='nav-posts-tab'
+                data-toggle='tab'
+                href='#nav-posts'
+                role='tab'
+                aria-controls='nav-posts'
+                aria-selected='false'>
+                POSTS
+              </a>
+            )}
+
+            {this.props.selected_user_id ? (
+              <div></div>
+            ) : (
+              <a
+                className='nav-item nav-link profile-nav-link'
+                id='nav-upvotes-tab'
+                data-toggle='tab'
+                href='#nav-upvotes'
+                role='tab'
+                aria-controls='nav-upvotes'
+                aria-selected='false'>
+                UPVOTES
+              </a>
+            )}
+
+            {this.props.selected_user_id ? (
+              <div></div>
+            ) : (
+              <a
+                className='nav-item nav-link profile-nav-link'
+                id='nav-downvotes-tab'
+                data-toggle='tab'
+                href='#nav-downvotes'
+                role='tab'
+                aria-controls='nav-downvotes'
+                aria-selected='false'>
+                DOWNVOTES
+              </a>
+            )}
+
             {this.props.selected_user_id ? (
               <div></div>
             ) : (
@@ -103,28 +118,7 @@ class ProfileTabs extends React.Component {
         </nav>
         <div className='tab-content' id='nav-tabContent'>
           <div
-            className='tab-pane fade show active'
-            id='nav-posts'
-            role='tabpanel'
-            aria-labelledby='nav-posts-tab'>
-            <Posts />
-          </div>
-          <div
-            className='tab-pane fade'
-            id='nav-upvotes'
-            role='tabpanel'
-            aria-labelledby='nav-upvotes-tab'>
-            <Upvotes />
-          </div>
-          <div
-            className='tab-pane fade'
-            id='nav-downvotes'
-            role='tabpanel'
-            aria-labelledby='nav-downvotes-tab'>
-            <Downvotes />
-          </div>
-          <div
-            className='tab-pane fade'
+            className='tab-pane active fade show'
             id='nav-followers'
             role='tabpanel'
             aria-labelledby='nav-followers-tab'>
@@ -180,6 +174,28 @@ class ProfileTabs extends React.Component {
               </div>
             )}
           </div>
+          <div
+            className='tab-pane fade  '
+            id='nav-posts'
+            role='tabpanel'
+            aria-labelledby='nav-posts-tab'>
+            <Posts />
+          </div>
+          <div
+            className='tab-pane fade'
+            id='nav-upvotes'
+            role='tabpanel'
+            aria-labelledby='nav-upvotes-tab'>
+            <Upvotes />
+          </div>
+          <div
+            className='tab-pane fade'
+            id='nav-downvotes'
+            role='tabpanel'
+            aria-labelledby='nav-downvotes-tab'>
+            <Downvotes />
+          </div>
+
           <div
             class='tab-pane fade'
             id='nav-following'

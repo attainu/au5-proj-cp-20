@@ -3,7 +3,7 @@ html {
 }
 
 #tab-nav {
-  background-color: #212121;
+  background-color: #222222;
   margin-top: 2rem;
   margin-left: 3rem;
   position: sticky;
@@ -14,7 +14,7 @@ html {
   margin-left: 3rem;
 }
 .nav-link {
-  color: blueviolet;
+  color: whitesmoke;
 }
 
 .profile-nav-link {

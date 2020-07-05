@@ -112,12 +112,9 @@ class Register extends React.Component {
       <div>
         <div className='login_div'>
           <div className='logo-name'>
-            <span style={{ fontSize: "50px" }} className='logo-title1'>
-              raise
-            </span>
-            <span style={{ fontSize: "50px" }} className='logo-title2'>
-              it
-            </span>
+            <span className='logo-title2'>#</span>
+            <span className='logo-title1'>raise</span>
+            <span className='logo-title2'>it</span>
           </div>
           <div className='head_div'>REGISTER</div>
           <hr />
@@ -131,7 +128,7 @@ class Register extends React.Component {
                   label='Full Name'
                   type='text'
                   icon='user'
-                  size='sm'
+                  size='lg'
                   onChange={(event) => this.handleName(event)}
                   outline
                   required>
@@ -146,7 +143,7 @@ class Register extends React.Component {
                   type='email'
                   id='email'
                   icon='envelope'
-                  size='sm'
+                  size='lg'
                   onChange={(event) => this.handleEmail(event)}
                   outline
                   required>
@@ -160,7 +157,7 @@ class Register extends React.Component {
                   label='Password'
                   type='password'
                   icon='key'
-                  size='sm'
+                  size='lg'
                   onChange={(event) => this.handlePassword(event)}
                   minLength='8'
                   outline
@@ -176,7 +173,7 @@ class Register extends React.Component {
                   label='Confirm Password'
                   type='password'
                   icon='clipboard-check'
-                  size='sm'
+                  size='lg'
                   onChange={(event) => this.handleConfirmPassword(event)}
                   minLength='8'
                   maxLength={this.state.password.length}
@@ -191,7 +188,7 @@ class Register extends React.Component {
                 Register
               </MDBBtn>
             </form>
-            <div className='social_register'>
+            {/* <div className='social_register'>
               <GoogleLogin
                 clientId='189392606316-gophi88gi150u8rg4b0gotokdfe36ufk.apps.googleusercontent.com'
                 buttonText='Login with Google'
@@ -200,8 +197,7 @@ class Register extends React.Component {
                 onFailure={this.responseGoogle}
                 cookiePolicy={"single_host_origin"}
               />
-            </div>
-
+            </div> */}
             <div className='info-div-login'>
               Already a user..? <Link to='/login'>Click Here</Link> to Login
             </div>

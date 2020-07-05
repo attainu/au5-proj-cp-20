@@ -1,6 +1,7 @@
 * {
   margin: 0rem;
 }
+
 body {
   margin: 0rem;
   padding: 0;
@@ -17,15 +18,32 @@ article {
   align-self: auto;
 }
 #create {
-  position: relative;
+  width: 60%;
+  margin: 0 20%;
+  padding: 0 1rem 2rem 1rem;
   -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: 0px 0px 80px -47px rgba(171, 171, 171, 1);
   /* box-shadow: 0 41.8px 33.4px rgba(0, 0, 0, 0.086);
     padding-top: 1px; */
   background-color: whitesmoke;
+  height: max-content;
+  color: #212121;
+  border-radius: 10px;
+}
+
+.row-cp {
+  background-color: #00000083;
+  height: 90.3vh;
+  max-height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  margin-top: 0;
+}
+.cp {
+  margin: 0;
 }
 
 .spinner-div {
@@ -142,7 +160,7 @@ article {
 }
 
 .landing-page {
-  background: #000000c5;
+  background: #18191a;
   background-size: cover;
   width: 100%;
   min-height: 100vh;
@@ -170,7 +188,7 @@ article {
 #hash {
   font-size: 35px;
 }
-
+/* #242526 */
 @media screen and (max-width: 1060px) {
   .landing-heading {
     width: 80%;
@@ -238,5 +256,35 @@ article {
     border-radius: 15px;
     margin-top: -1.3rem;
     margin-left: -0.6rem;
+  }
+
+  #create {
+    width: 100%;
+    padding: 0 1rem 2rem 1rem;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
+      0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    /* box-shadow: 0 41.8px 33.4px rgba(0, 0, 0, 0.086);
+      padding-top: 1px; */
+    background-color: whitesmoke;
+    height: max-content;
+  }
+
+  #create.container {
+    margin: 0;
+    padding: 0 1rem 2rem 1rem;
+    width: 100%;
+    margin: 0;
+    color: #212121;
+  }
+
+  .cp {
+    width: 100%;
+  }
+  .row-cp {
+    width: 100%;
+    margin: 0;
   }
 }

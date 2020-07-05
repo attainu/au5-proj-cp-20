@@ -15,7 +15,9 @@ import { verifyToken } from "../../../actions/register_action";
 class InfoCard extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      user_profile: "",
+    };
     this.props.verifyToken();
   }
 
@@ -37,6 +39,8 @@ class InfoCard extends React.Component {
     this.props.sendFollowData(data);
     this.props.getFollowers();
     this.props.getFollowing();
+    this.props.verifyToken();
+    window.location.reload();
   };
 
   handleUnfollowClick = (id) => {
@@ -48,6 +52,8 @@ class InfoCard extends React.Component {
     this.props.getAllUsers();
     this.props.getFollowers();
     this.props.getFollowing();
+    this.props.verifyToken();
+    window.location.reload();
   };
 
   render() {

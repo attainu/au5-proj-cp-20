@@ -49,6 +49,7 @@ export function verifyToken() {
         });
       } else {
         Promise.reject({ redirectTo: "/no-access" });
+        window.location.assign("/forbidden");
       }
     });
   };
@@ -122,6 +123,7 @@ export function sendEditProfileData(data) {
           type: "EDIT_PROFILE",
           payload: res.data,
         });
+        window.location.assign("/profile");
       })
       .catch((error) => {
         console.log(error);

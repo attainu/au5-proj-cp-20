@@ -29,12 +29,12 @@ class Navbar extends Component {
   constructor(props) {
     super(props);
     this.props.verifyToken();
-    this.props.articleCall("Reddit");
+    this.props.articleCall("meme");
     this.props.getallPost();
   }
   state = {
     isOpen: false,
-    querry: "meme",
+    querry: "nothing",
   };
   article = () => {
     this.props.articleCall(this.state.querry);
@@ -49,9 +49,9 @@ class Navbar extends Component {
       <MDBNavbar color='elegant-color' dark expand='md'>
         <Link to='/'>
           <MDBNavbarBrand>
-            <span className='logo-title2'>#</span>
-            <span className='logo-title1'>raise</span>
-            <span className='logo-title2'>it</span>
+            <span className='logo-title2-nav'>#</span>
+            <span className='logo-title1-nav'>raise</span>
+            <span className='logo-title2-nav'>it</span>
           </MDBNavbarBrand>
         </Link>
         <MDBNavbarToggler onClick={this.toggleCollapse} />
@@ -67,12 +67,12 @@ class Navbar extends Component {
               <input
                 className='form-control mr-sm-2 text-white'
                 type='text'
-                placeholder='Search'
+                placeholder='Search '
                 aria-label='Search'
                 onKeyUp={(e) => this.setState({ querry: e.target.value })}
               />
             </div>
-            <MDBNavItem onClick={() => this.article()}>
+            <MDBNavItem onClick={() => this.article()} className='mt-2 ml-2'>
               <MDBIcon
                 fab
                 icon='reddit-alien'
@@ -96,33 +96,36 @@ class Navbar extends Component {
                 </Link>
               </Fragment>
             ) : (
-                <div>
-                  <MDBNavItem>
-                    <MDBDropdown dropleft>
-                      <MDBDropdownToggle nav caret>
-                        <img
-                          className='avatar_img_navbar'
-                          src={this.props.user.image_url}
-                          alt=''
-                        />
-                      </MDBDropdownToggle>
-                      <MDBDropdownMenu className='dropdown-default'>
-                        <MDBDropdownItem href='/profile' size='sm'>
-                          {this.props.user.name}
-                        </MDBDropdownItem>
-                        <MDBDropdownItem href='/create' size='sm'>
-                          Create Post
+              <div>
+                <MDBNavItem>
+                  <MDBDropdown dropleft>
+                    <MDBDropdownToggle nav caret>
+                      <img
+                        className='avatar_img_navbar'
+                        src={this.props.user.image_url}
+                        alt=''
+                      />
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu className='dropdown-default'>
+                      <MDBDropdownItem href='/profile' size='sm'>
+                        {this.props.user.name}
                       </MDBDropdownItem>
-                        <MDBDropdownItem
-                          onClick={() => this.props.logoutAgain()}
-                          size='sm'>
-                          Logout
+                      <MDBDropdownItem
+                        href='/create'
+                        size='sm'
+                        loginData={this.props.login}>
+                        Create Post
                       </MDBDropdownItem>
-                      </MDBDropdownMenu>
-                    </MDBDropdown>
-                  </MDBNavItem>
-                </div>
-              )}
+                      <MDBDropdownItem
+                        onClick={() => this.props.logoutAgain()}
+                        size='sm'>
+                        Logout
+                      </MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavItem>
+              </div>
+            )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
@@ -131,6 +134,7 @@ class Navbar extends Component {
 }
 const mapStateToProps = (state) => {
   return {
+    login: state.user.user,
     state: state,
     user: state.user.user,
   };

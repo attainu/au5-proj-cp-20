@@ -11,15 +11,7 @@ import {
   getCommentDataImage,
 } from "../../actions/register_action";
 import ReactHtmlParser from "react-html-parser";
-import {
-  MDBBtn,
-  MDBBadge,
-  MDBInput,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBModalFooter,
-} from "mdbreact";
+import { MDBBadge } from "mdbreact";
 
 class Postdiv extends React.Component {
   constructor() {
@@ -184,7 +176,7 @@ class Postdiv extends React.Component {
                     ))} */}
                     <h4>{e.title}</h4>
                   </div>
-                  {e.pic && (
+                  {e.pic && e.comments.length > 0 && (
                     <div>
                       <div className='post-content-div'>
                         <img id='post-image' src={e.pic} alt='REDDIT' />
@@ -260,7 +252,6 @@ class Postdiv extends React.Component {
                             </form>
                           </div>
                         </div>
-
                         <div
                           className='comments-display'
                           id={e._id}
@@ -304,7 +295,7 @@ class Postdiv extends React.Component {
                           <span class='badge badge-success ml-2'>
                             <i
                               className='fas fa-arrow-up fa-2x'
-                              onClick={() => this.upvote_img(e._id)}></i>
+                              onClick={() => this.upvote_text(e._id)}></i>
                           </span>
                         </div>
                         <div id='count'>
@@ -318,7 +309,7 @@ class Postdiv extends React.Component {
                           <span class='badge badge-danger ml-2'>
                             <i
                               className='fas fa-arrow-down fa-2x'
-                              onClick={() => this.downvote_img(e._id)}></i>
+                              onClick={() => this.downvote_text(e._id)}></i>
                           </span>
                         </div>
                         <div className='comments-badge' id='comments'>
@@ -368,7 +359,6 @@ class Postdiv extends React.Component {
                             </form>
                           </div>
                         </div>
-
                         <div
                           className='comments-display'
                           id={e._id}
@@ -410,7 +400,6 @@ class Postdiv extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log("homepage", state.user.all_posts);
   return {
     state: state.user,
     user: state.user.user,

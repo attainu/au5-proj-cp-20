@@ -46,7 +46,7 @@ function userReducer(state = userdata, action) {
       console.log("IN SEARCHED USERS", stateCopy.user.email, action.payload);
 
       const resultArray = action.payload;
-      for (var i in action.payload) {
+      for (let i in action.payload) {
         if (resultArray[i].email === stateCopy.user.email) {
           resultArray.splice(i, 1);
           console.log("filteredAry", resultArray);
@@ -59,7 +59,7 @@ function userReducer(state = userdata, action) {
 
     case "SEARCH_RESULTS":
       const resultArray2 = action.payload;
-      for (var i in action.payload) {
+      for (let i in action.payload) {
         if (resultArray2[i].email === stateCopy.user.email) {
           resultArray2.splice(i, 1);
           console.log("filteredAry2", resultArray2);

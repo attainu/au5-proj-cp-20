@@ -23,7 +23,6 @@ import {
   MDBModalBody,
   MDBModalHeader,
   MDBModalFooter,
-  MDBProgress,
 } from "mdbreact";
 
 class Profile extends React.Component {
@@ -52,7 +51,21 @@ class Profile extends React.Component {
     this.props.verifyToken();
     this.handleImage = this.handleImage.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-    // console.log("login", this.props.login);
+
+    // document.onreadystatechange = function () {
+    //   // let redirect = document.getElementById("div-redirected");
+    //   // redirect.style.visibility = "hidden";
+    //   // setTimeout(function () {
+    //   //   redirect.style.visibility = "visible";
+    //   // }, 3000);
+    //   // if (document.readyState !== "complete") {
+    //   //   document.getElementsByTagName("body").style.visibility = "hidden";
+    //   //   document.getElementById("#loader").style.visibility = "visible";
+    //   // } else {
+    //   //   document.getElementById("#loader").style.display = "hidden";
+    //   //   document.getElementsByTagName("body").style.visibility = "visible";
+    //   // }
+    // };
   };
 
   toggle = (nr) => () => {
@@ -183,7 +196,20 @@ class Profile extends React.Component {
       <div>
         <div>
           <Navbar />
-          <div className='the-bg'></div>
+        </div>
+        <div className='spinner-div' id='loader'>
+          <div
+            class='spinner-border text-white'
+            style={{
+              width: "5rem",
+              height: "5rem",
+              marginTop: "2rem",
+            }}
+            role='status'>
+            <span class='sr-only'>Loading...</span>
+          </div>
+        </div>
+        <div className='the-bg'>
           {this.props.login ? (
             <div>
               <div className='main_profile'>
@@ -269,7 +295,9 @@ class Profile extends React.Component {
               </div>
             </div>
           ) : (
-            <div></div>
+            <div id='div-redirected' timeout='2000'>
+              <Login timeout={2000} />
+            </div>
           )}
         </div>
         <div></div>
@@ -279,7 +307,7 @@ class Profile extends React.Component {
 }
 
 const getDataFromRedux = (state) => {
-  // console.log("in profile", state.user.google);
+  console.log("in profile", state.user.login);
   return {
     login: state.user.login,
     user: state.user.user,

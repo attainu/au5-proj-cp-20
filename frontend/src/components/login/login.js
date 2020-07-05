@@ -71,15 +71,9 @@ class Login extends React.Component {
       <div>
         <div className='login_div'>
           <div className='logo-name'>
-            <span style={{ fontSize: "50px" }} className='logo-title2'>
-              #
-            </span>
-            <span style={{ fontSize: "50px" }} className='logo-title1'>
-              raise
-            </span>
-            <span style={{ fontSize: "50px" }} className='logo-title2'>
-              it
-            </span>
+            <span className='logo-title2'>#</span>
+            <span className='logo-title1'>raise</span>
+            <span className='logo-title2'>it</span>
           </div>
 
           <div className='head_div'>LOGIN</div>
@@ -97,6 +91,7 @@ class Login extends React.Component {
                   label='Email'
                   type='email'
                   icon='envelope'
+                  size='lg'
                   outline
                   required>
                   <div className='invalid-feedback'>
@@ -112,6 +107,7 @@ class Login extends React.Component {
                   label='Password'
                   type='password'
                   icon='key'
+                  size='lg'
                   outline
                   minLength='8'
                   required>
@@ -125,7 +121,7 @@ class Login extends React.Component {
                 Login
               </MDBBtn>
             </form>
-            <div className='social_login'>
+            {/* <div className='social_login'>
               <GoogleLogin
                 clientId='189392606316-gophi88gi150u8rg4b0gotokdfe36ufk.apps.googleusercontent.com'
                 buttonText='Login with Google'
@@ -134,7 +130,7 @@ class Login extends React.Component {
                 cookiePolicy={"single_host_origin"}
                 theme='dark'
               />
-            </div>
+            </div> */}
             <div className='info-div-login'>
               Forgot password..?
               <Link to='/login/reset_password'>Click Here</Link> to reset.

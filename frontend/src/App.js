@@ -68,7 +68,9 @@ function App() {
           strict></Route>
       </div>
       <div className='forbidden'>
-        <Route path='/forbidden' component={Forbidden}></Route>
+        <Route path='/forbidden' exact strict>
+          <Forbidden />
+        </Route>
       </div>
     </BrowserRouter>
   );

@@ -64,7 +64,27 @@
 }
 
 .logo-name {
-  margin-left: 5rem;
+  margin-left: 2.5rem;
+}
+
+.logo-title1 {
+  font-size: 60px;
+}
+.logo-title2 {
+  font-size: 60px;
+}
+
+.logo-title1-nav {
+  font-size: 25px;
+  color: whitesmoke;
+  font-weight: 1000;
+}
+.logo-title2-nav {
+  font-size: 25px;
+  color: red;
+  text-decoration: dotted;
+  font-weight: 500;
+  font-weight: 1000;
 }
 
 @media screen and (max-width: 1060px) {
@@ -81,9 +101,16 @@
   .logo-name {
     margin-left: 13rem;
   }
+
+  .logo-title1 {
+    font-size: 70px;
+  }
+  .logo-title2 {
+    font-size: 70px;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1060px) {
   .login_div {
     padding: 1rem 1rem 1rem 1rem;
     width: 100%;
@@ -95,7 +122,14 @@
   }
 
   .logo-name {
-    margin-left: 6rem;
+    margin-left: 4rem;
+  }
+
+  .logo-title1 {
+    font-size: 70px;
+  }
+  .logo-title2 {
+    font-size: 70px;
   }
 }
 
@@ -129,8 +163,13 @@
   }
 
   .logo-name {
-    margin-left: 20rem;
-    font-size: 70px;
+    margin-left: 12rem;
+  }
+  .logo-title1 {
+    font-size: 100px;
+  }
+  .logo-title2 {
+    font-size: 100px;
   }
 }
 
@@ -165,8 +204,17 @@
     margin-left: 7rem;
   }
 
+  .info-div-login {
+    font-size: 30px;
+  }
+
   .logo-name {
     margin-left: 20rem;
-    font-size: 70px;
+  }
+  .logo-title1 {
+    font-size: 100px;
+  }
+  .logo-title2 {
+    font-size: 100px;
   }
 }
