@@ -16,7 +16,7 @@ class DownVote extends React.Component {
     return (
       <div>
         <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>Your Down Voted Post</h4>
-        {this.props.state.logged_dowm.length === 0 ? <div></div> : this.props.state.logged_dowm.map((e, i) => {
+        {this.props.state.logged_down.length === 0 ? <div></div> : this.props.state.logged_down.map((e, i) => {
           return (
             <div className='posts_div mt-3'>
               <div className='upvote-downvote-div'>
