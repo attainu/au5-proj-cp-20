@@ -291,7 +291,7 @@ class Postdiv extends React.Component {
                               <div className='comment-content' key={index}>
                                 <div className='col-1'>
                                   <img
-                                    // src={el.postedBy.image_url}
+                                    src={el.postedBy.image_url}
                                     alt=''
                                     width='35'
                                     height='35'
@@ -303,7 +303,7 @@ class Postdiv extends React.Component {
                                 </div>
                                 <div className='col-11' id='comment-text'>
                                   <div>
-                                    {/* <strong>{el.postedBy.name}</strong> */}
+                                    <strong>{el.postedBy.name}</strong>
                                   </div>
                                   <div>{el.text}</div>
                                 </div>
@@ -399,7 +399,7 @@ class Postdiv extends React.Component {
                               <div className='comment-content' key={index}>
                                 <div className='col-1'>
                                   <img
-                                    // src={el.postedBy.image_url}
+                                    src={el.postedBy.image_url}
                                     alt=''
                                     width='35'
                                     height='35'
@@ -411,7 +411,7 @@ class Postdiv extends React.Component {
                                 </div>
                                 <div className='col-11' id='comment-text'>
                                   <div>
-                                    {/* <strong>{el.postedBy.name}</strong> */}
+                                    <strong>{el.postedBy.name}</strong>
                                   </div>
                                   <div>{el.text}</div>
                                 </div>
