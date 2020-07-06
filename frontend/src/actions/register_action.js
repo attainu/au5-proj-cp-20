@@ -494,7 +494,6 @@ export function getCommentDataText() {
         console.log("text Post", res.data);
         dispatch({
           type: "COMMENTS_TEXT",
-
           payload: res.data,
         });
       })

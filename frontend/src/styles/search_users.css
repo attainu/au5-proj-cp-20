@@ -35,7 +35,7 @@
   border: 2px dotted whitesmoke;
   color: #212121;
   width: 60%;
-  margin-left: 20%;
+  margin-left: 22%;
   border-radius: 50px;
   box-shadow: 0px 0px 5px -5px rgba(184, 184, 184, 1);
 }
@@ -43,10 +43,6 @@
 .followers-name-div h5 {
   text-transform: uppercase;
 }
-
-/* .followers-name-div h6{
-
-} */
 
 @media screen and (max-width: 1060px) {
   .folowers-div {

@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { bindActionCreators } from "redux";
 import { MDBBtn, MDBTypography } from "mdbreact";
+import "../../styles/login/login.css";
 // import axios from 'axios'
 import {
   verifyToken,
@@ -78,6 +79,7 @@ class Navbar extends Component {
                 icon='reddit-alien'
                 size='2x'
                 className='d-inline text-white'
+                id='reddit-icon'
               />
             </MDBNavItem>
           </MDBNavbarNav>
@@ -108,7 +110,9 @@ class Navbar extends Component {
                     </MDBDropdownToggle>
                     <MDBDropdownMenu className='dropdown-default'>
                       <MDBDropdownItem href='/profile' size='sm'>
-                        {this.props.user.name}
+                        <div style={{ textTransform: "capitalize" }}>
+                          {this.props.user.name}
+                        </div>
                       </MDBDropdownItem>
                       <MDBDropdownItem
                         href='/create'

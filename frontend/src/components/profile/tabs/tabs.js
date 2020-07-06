@@ -127,9 +127,9 @@ class ProfileTabs extends React.Component {
             {this.props.selected_user_id ? (
               <div>
                 {this.props.selected_followers.map((ele, index) => (
-                  <div className='folowers-div' key={index}>
+                  <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-4 ml-5'>
+                      <div className='col-2 ml-5'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -141,8 +141,18 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-8' className='followers-name-div'>
-                        <h3>{ele.name}</h3>
+                      <div className='col-6 followers-name-div'>
+                        <h5>{ele.name}</h5>
+                        <h6>{ele.email}</h6>
+                      </div>
+                      <div className='col-2'>
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Followers : {ele.followers.length}
+                        </p>
+
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Following: {ele.following.length}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -151,9 +161,9 @@ class ProfileTabs extends React.Component {
             ) : (
               <div>
                 {this.props.followers.map((ele, index) => (
-                  <div className='folowers-div' key={index}>
+                  <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-4 ml-5'>
+                      <div className='col-2 ml-5'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -165,8 +175,18 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-8' className='followers-name-div'>
-                        <h3>{ele.name}</h3>
+                      <div className='col-6 followers-name-div'>
+                        <h5>{ele.name}</h5>
+                        <h6>{ele.email}</h6>
+                      </div>
+                      <div className='col-2'>
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Followers : {ele.followers.length}
+                        </p>
+
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Following: {ele.following.length}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -206,7 +226,7 @@ class ProfileTabs extends React.Component {
             {this.props.selected_user_id ? (
               <div>
                 {this.props.selected_following.map((ele, index) => (
-                  <div className='folowers-div' key={index}>
+                  <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
                       <div className='col-4 ml-5'>
                         <img
@@ -230,9 +250,9 @@ class ProfileTabs extends React.Component {
             ) : (
               <div>
                 {this.props.following.map((ele, index) => (
-                  <div className='folowers-div' key={index}>
+                  <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-4 ml-5'>
+                      <div className='col-2 ml-5'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -244,8 +264,18 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-8' className='followers-name-div'>
-                        <h3>{ele.name}</h3>
+                      <div className='col-6 followers-name-div'>
+                        <h5>{ele.name}</h5>
+                        <h6>{ele.email}</h6>
+                      </div>
+                      <div className='col-2'>
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Followers : {ele.followers.length}
+                        </p>
+
+                        <p style={{ color: "yellow", fontSize: "15px" }}>
+                          Following: {ele.following.length}
+                        </p>
                       </div>
                     </div>
                   </div>

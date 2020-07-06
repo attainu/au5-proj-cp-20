@@ -162,12 +162,36 @@ class InfoCard extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div></div>
-                <div className='col-10 mt-4 offset-1'>
+                <hr />
+                <div
+                  className='col-10 mt-1 offset-2'
+                  style={{ justifyContent: "center" }}>
                   {this.props.user_profile ? (
-                    <div> {this.props.user_profile.bio}</div>
+                    <div>{this.props.user_profile.mobile}</div>
                   ) : (
-                    <div> {this.props.user.bio}</div>
+                    <div>{this.props.user.mobile}</div>
+                  )}
+                </div>
+                <div className='col-10 mt-1 offset-2'>
+                  {this.props.user_profile ? (
+                    <div>{this.props.user_profile.username}</div>
+                  ) : (
+                    <div>{this.props.user.username}</div>
+                  )}
+                </div>
+                <div className='col-10 mt-1 offset-2'>
+                  {this.props.user_profile ? (
+                    <div>{this.props.user_profile.email}</div>
+                  ) : (
+                    <div>{this.props.user.email}</div>
+                  )}
+                </div>
+                <hr />
+                <div className='col-10 mt-1 mb-3 offset-1'>
+                  {this.props.user_profile ? (
+                    <div>{this.props.user_profile.bio}</div>
+                  ) : (
+                    <div>{this.props.user.bio}</div>
                   )}
                 </div>
               </div>

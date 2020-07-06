@@ -33,6 +33,26 @@ html {
   background-color: #212121;
 }
 
+.folowers-div-profile {
+  padding: 0.5rem;
+  width: 80%;
+  background-color: #212121;
+  border-radius: 50px;
+  border: 2px solid whitesmoke;
+  margin-top: 5px;
+}
+
+.folowers-div-profile:hover {
+  margin-top: 5px;
+  width: 80%;
+  background-color: crimson;
+  border: 2px dotted whitesmoke;
+  color: #212121;
+  margin-left: 2%;
+  border-radius: 50px;
+  box-shadow: 0px 0px 5px -5px rgba(184, 184, 184, 1);
+}
+
 .followers-name-div {
   color: whitesmoke;
 }

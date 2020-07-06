@@ -7,6 +7,10 @@
   color: whitesmoke;
 }
 
+#reddit-icon:hover {
+  opacity: 0.5;
+}
+
 .head_div {
   padding: 0.2rem;
   background: rgba(40, 43, 44, 0.562);
@@ -79,6 +83,7 @@
   color: whitesmoke;
   font-weight: 1000;
 }
+
 .logo-title2-nav {
   font-size: 25px;
   color: red;
@@ -155,6 +160,10 @@
     margin-left: 7rem;
     padding: 1rem;
     font-size: 70px;
+  }
+
+  #reddit-icon:hover {
+    background-color: black;
   }
 
   .form_div {

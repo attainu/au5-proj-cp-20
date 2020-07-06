@@ -51,20 +51,19 @@ class Profile extends React.Component {
     this.props.verifyToken();
     this.handleImage = this.handleImage.bind(this);
     this.handleImageUpload = this.handleImageUpload.bind(this);
-
+    let redirect = document.getElementById("div-redirected");
+    redirect.style.visibility = "hidden";
+    setTimeout(function () {
+      redirect.style.visibility = "visible";
+    }, 3000);
     // document.onreadystatechange = function () {
-    //   // let redirect = document.getElementById("div-redirected");
-    //   // redirect.style.visibility = "hidden";
-    //   // setTimeout(function () {
-    //   //   redirect.style.visibility = "visible";
-    //   // }, 3000);
-    //   // if (document.readyState !== "complete") {
-    //   //   document.getElementsByTagName("body").style.visibility = "hidden";
-    //   //   document.getElementById("#loader").style.visibility = "visible";
-    //   // } else {
-    //   //   document.getElementById("#loader").style.display = "hidden";
-    //   //   document.getElementsByTagName("body").style.visibility = "visible";
-    //   // }
+    //   if (document.readyState !== "complete") {
+    //     document.getElementsByTagName("body").style.visibility = "hidden";
+    //     document.getElementById("#loader").style.visibility = "visible";
+    //   } else {
+    //     document.getElementById("#loader").style.display = "hidden";
+    //     document.getElementsByTagName("body").style.visibility = "visible";
+    //   }
     // };
   };
 
@@ -194,10 +193,7 @@ class Profile extends React.Component {
     // console.log("progress", this.props.login, this.props.user.email);
     return (
       <div>
-        <div>
-          <Navbar />
-        </div>
-        <div className='spinner-div' id='loader'>
+        {/* <div className='spinner-div' id='loader'>
           <div
             class='spinner-border text-white'
             style={{
@@ -208,8 +204,11 @@ class Profile extends React.Component {
             role='status'>
             <span class='sr-only'>Loading...</span>
           </div>
-        </div>
+        </div> */}
         <div className='the-bg'>
+          <div>
+            <Navbar />
+          </div>
           {this.props.login ? (
             <div>
               <div className='main_profile'>

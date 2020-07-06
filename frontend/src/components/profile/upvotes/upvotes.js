@@ -13,11 +13,6 @@ class UpVote extends React.Component {
       myclass: "",
       display: "none",
     };
-
-    // if (this.props.state.user.email) {
-    //   console.log("Calling", this.props.state.user.email);
-    //   this.setState({ email: this.props.state.user.email });
-    // }
   }
 
   componentDidMount() {

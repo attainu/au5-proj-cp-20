@@ -5,70 +5,206 @@ import { loggedPostdown } from "../../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
+import { MDBBadge } from "mdbreact";
 class DownVote extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      myclass: "",
+      display: "none",
+    };
+  }
+
   componentDidMount() {
     if (this.props.state.user.email) {
-      this.props.loggedPostdown(this.props.state.user.email)
+      this.props.loggedPostdown(this.props.state.user.email);
     }
   }
+
+  handleHide = (id) => {
+    const divId = document.getElementById(id);
+    console.log("divid", divId);
+    if (divId.style.display === "none") {
+      divId.style.display = "";
+    } else {
+      divId.style.display = "none";
+    }
+  };
   render() {
-    console.log("Up and Down", this.props.state)
+    console.log("Up and Down", this.props.state);
     return (
       <div>
-        <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>Your Down Voted Post</h4>
-        {this.props.state.logged_down.length === 0 ? <div></div> : this.props.state.logged_down.map((e, i) => {
-          return (
-            <div className='posts_div mt-3'>
-              <div className='upvote-downvote-div'>
-                <div className='col-3'>
-                  <i class='fas fa-arrow-alt-circle-up fa-2x green-text'></i>
-                </div>
-                <div className='col-6 text-center'>{Number(e.upvote.length - e.dvote.length)}</div>
-                <div className='col-3'>
-                  <i class='fas fa-arrow-alt-circle-down fa-2x red-text'></i>
+        <h4 style={{ color: "whitesmoke", marginTop: "1rem" }}>
+          Your Down Voted Post
+        </h4>
+        {this.props.state.logged_down.length === 0 ? (
+          <div></div>
+        ) : (
+          this.props.state.logged_down.map((e, i) => {
+            return (
+              <div key={i} className='posts_div'>
+                <div className='contents-tools-div'>
+                  <div className='title-div'>
+                    <h4>{e.title}</h4>
+                  </div>
+                  {e.pic && (
+                    <div>
+                      <div className='post-content-div'>
+                        <img id='post-image' src={e.pic} alt='REDDIT' />
+                      </div>
+                      <div className='tools'>
+                        <div id='up-arrow'>
+                          <span class='badge badge-success ml-2'>
+                            <i className='fas fa-arrow-up fa-2x'></i>
+                          </span>
+                        </div>
+                        <div id='count'>
+                          <h4>
+                            <span className='badge badge-light ml-2'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </h4>
+                        </div>
+                        <div id='down-arrow'>
+                          <span class='badge badge-danger ml-2'>
+                            <i className='fas fa-arrow-down fa-2x'></i>
+                          </span>
+                        </div>
+                        <div className='comments-badge' id='comments'>
+                          <h4>
+                            <MDBBadge
+                              color='light'
+                              className='ml-2 fa-2x'
+                              onClick={() => this.handleHide(e._id)}>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
+                              COMMENTS{" "}
+                              <span
+                                class='badge badge-secondary ml-2'
+                                id='comments_count'>
+                                {e.comments.length}
+                              </span>
+                            </MDBBadge>
+                          </h4>
+                        </div>
+                      </div>
+                      <div id='comment-div'>
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content' key={index}>
+                              <div className='col-1'>
+                                <img
+                                  src={el.postedBy.image_url}
+                                  alt=''
+                                  width='35'
+                                  height='35'
+                                  style={{
+                                    borderRadius: "50%",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-11' id='comment-text'>
+                                <div>
+                                  <strong>{el.postedBy.name}</strong>
+                                </div>
+                                <div>{el.text}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  {e.text && (
+                    <div>
+                      <div className='post-content-div'>
+                        {ReactHtmlParser(e.text)}
+                      </div>
+                      <div className='tools'>
+                        <div id='up-arrow'>
+                          <span class='badge badge-success ml-2'>
+                            <i className='fas fa-arrow-up fa-2x'></i>
+                          </span>
+                        </div>
+                        <div id='count'>
+                          <h4>
+                            <span className='badge badge-light ml-2'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </h4>
+                        </div>
+                        <div id='down-arrow'>
+                          <span class='badge badge-danger ml-2'>
+                            <i className='fas fa-arrow-down fa-2x'></i>
+                          </span>
+                        </div>
+                        <div className='comments-badge' id='comments'>
+                          <h4>
+                            <MDBBadge
+                              color='light'
+                              className='ml-2 fa-2x'
+                              onClick={() => this.handleHide(e._id)}>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
+                              COMMENTS{" "}
+                              <span
+                                class='badge badge-secondary ml-2'
+                                id='comments_count'>
+                                {e.comments.length}
+                              </span>
+                            </MDBBadge>
+                          </h4>
+                        </div>
+                      </div>
+                      <div id='comment-div'>
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content' key={index}>
+                              <div className='col-1'>
+                                <img
+                                  src={el.postedBy.image_url}
+                                  alt=''
+                                  width='35'
+                                  height='35'
+                                  style={{
+                                    borderRadius: "50%",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-11' id='comment-text'>
+                                <div>
+                                  <strong>{el.postedBy.name}</strong>
+                                </div>
+                                <div>{el.text}</div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-              {e.pic &&
-                <div className='contents-tools-div'>
-                  <div class='post-content-div'>
-                    <img
-                      src={e.pic}
-                      alt='post'
-                      width='400'
-                      height='300'
-                    />
-                  </div>
-                  <div class='tools'>
-                    <span class='badge fa-2x badge-pill amber'>
-                      <i class='far fa-comments fa-lg' aria-hidden='true'></i>
-                      <span> </span>Comment
-                              </span>
-                  </div>
-                </div>
-              }
-              {e.text &&
-                <div className='contents-tools-div'>
-                  <div class='post-content-div'>
-                    {ReactHtmlParser(e.text)}
-                  </div>
-                  <div class='tools'>
-                    <span class='badge fa-2x badge-pill amber'>
-                      <i class='far fa-comments fa-lg' aria-hidden='true'></i>
-                      <span> </span>Comment
-                              </span>
-                  </div>
-                </div>
-              }
-            </div>
-          )
-        })}
+            );
+          })
+        )}
       </div>
-    )
+    );
   }
 }
 const mapStateToProps = (state) => {
   return {
     state: state.user,
+    user: state.user.user,
+    all_posts: state.user.all_posts,
+    comments_text: state.user.comments_text,
+    comments_image: state.user.comments_image,
   };
 };
 const mapDispatchToProps = (dispatch) => {

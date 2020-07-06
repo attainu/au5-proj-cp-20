@@ -4,15 +4,7 @@ import axios from "axios";
 import { loggedPost } from "../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import {
-  MDBBtn,
-  MDBBadge,
-  MDBInput,
-  MDBModal,
-  MDBModalBody,
-  MDBModalHeader,
-  MDBModalFooter,
-} from "mdbreact";
+import { MDBBadge } from "mdbreact";
 import ReactHtmlParser from "react-html-parser";
 import HtmlParser from "react-html-parser";
 class Logposts extends React.Component {
@@ -60,26 +52,9 @@ class Logposts extends React.Component {
         ) : (
           this.props.state.logged_all.map((e, i) => {
             return (
-              <div key={i} className='posts_div'>
+              <div key={i} className='posts_div-profile'>
                 <div className='contents-tools-div'>
                   <div className='title-div'>
-                    {/* {e.postedBy.map((el) => (
-                      <div>
-                        <div className='col-1'>
-                          <img
-                            src={el.image_url}
-                            width='30'
-                            height='30'
-                            style={{
-                              borderRadius: "50%",
-                              border: "2px solid whitesmoke",
-                            }}
-                            alt=''
-                          />
-                        </div>
-                        <div className='col-5'>{el.name}</div>{" "}
-                      </div>
-                    ))} */}
                     <h4>{e.title}</h4>
                   </div>
                   {e.pic && (
@@ -156,7 +131,9 @@ class Logposts extends React.Component {
                   {e.text && (
                     <div>
                       <div className='post-content-div'>
-                        {ReactHtmlParser(e.text)}
+                        <div className='text-post-div'>
+                          {ReactHtmlParser(e.text)}
+                        </div>
                       </div>
                       <div className='tools'>
                         <div id='up-arrow'>
@@ -238,6 +215,8 @@ const mapStateToProps = (state) => {
     state: state.user,
     user: state.user.user,
     all_posts: state.user.all_posts,
+    comments_text: state.user.comments_text,
+    comments_image: state.user.comments_image,
   };
 };
 const mapDispatchToProps = (dispatch) => {

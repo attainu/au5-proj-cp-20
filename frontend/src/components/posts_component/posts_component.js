@@ -26,11 +26,36 @@ class Postdiv extends React.Component {
       display: "none",
       callApi: false,
       disable: "",
+      correctColor: undefined,
+      rgbDisplay: "",
+      colorSquares: undefined,
+      video_url: "",
     };
     // if (this.props.state.user.email) {
     //   console.log("Calling", this.props.state.user.email);
     //   this.setState({ email: this.props.state.user.email });
     // }
+  }
+
+  generateRandomColor() {
+    var colors = [
+      ,
+      "linear-gradient(to right, #834d9b, #d04ed6)",
+      "linear-gradient(to right, #2980b9, #2c3e50)",
+      "linear-gradient(to right, #fd746c, #ff9068)",
+      "linear-gradient(to right, #4ca1af, #c4e0e5)",
+      "linear-gradient(to right, #b24592, #f15f79)",
+      "linear-gradient(to right, #c2e59c, #64b3f4)",
+      "linear-gradient(to right, #76b852, #8dc26f)",
+      "linear-gradient(to right, #e53935, #e35d5b)",
+      "linear-gradient(to right, #ee9ca7, #ffdde1)",
+      "linear-gradient(to right, #d1913c, #ffd194)",
+    ];
+    var len = colors.length;
+    var randomNum = Math.floor(Math.random() * len);
+    var color = colors[randomNum];
+    colors.splice(randomNum, 1);
+    return color;
   }
 
   componentDidMount() {
@@ -39,6 +64,9 @@ class Postdiv extends React.Component {
     this.props.getallPost();
     this.props.getCommentDataImage();
     this.props.getCommentDataText();
+
+    let url = document.querySelector("oembed");
+    console.log(url);
   }
 
   upvote_text = (id, elem) => {
@@ -168,7 +196,7 @@ class Postdiv extends React.Component {
     }
   };
   render() {
-    console.log("sda", this.props.state.all_posts, this.state);
+    console.log("sda", this.props.videoData);
     return (
       <div className='pd-top'>
         {this.props.state.all_posts.length === 0 ? (
@@ -179,13 +207,15 @@ class Postdiv extends React.Component {
               <div key={i} className='posts_div'>
                 <div className='contents-tools-div'>
                   <div className='title-div'>
-                    {/* {e.postedBy.map((el) => (
-                      <div>
-                        <div className='col-1'>
+                    {e.postedBy.map((el) => (
+                      <div
+                        className='row'
+                        style={{ backgroundColor: "#252525" }}>
+                        <div className='col-2-lg ml-3'>
                           <img
                             src={el.image_url}
-                            width='30'
-                            height='30'
+                            width='35'
+                            height='35'
                             style={{
                               borderRadius: "50%",
                               border: "2px solid whitesmoke",
@@ -193,9 +223,14 @@ class Postdiv extends React.Component {
                             alt=''
                           />
                         </div>
-                        <div className='col-5'>{el.name}</div>{" "}
+                        <div
+                          className='col-10-lg ml-3 mt-2'
+                          style={{ textTransform: "capitalize" }}>
+                          <h5>{el.name}</h5>
+                        </div>
                       </div>
-                    ))} */}
+                    ))}
+                    <hr />
                     <h4>{e.title}</h4>
                   </div>
                   {e.pic && (
@@ -256,7 +291,7 @@ class Postdiv extends React.Component {
                       </div>
                       <div id='comment-div'>
                         <div className='input-div'>
-                          <div className='col-1'>
+                          <div className='col-2 '>
                             <img
                               src={this.props.user.image_url}
                               alt=''
@@ -268,7 +303,7 @@ class Postdiv extends React.Component {
                               }}
                             />
                           </div>
-                          <div className='col-11'>
+                          <div className='col-10'>
                             <form
                               onSubmit={(event) => {
                                 event.preventDefault();
@@ -293,23 +328,29 @@ class Postdiv extends React.Component {
                           style={{ display: this.state.display }}>
                           {e.comments.map((el, index) => (
                             <div className='comment-content' key={index}>
-                              <div className='col-1'>
+                              <div className='col-2'>
                                 <img
                                   src={el.postedBy.image_url}
                                   alt=''
-                                  width='35'
-                                  height='35'
+                                  width='38'
+                                  height='38'
                                   style={{
                                     borderRadius: "50%",
+                                    marginTop: "2px",
                                     border: "2px solid whitesmoke",
                                   }}
                                 />
                               </div>
-                              <div className='col-11' id='comment-text'>
-                                <div>
-                                  <strong>{el.postedBy.name}</strong>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='body'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <span>{el.text}</span>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>{el.text}</div>
                               </div>
                             </div>
                           ))}
@@ -317,12 +358,28 @@ class Postdiv extends React.Component {
                       </div>
                     </div>
                   )}
-
                   {e.text && (
                     <div>
                       <div className='post-content-div'>
-                        <div className='text-post-div'>
+                        <div
+                          className='text-post-div'
+                          style={{
+                            background: this.generateRandomColor(),
+                          }}
+                          id='text-post-div'>
                           {ReactHtmlParser(e.text)}
+                          {this.props.videoData &&
+                            this.props.videoData.map((el, i) => {
+                              if (el.id === e._id) {
+                                return (
+                                  <div>
+                                    <iframe
+                                      src={`//www.youtube.com/embed/${el.v_url}`}></iframe>
+                                  </div>
+                                );
+                              }
+                              return <div></div>;
+                            })}
                         </div>
                       </div>
                       <div className='tools'>
@@ -367,7 +424,9 @@ class Postdiv extends React.Component {
                               onClick={() => this.handleHide(e._id)}>
                               <i class='fas fa-comment-alt black-text'></i>{" "}
                               COMMENTS{" "}
-                              <span class='badge badge-danger ml-2'>
+                              <span
+                                class='badge badge-info ml-2'
+                                id='comments_count'>
                                 {e.comments.length}
                               </span>
                             </MDBBadge>
@@ -413,23 +472,29 @@ class Postdiv extends React.Component {
                           style={{ display: this.state.display }}>
                           {e.comments.map((el, index) => (
                             <div className='comment-content' key={index}>
-                              <div className='col-1'>
+                              <div className='col-2'>
                                 <img
                                   src={el.postedBy.image_url}
                                   alt=''
-                                  width='35'
-                                  height='35'
+                                  width='38'
+                                  height='38'
                                   style={{
                                     borderRadius: "50%",
+                                    marginTop: "2px",
                                     border: "2px solid whitesmoke",
                                   }}
                                 />
                               </div>
-                              <div className='col-11' id='comment-text'>
-                                <div>
-                                  <strong>{el.postedBy.name}</strong>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='body'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <blockquote>{el.text}</blockquote>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>{el.text}</div>
                               </div>
                             </div>
                           ))}
@@ -448,12 +513,14 @@ class Postdiv extends React.Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log("VideoPost", state.user.videoData);
   return {
     state: state.user,
     user: state.user.user,
     all_posts: state.user.all_posts,
     comments_text: state.user.comments_text,
     comments_image: state.user.comments_image,
+    videoData: state.user.videoData,
   };
 };
 const mapDispatchToProps = (dispatch) => {

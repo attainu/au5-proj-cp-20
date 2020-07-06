@@ -17,6 +17,7 @@ let userdata = {
   logged_all: "",
   logged_up: "",
   logged_down: "",
+  videoData: "",
 };
 
 function userReducer(state = userdata, action) {
@@ -116,9 +117,37 @@ function userReducer(state = userdata, action) {
       return stateCopy;
 
     case "COMMENTS_TEXT":
-      console.log("Red Comments1 text", action.payload.comments);
+      console.log("Red Comments1 text", action.payload);
+      let array = action.payload;
+      let videoPost = [];
+      let urlArray = [];
+      array.forEach((el) => {
+        if (el.text.includes("oembed") === true) {
+          const url = el.text;
+          var result = url.split("url=")[1];
+          result = result.split(">")[0];
+          urlArray.push({
+            url_text: result,
+            id: el._id,
+          });
+        }
+      });
 
+      urlArray.forEach((el) => {
+        let v_url = el.url_text;
+        var regExp = /(?:.+?)?(?:\/v\/|watch\/|\?v=|\&v=|youtu\.be\/|\/v=|^youtu\.be\/|watch\%3Fv\%3D)([a-zA-Z0-9_-]{11})+/;
+        var match = v_url.match(regExp);
+        if (match) {
+          const video_url = match[1];
+          videoPost.push({
+            v_url: video_url,
+            id: el.id,
+          });
+        }
+      });
+      stateCopy.videoData = videoPost;
       stateCopy.comments_text = action.payload;
+
       return stateCopy;
 
     case "COMMENTS_IMAGE":
