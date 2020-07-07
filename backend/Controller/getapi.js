@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const post = require("../model/post");
 var getcontrol = {};
 // Text post Get API
@@ -68,4 +69,17 @@ getcontrol.image = async (req, res) => {
       res.json(result);
     });
 };
+getcontrol.delimage = async (req, res) => {
+  console.log("s", req.body)
+  post.imageposts.findByIdAndRemove({ _id: req.body.id }, function (err, result) {
+    if (err) return console.log(err)
+    res.json(result)
+  })
+}
+getcontrol.deltext = (req, res) => {
+  post.textposts.findByIdAndRemove({ _id: req.body.id }, function (err, result) {
+    if (err) return console.log(err)
+    res.json(result)
+  })
+}
 module.exports = getcontrol;
