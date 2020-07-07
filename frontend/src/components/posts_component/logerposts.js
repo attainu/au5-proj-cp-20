@@ -4,9 +4,9 @@ import axios from "axios";
 import { loggedPost, getCommentDataText } from "../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { MDBBadge } from "mdbreact";
+import { MDBBadge, MDBIcon } from "mdbreact";
 import ReactHtmlParser from "react-html-parser";
-import HtmlParser from "react-html-parser";
+
 class Logposts extends React.Component {
   constructor() {
     super();
@@ -65,6 +65,37 @@ class Logposts extends React.Component {
     }
   };
 
+  deletePost = (post) => {
+    let cal = window.confirm("Are you Sure you wanna delete this post ?");
+    console.log(cal);
+    if (post.text && cal) {
+      let token = localStorage.getItem("auth-token");
+      let data = { id: post._id };
+      axios({
+        url: "/api/get/delete/text",
+        method: "delete",
+        headers: { "auth-token": token },
+        data,
+      }).then((res) => {
+        this.props.loggedPost(this.props.state.user.email);
+      });
+    }
+    if (post.pic && cal) {
+      console.log(post.pic);
+      let token = localStorage.getItem("auth-token");
+      let data = { id: post._id };
+      console.log(data);
+      axios({
+        url: "/api/get/delete/image",
+        method: "delete",
+        headers: { "auth-token": token },
+        data,
+      }).then((res) => {
+        this.props.loggedPost(this.props.state.user.email);
+      });
+    }
+  };
+
   render() {
     console.log("Up and Down", this.props.state);
     return (
@@ -76,11 +107,17 @@ class Logposts extends React.Component {
             return (
               <div key={i} className='posts_div-profile'>
                 <div className='contents-tools-div'>
-                  <div className='title-div'>
+                  <div className='title-div d-inline-flex'>
                     <h4>
                       <span className='logo-title2-nav'># </span>
-                      <u>{e.title}</u>
+                      {e.title}
                     </h4>
+                    <MDBIcon
+                      far
+                      icon='trash-alt'
+                      className='p-2 col-example ml-auto'
+                      onClick={() => this.deletePost(e)}
+                    />
                   </div>
                   {e.pic && (
                     <div>

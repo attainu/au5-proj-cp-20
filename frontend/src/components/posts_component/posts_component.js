@@ -11,7 +11,7 @@ import {
   getCommentDataImage,
 } from "../../actions/register_action";
 import ReactHtmlParser from "react-html-parser";
-import { MDBBadge } from "mdbreact";
+import { MDBBadge, MDBIcon } from "mdbreact";
 
 class Postdiv extends React.Component {
   constructor() {
