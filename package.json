@@ -8,6 +8,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "cd frontend && npm start",
+    "heroku-postbuild": "npm run install-client && npm run build",
     "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "author": "",
