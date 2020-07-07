@@ -25,22 +25,27 @@ article {
     0 0 40px rgba(0, 0, 0, 0.1) inset;
   -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3),
     0 0 40px rgba(0, 0, 0, 0.1) inset;
-  box-shadow: 0px 0px 80px -47px rgba(171, 171, 171, 1);
+  box-shadow: 0px 0px 80px -47px rgb(41, 41, 41);
   /* box-shadow: 0 41.8px 33.4px rgba(0, 0, 0, 0.086);
     padding-top: 1px; */
-  background-color: whitesmoke;
+  background-color: #2121217c;
   height: max-content;
   color: #212121;
   border-radius: 10px;
 }
 
+#create.container {
+  background-color: #2b2b2b;
+}
+
 .row-cp {
-  background-color: #00000083;
-  height: 90.3vh;
+  background-color: #000000e8;
+  margin-top: 0;
+  height: 100vh;
   max-height: 100%;
   min-width: 100%;
   min-height: 100%;
-  margin-top: 0;
+  top: 0;
 }
 .cp {
   margin: 0;
@@ -173,16 +178,51 @@ article {
 }
 
 .landing-heading {
-  width: 30%;
+  width: 60%;
+  top: 50px;
+  margin-left: 20%;
   margin-top: 1rem;
-  margin-left: 35%;
-  padding: 1rem;
-  border-bottom: 2px solid rgb(235, 9, 9);
-  border-top: 2px solid rgb(235, 9, 9);
+  padding: 0.5rem;
+  border-bottom: 5px solid crimson;
   background-color: #212121;
   display: flex;
   justify-content: center;
-  border-radius: 35px;
+}
+.cp {
+  padding: 1rem;
+}
+
+.post-create-title {
+  width: 60%;
+  top: 50px;
+  margin-left: 20%;
+  padding: 1rem;
+  border-bottom: 5px solid crimson;
+  background-color: #212121;
+  display: flex;
+  justify-content: center;
+}
+
+.dropdown-menu button {
+  background-color: #212121;
+  color: white;
+  padding-left: 0.8rem;
+}
+
+.Ripple-parent {
+  background-color: #2e2e2e;
+}
+
+.ck-content {
+  color: black;
+}
+
+.waves-effect .Ripple-parent {
+  width: 200px;
+}
+
+label b {
+  color: whitesmoke;
 }
 
 #hash {
@@ -191,20 +231,29 @@ article {
 /* #242526 */
 @media screen and (max-width: 1060px) {
   .landing-heading {
-    width: 80%;
-    margin-top: 1rem;
-    margin-left: 10%;
+    width: 100%;
+    top: 50px;
+    margin-left: 0;
     padding: 1rem;
-    border-bottom: 2px solid rgb(235, 9, 9);
-    border-top: 2px solid rgb(235, 9, 9);
+    border-bottom: 5px solid crimson;
     background-color: #212121;
     display: flex;
     justify-content: center;
-    border-radius: 35px;
   }
   .carousel {
     padding: 2rem 0;
     width: 90%;
+  }
+
+  .post-create-title {
+    width: 100%;
+    top: 50px;
+    margin-left: 0;
+    padding: 1rem;
+    border-bottom: 5px solid crimson;
+    background-color: #212121;
+    display: flex;
+    justify-content: center;
   }
 
   #card-landing {
@@ -277,7 +326,7 @@ article {
     padding: 0 1rem 2rem 1rem;
     width: 100%;
     margin: 0;
-    color: #212121;
+    background-color: #212121;
   }
 
   .cp {

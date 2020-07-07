@@ -36,7 +36,7 @@
   width: 200px;
   height: 200px;
   z-index: 6;
-  box-shadow: 0px 0px 6px 2px rgba(145, 145, 145, 1);
+  box-shadow: 0px 0px 6px 2px rgb(0, 0, 0);
 }
 
 .avatar:hover {
@@ -73,6 +73,7 @@
 .small-logo-image {
   display: flex;
   flex-direction: row;
+  height: auto;
 }
 .user-details {
   padding: 0.7rem;
@@ -205,37 +206,13 @@ input[type="File"] {
   margin-top: 1rem;
   width: 18rem;
   min-height: 100%;
-  height: 30rem;
+  height: 40rem;
   max-height: 100%;
 }
 
 #card_front,
 #card_back {
-  box-shadow: 0px 5px 25px 0px rgba(51, 51, 51, 0.28);
-}
-
-#card-symbol {
-  margin: 0;
-  width: 100%;
-  text-align: center;
-  color: #000;
-  font-family: "Cantata One", serif;
-  font-size: 13em;
-  mix-blend-mode: lighten;
-}
-
-@supports (display: flex) {
-  #card_front {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  #card_front .card-symbol {
-    margin: 0 0.15em;
-    border-radius: 50%;
-    font-size: 15em;
-  }
+  height: 100%;
 }
 
 #card_front {
@@ -264,11 +241,6 @@ input[type="File"] {
 .container {
   perspective: 1000px;
 }
-
-/* .container:hover .card,
-.container.hover {
-  transform: rotateY(-180deg);
-} */
 
 .card {
   transition: 0.6s;
@@ -473,10 +445,10 @@ p {
 
   .avatar_img {
     width: 55%;
-    height: 55%;
+    height: 40%;
     margin-left: 22.5%;
     margin-bottom: 0;
-    box-shadow: 0px 0px 14px -4px rgba(255, 255, 255, 1);
+    border: 2px solid #161616;
   }
 
   #container,
@@ -485,7 +457,30 @@ p {
   #card_back {
     width: 320px;
     margin: 0;
-    height: 30rem;
+    height: 40rem;
+    background-color: #191919;
+    border-radius: 10px;
+  }
+
+  .upper-card-div {
+    top: auto;
+    height: 20%;
+    width: 100%;
+    background-color: crimson;
+    margin-top: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  .lower-card-div {
+    min-height: 80%;
+    height: auto;
+    max-height: 100%;
+    width: 100%;
+    background-color: #191919;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: whitesmoke;
   }
 
   .card-body {

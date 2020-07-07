@@ -64,9 +64,6 @@ class Postdiv extends React.Component {
     this.props.getallPost();
     this.props.getCommentDataImage();
     this.props.getCommentDataText();
-
-    let url = document.querySelector("oembed");
-    console.log(url);
   }
 
   upvote_text = (id, elem) => {
@@ -231,7 +228,10 @@ class Postdiv extends React.Component {
                       </div>
                     ))}
                     <hr />
-                    <h4>{e.title}</h4>
+                    <h4>
+                      <span className='logo-title2-nav'>#</span>
+                      <u>{e.title}</u>
+                    </h4>
                   </div>
                   {e.pic && (
                     <div>
@@ -290,37 +290,41 @@ class Postdiv extends React.Component {
                         </div>
                       </div>
                       <div id='comment-div'>
-                        <div className='input-div'>
-                          <div className='col-2 '>
-                            <img
-                              src={this.props.user.image_url}
-                              alt=''
-                              width='35'
-                              height='35'
-                              style={{
-                                borderRadius: "50%",
-                                border: "2px solid whitesmoke",
-                              }}
-                            />
-                          </div>
-                          <div className='col-10'>
-                            <form
-                              onSubmit={(event) => {
-                                event.preventDefault();
-                                this.handleCommentSaveImage(
-                                  event.target[0].value,
-                                  e._id,
-                                  this.props.user._id
-                                );
-                              }}>
-                              <input
-                                type='text'
-                                placeholder='Add your comment'
-                                className='form-control comment-input'
+                        {this.props.login ? (
+                          <div className='input-div'>
+                            <div className='col-1'>
+                              <img
+                                src={this.props.user.image_url}
+                                alt=''
+                                width='35'
+                                height='35'
+                                style={{
+                                  borderRadius: "50%",
+                                  border: "2px solid whitesmoke",
+                                }}
                               />
-                            </form>
+                            </div>
+                            <div className='col-11'>
+                              <form
+                                onSubmit={(event) => {
+                                  event.preventDefault();
+                                  this.handleCommentSaveText(
+                                    event.target[0].value,
+                                    e._id,
+                                    this.props.user._id
+                                  );
+                                }}>
+                                <input
+                                  type='text'
+                                  placeholder='Add your comment'
+                                  className='form-control comment-input'
+                                />
+                              </form>
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <div></div>
+                        )}
 
                         <div
                           className='comments-display'
@@ -343,7 +347,7 @@ class Postdiv extends React.Component {
                               </div>
                               <div className='col-10'>
                                 <div class='dialogbox'>
-                                  <div class='body'>
+                                  <div class='bodyyy'>
                                     <span class='tip tip-left'></span>
                                     {el.postedBy.name}
                                     <div class='message'>
@@ -374,7 +378,9 @@ class Postdiv extends React.Component {
                                 return (
                                   <div>
                                     <iframe
-                                      src={`//www.youtube.com/embed/${el.v_url}`}></iframe>
+                                      src={`//www.youtube.com/embed/${el.v_url}?autoplay=1`}
+                                      allow='autoplay; encrypted-media'
+                                      allowFullScreen></iframe>
                                   </div>
                                 );
                               }
@@ -382,6 +388,7 @@ class Postdiv extends React.Component {
                             })}
                         </div>
                       </div>
+
                       <div className='tools'>
                         <div id='up-arrow'>
                           <span class='badge badge-success ml-2'>
@@ -434,37 +441,41 @@ class Postdiv extends React.Component {
                         </div>
                       </div>
                       <div id='comment-div'>
-                        <div className='input-div'>
-                          <div className='col-1'>
-                            <img
-                              src={this.props.user.image_url}
-                              alt=''
-                              width='35'
-                              height='35'
-                              style={{
-                                borderRadius: "50%",
-                                border: "2px solid whitesmoke",
-                              }}
-                            />
-                          </div>
-                          <div className='col-11'>
-                            <form
-                              onSubmit={(event) => {
-                                event.preventDefault();
-                                this.handleCommentSaveText(
-                                  event.target[0].value,
-                                  e._id,
-                                  this.props.user._id
-                                );
-                              }}>
-                              <input
-                                type='text'
-                                placeholder='Add your comment'
-                                className='form-control comment-input'
+                        {this.props.login ? (
+                          <div className='input-div'>
+                            <div className='col-1'>
+                              <img
+                                src={this.props.user.image_url}
+                                alt=''
+                                width='35'
+                                height='35'
+                                style={{
+                                  borderRadius: "50%",
+                                  border: "2px solid whitesmoke",
+                                }}
                               />
-                            </form>
+                            </div>
+                            <div className='col-11'>
+                              <form
+                                onSubmit={(event) => {
+                                  event.preventDefault();
+                                  this.handleCommentSaveText(
+                                    event.target[0].value,
+                                    e._id,
+                                    this.props.user._id
+                                  );
+                                }}>
+                                <input
+                                  type='text'
+                                  placeholder='Add your comment'
+                                  className='form-control comment-input'
+                                />
+                              </form>
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <div></div>
+                        )}
 
                         <div
                           className='comments-display'
@@ -515,6 +526,7 @@ class Postdiv extends React.Component {
 const mapStateToProps = (state) => {
   console.log("VideoPost", state.user.videoData);
   return {
+    login: state.user.login,
     state: state.user,
     user: state.user.user,
     all_posts: state.user.all_posts,

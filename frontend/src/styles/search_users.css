@@ -4,12 +4,16 @@
 .cont-div {
   height: 100vh;
 }
+.bar-div {
+  width: 80%;
+  margin-left: 10%;
+}
 
 .searchbar-div {
   background-color: #212121;
   color: whitesmoke;
   padding: 0.5rem;
-  border: 1px solid whitesmoke;
+  border-bottom: 5px solid crimson;
   width: 60%;
   margin-left: 20%;
   margin-top: 1rem;
@@ -65,5 +69,22 @@
 
   #nav-tabContent {
     margin-left: 0;
+  }
+
+  .bar-div {
+    width: 100%;
+  }
+
+  .searchbar-div {
+    background-color: #212121;
+    color: whitesmoke;
+    padding: 0.5rem;
+    border-bottom: 5px solid crimson;
+    width: 100%;
+    margin-left: 0;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: row;
   }
 }

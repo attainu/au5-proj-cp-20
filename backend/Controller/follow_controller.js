@@ -162,4 +162,14 @@ follow.user_profile = async (req, res) => {
     });
 };
 
+follow.user_profile_get = async (req, res) => {
+  const { user_id } = req.body;
+  console.log("search id", user_id);
+  const users = await userModel.signup.find({}).exec(function (err, data) {
+    console.log("UP data:", data);
+    console.log("err:", err);
+    res.send(data);
+  });
+};
+
 module.exports = follow;

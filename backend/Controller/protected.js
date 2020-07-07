@@ -28,6 +28,7 @@ controller.textposts = async (req, res) => {
     let ba = await new post.textposts({
       title: req.body.title,
       text: req.body.text,
+      postedBy: req.user._id,
     });
     ba.save();
     da.textposts.push(ba);
@@ -48,6 +49,7 @@ controller.imageposts = async (req, res) => {
     let ba = await new post.imageposts({
       title: req.body.title,
       pic: req.body.pic,
+      postedBy: req.user._id,
     });
     ba.save();
     found.imageposts.push(ba);
@@ -61,6 +63,7 @@ controller.imageposts = async (req, res) => {
     let img = await new post.imageposts({
       title: req.body.title,
       pic: req.body.pic,
+      postedBy: req.user._id,
     });
     img.save();
     min.imageposts.push(img);
@@ -160,6 +163,7 @@ controller.comment_text = async (req, res) => {
 
 controller.comment_image = async (req, res) => {
   const { user_id, image_id, text } = req.body;
+  console.log("ABCD", user_id, image_id, text);
   const comment = {
     text: text,
     postedBy: user_id,
@@ -239,6 +243,26 @@ controller.userdown = async (req, res) => {
     .find({ email: req.body.email })
     .populate("textposts")
     .populate("imageposts")
+    .populate({
+      path: "imageposts",
+      populate: {
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: "user",
+        },
+      },
+    })
+    .populate({
+      path: "textposts",
+      populate: {
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: "user",
+        },
+      },
+    })
     .exec((err, result) => {
       if (err) console.log(err);
       let array = [];
@@ -263,6 +287,26 @@ controller.userup = async (req, res) => {
     .find({ email: req.body.email })
     .populate("textposts")
     .populate("imageposts")
+    .populate({
+      path: "imageposts",
+      populate: {
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: "user",
+        },
+      },
+    })
+    .populate({
+      path: "textposts",
+      populate: {
+        path: "comments",
+        populate: {
+          path: "postedBy",
+          model: "user",
+        },
+      },
+    })
     .exec((err, result) => {
       if (err) console.log(err);
       let array = [];

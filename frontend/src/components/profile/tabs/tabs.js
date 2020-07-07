@@ -12,6 +12,7 @@ import {
   getSelectedUserFollowers,
 } from "../../../actions/register_action";
 import { connect } from "react-redux";
+import { MDBBadge } from "mdbreact";
 
 class ProfileTabs extends React.Component {
   componentDidMount = () => {
@@ -129,7 +130,7 @@ class ProfileTabs extends React.Component {
                 {this.props.selected_followers.map((ele, index) => (
                   <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-2 ml-5'>
+                      <div className='fl-1'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -141,18 +142,35 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-6 followers-name-div'>
-                        <h5>{ele.name}</h5>
-                        <h6>{ele.email}</h6>
+                      <div className='fl-2 followers-name-div'>
+                        <h3>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.name}
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.email}
+                          </MDBBadge>
+                        </h3>
                       </div>
-                      <div className='col-2'>
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Followers : {ele.followers.length}
-                        </p>
-
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Following: {ele.following.length}
-                        </p>
+                      <div className='fl-3'>
+                        <h4>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWERS{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.followers.length}
+                            </span>
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWING{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.following.length}
+                            </span>
+                          </MDBBadge>
+                        </h4>
                       </div>
                     </div>
                   </div>
@@ -163,7 +181,7 @@ class ProfileTabs extends React.Component {
                 {this.props.followers.map((ele, index) => (
                   <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-2 ml-5'>
+                      <div className='fl-1'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -175,18 +193,35 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-6 followers-name-div'>
-                        <h5>{ele.name}</h5>
-                        <h6>{ele.email}</h6>
+                      <div className='fl-2 followers-name-div'>
+                        <h3>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.name}
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.email}
+                          </MDBBadge>
+                        </h3>
                       </div>
-                      <div className='col-2'>
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Followers : {ele.followers.length}
-                        </p>
-
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Following: {ele.following.length}
-                        </p>
+                      <div className='fl-3'>
+                        <h4>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWERS{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.followers.length}
+                            </span>
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWING{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.following.length}
+                            </span>
+                          </MDBBadge>
+                        </h4>
                       </div>
                     </div>
                   </div>
@@ -228,7 +263,7 @@ class ProfileTabs extends React.Component {
                 {this.props.selected_following.map((ele, index) => (
                   <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-4 ml-5'>
+                      <div className='fl-1'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -240,8 +275,35 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-8' className='followers-name-div'>
-                        <h3>{ele.name}</h3>
+                      <div className='fl-2 followers-name-div'>
+                        <h3>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.name}
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.email}
+                          </MDBBadge>
+                        </h3>
+                      </div>
+                      <div className='fl-3'>
+                        <h4>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWERS{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.followers.length}
+                            </span>
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWING{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.following.length}
+                            </span>
+                          </MDBBadge>
+                        </h4>
                       </div>
                     </div>
                   </div>
@@ -252,7 +314,7 @@ class ProfileTabs extends React.Component {
                 {this.props.following.map((ele, index) => (
                   <div className='folowers-div-profile' key={index}>
                     <div className='small-logo-image'>
-                      <div className='col-2 ml-5'>
+                      <div className='fl-1'>
                         <img
                           className='avatar_img_small'
                           htmlFor='file'
@@ -264,18 +326,35 @@ class ProfileTabs extends React.Component {
                           alt=''
                         />
                       </div>
-                      <div className='col-6 followers-name-div'>
-                        <h5>{ele.name}</h5>
-                        <h6>{ele.email}</h6>
+                      <div className='fl-2 followers-name-div'>
+                        <h3>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.name}
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            {ele.email}
+                          </MDBBadge>
+                        </h3>
                       </div>
-                      <div className='col-2'>
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Followers : {ele.followers.length}
-                        </p>
-
-                        <p style={{ color: "yellow", fontSize: "15px" }}>
-                          Following: {ele.following.length}
-                        </p>
+                      <div className='fl-3'>
+                        <h4>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWERS{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.followers.length}
+                            </span>
+                          </MDBBadge>
+                          <MDBBadge color='black' className='fa-5x'>
+                            <i class='fas fa-user-alt green-text'></i> FOLLOWING{" "}
+                            <span
+                              class='badge badge-success'
+                              id='comments_count'>
+                              {ele.following.length}
+                            </span>
+                          </MDBBadge>
+                        </h4>
                       </div>
                     </div>
                   </div>

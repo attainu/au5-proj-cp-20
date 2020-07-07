@@ -15,6 +15,7 @@ const textpost = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+      req: true,
     },
   ],
 });
@@ -34,6 +35,7 @@ const imagepost = mongoose.Schema({
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: "user",
+      req: true,
     },
   ],
 });

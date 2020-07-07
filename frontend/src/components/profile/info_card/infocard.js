@@ -36,10 +36,14 @@ class InfoCard extends React.Component {
       logged_user_id: this.props.user._id,
       selected_user_id: id,
     };
+
     this.props.sendFollowData(data);
     this.props.getFollowers();
     this.props.getFollowing();
-    this.props.verifyToken();
+    const data1 = {
+      user_id: this.props.user_id,
+    };
+    this.props.sendUserProfileId(data1);
     window.location.reload();
   };
 
@@ -52,7 +56,10 @@ class InfoCard extends React.Component {
     this.props.getAllUsers();
     this.props.getFollowers();
     this.props.getFollowing();
-    this.props.verifyToken();
+    const data1 = {
+      user_id: this.props.user_id,
+    };
+    this.props.sendUserProfileId(data1);
     window.location.reload();
   };
 

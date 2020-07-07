@@ -16,7 +16,10 @@ import {
   MDBBtn,
   MDBAlert,
 } from "mdbreact";
-
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 class TabsDefault extends Component {
   state = {
     activeItem: "1",
@@ -49,7 +52,8 @@ class TabsDefault extends Component {
     let tab = Number(this.state.activeItem);
     if (tab === 1) {
       if (this.state.text === "" || this.state.title === "") {
-        this.setState({ post_error: "Empty Text Field" });
+        NotificationManager.warning("Empty Text Field");
+        // this.setState({ post_error: "Empty Text Field" });
       } else {
         let { email, title, text } = this.state;
         let data = { title, text, email };
@@ -60,8 +64,8 @@ class TabsDefault extends Component {
           headers: { "auth-token": token },
           data,
         }).then((res) => {
+          NotificationManager.success("Post created successfully !!!");
           console.log("posttextres", res);
-          window.location.reload();
         });
       }
     }
@@ -100,8 +104,8 @@ class TabsDefault extends Component {
           headers: { "auth-token": token },
           data,
         }).then((res) => {
+          NotificationManager.success("Post created successfully !!!");
           console.log("posttextres", res);
-          window.location.reload();
         });
       }
     }
@@ -141,9 +145,10 @@ class TabsDefault extends Component {
         <nav className=''>
           <Navbar />
         </nav>
+        <NotificationContainer />
         <div className='row-cp'>
           <div className='cp'>
-            <div>
+            <div className='post-create-title'>
               <h2 style={{ color: "whitesmoke" }}>Share what's on your mind</h2>
             </div>
             <MDBContainer id='create'>
@@ -172,7 +177,7 @@ class TabsDefault extends Component {
                     </b>
                   </MDBNavLink>
                 </MDBNavItem>
-                <MDBNavItem>
+                {/* <MDBNavItem>
                   <MDBNavLink
                     link
                     to='#'
@@ -183,7 +188,7 @@ class TabsDefault extends Component {
                       <strong>Poll</strong>
                     </b>
                   </MDBNavLink>
-                </MDBNavItem>
+                </MDBNavItem> */}
               </MDBNav>
               <MDBTabContent activeItem={this.state.activeItem}>
                 <MDBTabPane tabId='1' role='tabpanel'>
@@ -275,7 +280,7 @@ class TabsDefault extends Component {
                     </button>
                   </div>
                 </MDBTabPane>
-                <MDBTabPane tabId='3' role='tabpanel'>
+                {/* <MDBTabPane tabId='3' role='tabpanel'>
                   <label for='exampleForm2' className='mt-2'>
                     <b>Title</b>
                   </label>
@@ -340,7 +345,7 @@ class TabsDefault extends Component {
                     onClick={() => this.postAction()}>
                     Post
                   </button>
-                </MDBTabPane>
+                </MDBTabPane> */}
               </MDBTabContent>
             </MDBContainer>
           </div>

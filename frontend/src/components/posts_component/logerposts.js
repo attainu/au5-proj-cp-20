@@ -1,7 +1,7 @@
 import React from "react";
 import "../../styles/posts_div.css";
 import axios from "axios";
-import { loggedPost } from "../../actions/register_action";
+import { loggedPost, getCommentDataText } from "../../actions/register_action";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { MDBBadge } from "mdbreact";
@@ -27,10 +27,32 @@ class Logposts extends React.Component {
     // }
   }
 
+  generateRandomColor() {
+    var colors = [
+      ,
+      "linear-gradient(to right, #834d9b, #d04ed6)",
+      "linear-gradient(to right, #2980b9, #2c3e50)",
+      "linear-gradient(to right, #fd746c, #ff9068)",
+      "linear-gradient(to right, #4ca1af, #c4e0e5)",
+      "linear-gradient(to right, #b24592, #f15f79)",
+      "linear-gradient(to right, #c2e59c, #64b3f4)",
+      "linear-gradient(to right, #76b852, #8dc26f)",
+      "linear-gradient(to right, #e53935, #e35d5b)",
+      "linear-gradient(to right, #ee9ca7, #ffdde1)",
+      "linear-gradient(to right, #d1913c, #ffd194)",
+    ];
+    var len = colors.length;
+    var randomNum = Math.floor(Math.random() * len);
+    var color = colors[randomNum];
+    colors.splice(randomNum, 1);
+    return color;
+  }
+
   componentDidMount() {
     if (this.props.state.user.email) {
       this.props.loggedPost(this.props.state.user.email);
     }
+    this.props.getCommentDataText();
   }
 
   handleHide = (id) => {
@@ -55,7 +77,10 @@ class Logposts extends React.Component {
               <div key={i} className='posts_div-profile'>
                 <div className='contents-tools-div'>
                   <div className='title-div'>
-                    <h4>{e.title}</h4>
+                    <h4>
+                      <span className='logo-title2-nav'># </span>
+                      <u>{e.title}</u>
+                    </h4>
                   </div>
                   {e.pic && (
                     <div>
@@ -104,23 +129,29 @@ class Logposts extends React.Component {
                           style={{ display: this.state.display }}>
                           {e.comments.map((el, index) => (
                             <div className='comment-content' key={index}>
-                              <div className='col-1'>
+                              <div className='col-2'>
                                 <img
                                   src={el.postedBy.image_url}
                                   alt=''
-                                  width='35'
-                                  height='35'
+                                  width='38'
+                                  height='38'
                                   style={{
                                     borderRadius: "50%",
+                                    marginTop: "2px",
                                     border: "2px solid whitesmoke",
                                   }}
                                 />
                               </div>
-                              <div className='col-11' id='comment-text'>
-                                <div>
-                                  <strong>{el.postedBy.name}</strong>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='body'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <blockquote>{el.text}</blockquote>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>{el.text}</div>
                               </div>
                             </div>
                           ))}
@@ -131,8 +162,24 @@ class Logposts extends React.Component {
                   {e.text && (
                     <div>
                       <div className='post-content-div'>
-                        <div className='text-post-div'>
+                        <div
+                          className='text-post-div'
+                          style={{
+                            background: this.generateRandomColor(),
+                          }}>
                           {ReactHtmlParser(e.text)}
+                          {this.props.videoData &&
+                            this.props.videoData.map((el, i) => {
+                              if (el.id === e._id) {
+                                return (
+                                  <div>
+                                    <iframe
+                                      src={`//www.youtube.com/embed/${el.v_url}`}></iframe>
+                                  </div>
+                                );
+                              }
+                              return <div></div>;
+                            })}
                         </div>
                       </div>
                       <div className='tools'>
@@ -162,7 +209,7 @@ class Logposts extends React.Component {
                               <i class='fas fa-comment-alt black-text'></i>{" "}
                               COMMENTS{" "}
                               <span
-                                class='badge badge-secondary ml-2'
+                                class='badge badge-info ml-2'
                                 id='comments_count'>
                                 {e.comments.length}
                               </span>
@@ -177,23 +224,29 @@ class Logposts extends React.Component {
                           style={{ display: this.state.display }}>
                           {e.comments.map((el, index) => (
                             <div className='comment-content' key={index}>
-                              <div className='col-1'>
+                              <div className='col-2'>
                                 <img
                                   src={el.postedBy.image_url}
                                   alt=''
-                                  width='35'
-                                  height='35'
+                                  width='38'
+                                  height='38'
                                   style={{
                                     borderRadius: "50%",
+                                    marginTop: "2px",
                                     border: "2px solid whitesmoke",
                                   }}
                                 />
                               </div>
-                              <div className='col-11' id='comment-text'>
-                                <div>
-                                  <strong>{el.postedBy.name}</strong>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='body'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <blockquote>{el.text}</blockquote>
+                                    </div>
+                                  </div>
                                 </div>
-                                <div>{el.text}</div>
                               </div>
                             </div>
                           ))}
@@ -211,15 +264,17 @@ class Logposts extends React.Component {
   }
 }
 const mapStateToProps = (state) => {
+  console.log("video links", state.user.videoData);
   return {
     state: state.user,
     user: state.user.user,
     all_posts: state.user.all_posts,
     comments_text: state.user.comments_text,
     comments_image: state.user.comments_image,
+    videoData: state.user.videoData,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({ loggedPost }, dispatch);
+  return bindActionCreators({ loggedPost, getCommentDataText }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Logposts);
