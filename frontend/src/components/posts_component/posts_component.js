@@ -11,7 +11,7 @@ import {
   getCommentDataImage,
 } from "../../actions/register_action";
 import ReactHtmlParser from "react-html-parser";
-import { MDBBadge } from "mdbreact";
+import { MDBBadge, MDBIcon } from "mdbreact";
 
 class Postdiv extends React.Component {
   constructor() {
@@ -64,9 +64,6 @@ class Postdiv extends React.Component {
     this.props.getallPost();
     this.props.getCommentDataImage();
     this.props.getCommentDataText();
-
-    let url = document.querySelector("oembed");
-    console.log(url);
   }
 
   upvote_text = (id, elem) => {
@@ -202,238 +199,98 @@ class Postdiv extends React.Component {
         {this.props.state.all_posts.length === 0 ? (
           <div></div>
         ) : (
-            this.props.state.all_posts.map((e, i) => {
-              return (
-                <div key={i} className='posts_div'>
-                  <div className='contents-tools-div'>
-                    <div className='title-div'>
-                      {e.postedBy.map((el) => (
+          this.props.state.all_posts.map((e, i) => {
+            return (
+              <div key={i} className='posts_div'>
+                <div className='contents-tools-div'>
+                  <div className='title-div'>
+                    {e.postedBy.map((el) => (
+                      <div
+                        className='row'
+                        style={{ backgroundColor: "#252525" }}>
+                        <div className='col-2-lg ml-3'>
+                          <img
+                            src={el.image_url}
+                            width='35'
+                            height='35'
+                            style={{
+                              borderRadius: "50%",
+                              border: "2px solid whitesmoke",
+                            }}
+                            alt=''
+                          />
+                        </div>
                         <div
-                          className='row'
-                          style={{ backgroundColor: "#252525" }}>
-                          <div className='col-2-lg ml-3'>
-                            <img
-                              src={el.image_url}
-                              width='35'
-                              height='35'
-                              style={{
-                                borderRadius: "50%",
-                                border: "2px solid whitesmoke",
-                              }}
-                              alt=''
-                            />
-                          </div>
-                          <div
-                            className='col-10-lg ml-3 mt-2'
-                            style={{ textTransform: "capitalize" }}>
-                            <h5>{el.name}</h5>
-                          </div>
-                        </div>
-                      ))}
-                      <hr />
-                      <h4>{e.title}</h4>
-                    </div>
-                    {e.pic && (
-                      <div>
-                        <div className='post-content-div'>
-                          <img id='post-image' src={e.pic} alt='REDDIT' />
-                        </div>
-                        <div className='tools'>
-                          <div id='up-arrow'>
-                            <span className='badge badge-success ml-2'>
-                              <i
-                                className='fas fa-arrow-up fa-2x'
-                                id={i + "up"}
-                                onMouseEnter={() =>
-                                  this.disableArrow(e.upvote, i + "up")
-                                }
-                                onClick={() =>
-                                  this.upvote_img(e._id, i + "up")
-                                }></i>
-                            </span>
-                          </div>
-                          <div id='count'>
-                            <h4>
-                              <span className='badge badge-light ml-2'>
-                                {Number(e.upvote.length - e.dvote.length)}
-                              </span>
-                            </h4>
-                          </div>
-                          <div id='down-arrow'>
-                            <span class='badge badge-danger ml-2'>
-                              <i
-                                className='fas fa-arrow-down fa-2x'
-                                id={i + "down"}
-                                onMouseEnter={() =>
-                                  this.disableArrow(e.dvote, i + "down")
-                                }
-                                onClick={() =>
-                                  this.downvote_img(e._id, i + "down")
-                                }></i>
-                            </span>
-                          </div>
-                          <div className='comments-badge' id='comments'>
-                            <h4>
-                              <MDBBadge
-                                color='light'
-                                className='ml-2 fa-2x'
-                                onClick={() => this.handleHide(e._id)}>
-                                <i class='fas fa-comment-alt black-text'></i>{" "}
-                              COMMENTS{" "}
-                                <span
-                                  class='badge badge-secondary ml-2'
-                                  id='comments_count'>
-                                  {e.comments.length}
-                                </span>
-                              </MDBBadge>
-                            </h4>
-                          </div>
-                        </div>
-                        <div id='comment-div'>
-                          <div className='input-div'>
-                            <div className='col-2 '>
-                              <img
-                                src={this.props.user.image_url}
-                                alt=''
-                                width='35'
-                                height='35'
-                                style={{
-                                  borderRadius: "50%",
-                                  border: "2px solid whitesmoke",
-                                }}
-                              />
-                            </div>
-                            <div className='col-10'>
-                              <form
-                                onSubmit={(event) => {
-                                  event.preventDefault();
-                                  this.handleCommentSaveImage(
-                                    event.target[0].value,
-                                    e._id,
-                                    this.props.user._id
-                                  );
-                                }}>
-                                <input
-                                  type='text'
-                                  placeholder='Add your comment'
-                                  className='form-control comment-input'
-                                />
-                              </form>
-                            </div>
-                          </div>
-
-                          <div
-                            className='comments-display'
-                            id={e._id}
-                            style={{ display: this.state.display }}>
-                            {e.comments.map((el, index) => (
-                              <div className='comment-content' key={index}>
-                                <div className='col-2'>
-                                  <img
-                                    src={el.postedBy.image_url}
-                                    alt=''
-                                    width='38'
-                                    height='38'
-                                    style={{
-                                      borderRadius: "50%",
-                                      marginTop: "2px",
-                                      border: "2px solid whitesmoke",
-                                    }}
-                                  />
-                                </div>
-                                <div className='col-10'>
-                                  <div class='dialogbox'>
-                                    <div class='body'>
-                                      <span class='tip tip-left'></span>
-                                      {el.postedBy.name}
-                                      <div class='message'>
-                                        <span>{el.text}</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
+                          className='col-10-lg ml-3 mt-2'
+                          style={{ textTransform: "capitalize" }}>
+                          <h5>{el.name}</h5>
                         </div>
                       </div>
-                    )}
-                    {e.text && (
-                      <div>
-                        <div className='post-content-div'>
-                          <div
-                            className='text-post-div'
-                            style={{
-                              background: this.generateRandomColor(),
-                            }}
-                            id='text-post-div'>
-                            {ReactHtmlParser(e.text)}
-                            {this.props.videoData &&
-                              this.props.videoData.map((el, i) => {
-                                if (el.id === e._id) {
-                                  return (
-                                    <div>
-                                      <iframe
-                                        src={`//www.youtube.com/embed/${el.v_url}`}></iframe>
-                                    </div>
-                                  );
-                                }
-                                return <div></div>;
-                              })}
-                          </div>
+                    ))}
+                    <hr />
+                    <h4>
+                      <span className='logo-title2-nav'>#</span>
+                      <u>{e.title}</u>
+                    </h4>
+                  </div>
+                  {e.pic && (
+                    <div>
+                      <div className='post-content-div'>
+                        <img id='post-image' src={e.pic} alt='REDDIT' />
+                      </div>
+                      <div className='tools'>
+                        <div id='up-arrow'>
+                          <span className='badge badge-success ml-2'>
+                            <i
+                              className='fas fa-arrow-up fa-2x'
+                              id={i + "up"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "up")
+                              }
+                              onClick={() =>
+                                this.upvote_img(e._id, i + "up")
+                              }></i>
+                          </span>
                         </div>
-                        <div className='tools'>
-                          <div id='up-arrow'>
-                            <span class='badge badge-success ml-2'>
-                              <i
-                                className='fas fa-arrow-up fa-2x'
-                                id={i + "up"}
-                                onMouseEnter={() =>
-                                  this.disableArrow(e.upvote, i + "up")
-                                }
-                                onClick={() =>
-                                  this.upvote_text(e._id, i + "up")
-                                }></i>
+                        <div id='count'>
+                          <h4>
+                            <span className='badge badge-light ml-2'>
+                              {Number(e.upvote.length - e.dvote.length)}
                             </span>
-                          </div>
-                          <div id='count'>
-                            <h4>
-                              <span className='badge badge-light ml-2'>
-                                {Number(e.upvote.length - e.dvote.length)}
-                              </span>
-                            </h4>
-                          </div>
-                          <div id='down-arrow'>
-                            <span class='badge badge-danger ml-2'>
-                              <i
-                                className='fas fa-arrow-down fa-2x'
-                                id={i + "down"}
-                                onMouseEnter={() =>
-                                  this.disableArrow(e.upvote, i + "down")
-                                }
-                                onClick={() =>
-                                  this.downvote_text(e._id, i + "down")
-                                }></i>
-                            </span>
-                          </div>
-                          <div className='comments-badge' id='comments'>
-                            <h4>
-                              <MDBBadge
-                                color='light'
-                                className='ml-2 fa-2x'
-                                onClick={() => this.handleHide(e._id)}>
-                                <i class='fas fa-comment-alt black-text'></i>{" "}
+                          </h4>
+                        </div>
+                        <div id='down-arrow'>
+                          <span class='badge badge-danger ml-2'>
+                            <i
+                              className='fas fa-arrow-down fa-2x'
+                              id={i + "down"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.dvote, i + "down")
+                              }
+                              onClick={() =>
+                                this.downvote_img(e._id, i + "down")
+                              }></i>
+                          </span>
+                        </div>
+                        <div className='comments-badge' id='comments'>
+                          <h4>
+                            <MDBBadge
+                              color='light'
+                              className='ml-2 fa-2x'
+                              onClick={() => this.handleHide(e._id)}>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
                               COMMENTS{" "}
-                                <span
-                                  class='badge badge-info ml-2'
-                                  id='comments_count'>
-                                  {e.comments.length}
-                                </span>
-                              </MDBBadge>
-                            </h4>
-                          </div>
+                              <span
+                                class='badge badge-secondary ml-2'
+                                id='comments_count'>
+                                {e.comments.length}
+                              </span>
+                            </MDBBadge>
+                          </h4>
                         </div>
-                        <div id='comment-div'>
+                      </div>
+                      <div id='comment-div'>
+                        {this.props.login ? (
                           <div className='input-div'>
                             <div className='col-1'>
                               <img
@@ -465,48 +322,202 @@ class Postdiv extends React.Component {
                               </form>
                             </div>
                           </div>
+                        ) : (
+                          <div></div>
+                        )}
 
-                          <div
-                            className='comments-display'
-                            id={e._id}
-                            style={{ display: this.state.display }}>
-                            {e.comments.map((el, index) => (
-                              <div className='comment-content' key={index}>
-                                <div className='col-2'>
-                                  <img
-                                    src={el.postedBy.image_url}
-                                    alt=''
-                                    width='38'
-                                    height='38'
-                                    style={{
-                                      borderRadius: "50%",
-                                      marginTop: "2px",
-                                      border: "2px solid whitesmoke",
-                                    }}
-                                  />
-                                </div>
-                                <div className='col-10'>
-                                  <div class='dialogbox'>
-                                    <div class='body'>
-                                      <span class='tip tip-left'></span>
-                                      {el.postedBy.name}
-                                      <div class='message'>
-                                        <blockquote>{el.text}</blockquote>
-                                      </div>
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content' key={index}>
+                              <div className='col-2'>
+                                <img
+                                  src={el.postedBy.image_url}
+                                  alt=''
+                                  width='38'
+                                  height='38'
+                                  style={{
+                                    borderRadius: "50%",
+                                    marginTop: "2px",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='bodyyy'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <span>{el.text}</span>
                                     </div>
                                   </div>
                                 </div>
                               </div>
-                            ))}
-                          </div>
+                            </div>
+                          ))}
                         </div>
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
+                  {e.text && (
+                    <div>
+                      <div className='post-content-div'>
+                        <div
+                          className='text-post-div'
+                          style={{
+                            background: this.generateRandomColor(),
+                          }}
+                          id='text-post-div'>
+                          {ReactHtmlParser(e.text)}
+                          {this.props.videoData &&
+                            this.props.videoData.map((el, i) => {
+                              if (el.id === e._id) {
+                                return (
+                                  <div>
+                                    <iframe
+                                      src={`//www.youtube.com/embed/${el.v_url}?autoplay=1`}
+                                      allow='autoplay; encrypted-media'
+                                      allowFullScreen></iframe>
+                                  </div>
+                                );
+                              }
+                              return <div></div>;
+                            })}
+                        </div>
+                      </div>
+
+                      <div className='tools'>
+                        <div id='up-arrow'>
+                          <span class='badge badge-success ml-2'>
+                            <i
+                              className='fas fa-arrow-up fa-2x'
+                              id={i + "up"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "up")
+                              }
+                              onClick={() =>
+                                this.upvote_text(e._id, i + "up")
+                              }></i>
+                          </span>
+                        </div>
+                        <div id='count'>
+                          <h4>
+                            <span className='badge badge-light ml-2'>
+                              {Number(e.upvote.length - e.dvote.length)}
+                            </span>
+                          </h4>
+                        </div>
+                        <div id='down-arrow'>
+                          <span class='badge badge-danger ml-2'>
+                            <i
+                              className='fas fa-arrow-down fa-2x'
+                              id={i + "down"}
+                              onMouseEnter={() =>
+                                this.disableArrow(e.upvote, i + "down")
+                              }
+                              onClick={() =>
+                                this.downvote_text(e._id, i + "down")
+                              }></i>
+                          </span>
+                        </div>
+                        <div className='comments-badge' id='comments'>
+                          <h4>
+                            <MDBBadge
+                              color='light'
+                              className='ml-2 fa-2x'
+                              onClick={() => this.handleHide(e._id)}>
+                              <i class='fas fa-comment-alt black-text'></i>{" "}
+                              COMMENTS{" "}
+                              <span
+                                class='badge badge-info ml-2'
+                                id='comments_count'>
+                                {e.comments.length}
+                              </span>
+                            </MDBBadge>
+                          </h4>
+                        </div>
+                      </div>
+                      <div id='comment-div'>
+                        {this.props.login ? (
+                          <div className='input-div'>
+                            <div className='col-1'>
+                              <img
+                                src={this.props.user.image_url}
+                                alt=''
+                                width='35'
+                                height='35'
+                                style={{
+                                  borderRadius: "50%",
+                                  border: "2px solid whitesmoke",
+                                }}
+                              />
+                            </div>
+                            <div className='col-11'>
+                              <form
+                                onSubmit={(event) => {
+                                  event.preventDefault();
+                                  this.handleCommentSaveText(
+                                    event.target[0].value,
+                                    e._id,
+                                    this.props.user._id
+                                  );
+                                }}>
+                                <input
+                                  type='text'
+                                  placeholder='Add your comment'
+                                  className='form-control comment-input'
+                                />
+                              </form>
+                            </div>
+                          </div>
+                        ) : (
+                          <div></div>
+                        )}
+
+                        <div
+                          className='comments-display'
+                          id={e._id}
+                          style={{ display: this.state.display }}>
+                          {e.comments.map((el, index) => (
+                            <div className='comment-content' key={index}>
+                              <div className='col-2'>
+                                <img
+                                  src={el.postedBy.image_url}
+                                  alt=''
+                                  width='38'
+                                  height='38'
+                                  style={{
+                                    borderRadius: "50%",
+                                    marginTop: "2px",
+                                    border: "2px solid whitesmoke",
+                                  }}
+                                />
+                              </div>
+                              <div className='col-10'>
+                                <div class='dialogbox'>
+                                  <div class='body'>
+                                    <span class='tip tip-left'></span>
+                                    {el.postedBy.name}
+                                    <div class='message'>
+                                      <blockquote>{el.text}</blockquote>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-              );
-            })
-          )}
+              </div>
+            );
+          })
+        )}
       </div>
     );
   }
@@ -515,6 +526,7 @@ class Postdiv extends React.Component {
 const mapStateToProps = (state) => {
   console.log("VideoPost", state.user.videoData);
   return {
+    login: state.user.login,
     state: state.user,
     user: state.user.user,
     all_posts: state.user.all_posts,

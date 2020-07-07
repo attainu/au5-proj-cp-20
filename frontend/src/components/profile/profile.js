@@ -10,13 +10,17 @@ import { getCroppedImg } from "./crop_image/image_cropper";
 import Login from "../login/login";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import Loader from "react-loader-spinner";
-import Forbidden from "../forbidden/forbidden";
-import { Redirect } from "react-router-dom";
-import { verifyToken, sendImageUrl } from "../../actions/register_action";
-import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
-import "react-circular-progressbar/dist/styles.css";
+import {
+  verifyToken,
+  sendImageUrl,
+  getAllUsers,
+} from "../../actions/register_action";
 import ProfileTabs from "../profile/tabs/tabs";
 import InfoCard from "./info_card/infocard";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 import {
   MDBBtn,
   MDBModal,
@@ -24,6 +28,7 @@ import {
   MDBModalHeader,
   MDBModalFooter,
 } from "mdbreact";
+import { Redirect, Route } from "react-router-dom";
 
 class Profile extends React.Component {
   constructor(props) {
@@ -111,6 +116,10 @@ class Profile extends React.Component {
             this.setState({ url: url, loading: false });
             console.log(url);
             this.props.sendImageUrl({ url: url, email: useremail });
+            this.props.verifyToken();
+            setTimeout(function () {
+              NotificationManager.success("Updated Successfully");
+            }, 3000);
           });
       }
     );
@@ -154,7 +163,7 @@ class Profile extends React.Component {
       this.setState({
         timeout: false,
       });
-    }, 1000);
+    }, 2000);
   };
 
   handlePicture = (nr, mr) => {
@@ -206,12 +215,13 @@ class Profile extends React.Component {
           </div>
         </div> */}
         <div className='the-bg'>
-          <div>
-            <Navbar />
-          </div>
           {this.props.login ? (
             <div>
+              <div>
+                <Navbar />
+              </div>
               <div className='main_profile'>
+                <NotificationContainer />
                 <div className='user-contents'>
                   <div className='nav-div'>
                     <ProfileTabs toggle={this.toggle(14)} />
@@ -294,9 +304,7 @@ class Profile extends React.Component {
               </div>
             </div>
           ) : (
-            <div id='div-redirected' timeout='2000'>
-              <Login timeout={2000} />
-            </div>
+            <div id='div-redirected' timeout={2000}></div>
           )}
         </div>
         <div></div>
@@ -314,7 +322,10 @@ const getDataFromRedux = (state) => {
 };
 
 const giveDataToRedux = (dispatch) => {
-  return bindActionCreators({ verifyToken, sendImageUrl }, dispatch);
+  return bindActionCreators(
+    { verifyToken, sendImageUrl, getAllUsers },
+    dispatch
+  );
 };
 
 export default connect(getDataFromRedux, giveDataToRedux)(Profile);

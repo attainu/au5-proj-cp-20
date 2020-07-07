@@ -2,6 +2,7 @@ import axios from "axios";
 
 export function sendSignupData(data) {
   // console.log("data in action", data);
+
   return (dispatch) => {
     return axios({
       method: "post",
@@ -67,6 +68,7 @@ export function sendLoginDataGoogle(data) {
 
 export function logoutAgain() {
   localStorage.clear();
+  window.location.assign("/login");
   return (dispatch) => {
     dispatch({
       type: "LOGOUT",
@@ -178,6 +180,7 @@ export function sendFollowData(data) {
       .then((res) => {
         getFollowers();
         getFollowing();
+        verifyToken();
         dispatch({
           type: "FOLLOWED",
           payload: res.data,
@@ -199,6 +202,7 @@ export function sendUnfollowData(data) {
       .then((res) => {
         getFollowers();
         getFollowing();
+        verifyToken();
         dispatch({
           type: "UNFOLLOWED",
           payload: res.data,
@@ -242,6 +246,7 @@ export function getFollowing(data) {
           type: "FOLLOWING",
           payload: res.data[0].following,
         });
+        sendUserProfileId(data);
       })
       .catch((error) => {
         console.log(error);
@@ -262,6 +267,7 @@ export function getFollowers(data) {
           type: "FOLLOWERS",
           payload: res.data[0].followers,
         });
+        sendUserProfileId(data);
       })
       .catch((error) => {
         console.log(error);

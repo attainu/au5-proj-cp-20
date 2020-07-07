@@ -31,10 +31,52 @@
   background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
     no-repeat center fixed;
   background-size: cover;
+  height: 100%;
+  max-height: 100%;
+  min-height: 100%;
 }
 
 .forbidden {
   background: url("https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjEyMDd9")
     no-repeat center fixed;
   background-size: cover;
+}
+
+html {
+  --scrollbarBG: #3f3f3f;
+  --thumbBG: rgb(220, 33, 20);
+}
+body::-webkit-scrollbar {
+  width: 10px;
+}
+body {
+  scrollbar-width: 20px;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+body::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: var(--thumbBG);
+  border-radius: 15px;
+  border: 3px solid var(--scrollbarBG);
+}
+
+body {
+  height: 100%;
+}
+p {
+  margin: 0 0 1.5em;
+}
+* {
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1060px) {
+  html {
+    scrollbar-width: 0;
+  }
+  body::-webkit-scrollbar {
+    width: 0;
+  }
 }
